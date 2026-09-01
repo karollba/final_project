@@ -51,7 +51,7 @@
 
       </form>
          </div>
-         <a href="<c:url value='/employee/list'/>" class="btn btn-primary"> Strona główna</a>
+         <a href="<c:url value='/employee/employeeList'/>" class="btn btn-primary"> Strona główna</a>
        </div>
    </div>
 <%@ include file="footer.jsp" %>

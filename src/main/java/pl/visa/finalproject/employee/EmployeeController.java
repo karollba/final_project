@@ -19,49 +19,27 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-//    @GetMapping("/all")
-//    public List<Employee> allEmployees() {
-//        return employeeService.findAll();
-//    }
-
     @GetMapping("/list")
     public String listEmployees(Model model) {
         model.addAttribute("employees", employeeService.findAll());
-        return "list";
+        return "employee/employeeList";
 
     }
 
     // walidacja pamietaj!
     // hash hasla!
 
-//    @GetMapping("/add/{firstName}/{lastName}/{adminAccess}/{password}")
-//    public String add(@PathVariable String firstName,
-//                      @PathVariable String lastName,
-//                      @PathVariable boolean adminAccess,
-//                      @PathVariable String password) {
-//
-//        Employee employee = new Employee();
-//
-//        employee.setPassword(password);
-//        employee.setLastName(lastName);
-//        employee.setFirstName(firstName);
-//        employee.setAdminAccess(adminAccess);
-//        employeeService.save(employee);
-//
-//        return "ok";
-//    }
-
     // dodawanie nowego pracownika
 
     @GetMapping("/add")
     public String addForm() {
-        return "add";
+        return "employee/employeeAdd";
     }
 
     @PostMapping("/add")
     public String add(Employee employee) {
         employeeService.add(employee);
-       return "redirect:/employee/list";
+       return "redirect:/employee/employeeList";
     }
 
 
@@ -72,13 +50,13 @@ public class EmployeeController {
     @GetMapping("/edit")
     public String editForm(@RequestParam Long id, Model model) {
         model.addAttribute("employee", employeeService.get(id));
-        return "edit";
+        return "redirect:/employee/list";
     }
 
     @PostMapping("/edit")
     public String edit(Employee employee) {
         employeeService.update(employee);
-        return "redirect:/employee/list";
+        return "redirect:/employee/employeeList";
     }
 
 
