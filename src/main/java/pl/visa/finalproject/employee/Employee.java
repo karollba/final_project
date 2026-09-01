@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Getter
 @Setter
@@ -32,7 +34,12 @@ public class Employee {
     @Min(value = 4, message = "Nazwisko musi mieć min 4 znaki!")
     private String lastName;
 
+    // zastanow sie nad usuwaniem pracownikow (moze odejsc ale jak bylo robione ze nastepni pracownicy "przejmowali stare konta"
 
     // to do zastanowienia, czy moze usuwac/ mocno ingerowac w baze
     private boolean adminAccess;
+
+    private boolean deleted;
+
+    private LocalDateTime timeDeleted;
 }
