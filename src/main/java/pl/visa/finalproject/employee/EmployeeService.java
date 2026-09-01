@@ -19,15 +19,20 @@ public class EmployeeService {
     }
     // CRUD
 
-    public void add(String firstName, String lastName, boolean adminAccess, String password) {
-        Employee employee = new Employee();
+//    public void add(String firstName, String lastName, boolean adminAccess, String password) {
+//        Employee employee = new Employee();
+//
+//        employee.setAdminAccess(adminAccess);
+//        employee.setFirstName(firstName);
+//        employee.setLastName(lastName);
+//        employee.setPassword(password);
+//        employeeRepository.save(employee);
+//    }
 
-        employee.setAdminAccess(adminAccess);
-        employee.setFirstName(firstName);
-        employee.setLastName(lastName);
-        employee.setPassword(password);
+    public void add(Employee employee) {
         employeeRepository.save(employee);
     }
+
 
     public Employee findById(Long id) {
         return employeeRepository.findById(id).orElse(null);
