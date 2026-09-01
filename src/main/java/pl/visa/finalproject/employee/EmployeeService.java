@@ -41,14 +41,22 @@ public class EmployeeService {
     // a jak z tym remove? bo bedzie ciezko c
 
     // jeszcze to przetestuj
-    public void update(Long id, String firstName, String lastName, boolean adminAccess,  String password) {
-        Employee employee = employeeRepository.findById(id).orElse(null);
+//    public void update(Long id, String firstName, String lastName, boolean adminAccess,  String password) {
+//        Employee employee = employeeRepository.findById(id).orElse(null);
+//
+//        employee.setAdminAccess(adminAccess);
+//        employee.setFirstName(firstName);
+//        employee.setLastName(lastName);
+//        employee.setPassword(password);
+//        employeeRepository.save(employee);
+//    }
 
-        employee.setAdminAccess(adminAccess);
-        employee.setFirstName(firstName);
-        employee.setLastName(lastName);
-        employee.setPassword(password);
+    public void update(Employee employee) {
         employeeRepository.save(employee);
+    }
+
+    public Employee get(Long id) {
+        return employeeRepository.getById(id);
     }
 
     public void save(Employee employee) {

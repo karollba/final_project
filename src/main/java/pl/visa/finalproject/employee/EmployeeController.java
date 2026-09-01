@@ -67,6 +67,19 @@ public class EmployeeController {
 
     // update pracownika
 
+    // przy update nadpisujesz haslo (co prowadzi do np pustgego pola :/) ponadto brak hash hasla yet
+
+    @GetMapping("/edit")
+    public String editForm(@RequestParam Long id, Model model) {
+        model.addAttribute("employee", employeeService.get(id));
+        return "edit";
+    }
+
+    @PostMapping("/edit")
+    public String edit(Employee employee) {
+        employeeService.update(employee);
+        return "redirect:/employee/list";
+    }
 
 
 }

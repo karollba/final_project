@@ -8,25 +8,25 @@
   </div>
   <div class="card shadow mb-4">
     <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary">Użytkownik: ${user.userName}</h6>
+      <h6 class="m-0 font-weight-bold text-primary">Pracownik: ${employee.firstName} ${employee.lastName}</h6>
     </div>
 
     <div class="card-body">
       <table class="table">
         <tr>
           <th> ID</th>
-          <td> ${user.id}</td>
+          <td> ${employee.id}</td>
         </tr>
         <tr>
-          <th> Nazwa użytkownika</th>
-          <td> ${user.userName}</td>
+          <th> Imię i nazwisko</th>
+          <td> ${employee.firstName} ${employee.lastName}</td>
         </tr>
         <tr>
           <th> Email:</th>
-          <td> ${user.email}</td>
+          <td> ${employee.email}</td>
         </tr>
       </table>
-      <a href="<c:url value='/user/list'/>" class="btn btn-primary"> Main page</a>
+      <a href="<c:url value='/employee/list'/>" class="btn btn-primary"> Main page</a>
     </div>
   </div>
 </div>
