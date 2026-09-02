@@ -19,9 +19,7 @@ import java.util.UUID;
 @Table(name = "product")
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long table_id;
-
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     // nazwa pobierana automatycznie z barcode

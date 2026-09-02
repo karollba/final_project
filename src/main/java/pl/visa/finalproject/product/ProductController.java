@@ -1,7 +1,6 @@
 package pl.visa.finalproject.product;
 
 import lombok.extern.slf4j.Slf4j;
-import org.eclipse.tags.shaded.org.apache.xpath.operations.Mod;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Controller
@@ -27,6 +27,8 @@ public class ProductController {
         return "product/productList";
     }
 
+    // poszukujac filtruj napierw przez kategorie potem szukaj uuid bo tak to zajedziesz baze danych
+
 
     // najpierw sprawdz czy produkt juz nie istnieje jesli istnieje to dodaj do istniejacego rekordu juz a jak nie istnieje to utworz nowy rekord
     @GetMapping("/add")
@@ -36,7 +38,15 @@ public class ProductController {
 
     @PostMapping("/add")
     public String add(Product product) {
-        productService.add(product);
+        // moze zamiast tego tutaj zrobic taki ladny update??? bo to juz troche sie robi paghetticode i nie pwoinno to tez byc w controllerze :)
+        if (productService.exists(product.getId())) {
+            Optional<Product> existingProduct = productService.findById(product.getId());
+            existingProduct.get().setQuantity(existingProduct.get().getQuantity() + product.getQuantity());
+            productService.add(existingProduct.orElse(null));
+        } else {
+            productService.add(product);
+        }
+
         return "redirect:/product/list";
     }
 

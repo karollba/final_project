@@ -1,9 +1,9 @@
 package pl.visa.finalproject.product;
 
 import org.springframework.stereotype.Service;
-import pl.visa.finalproject.employee.Employee;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -40,9 +40,11 @@ public class ProductService {
         return productRepository.findAll();
     }
 
+    public Optional<Product> get(UUID id) {
+            return productRepository.findById(id);
+    }
 
-
-    public Product findById(UUID product_id) {
+    public Optional<Product> findById(UUID product_id) {
         return productRepository.findById(product_id);
     }
 
