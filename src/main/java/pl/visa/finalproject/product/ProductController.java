@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.visa.finalproject.barcode.BarcodeService;
 
 import java.io.IOException;
@@ -39,12 +40,10 @@ public class ProductController {
 
     // najpierw sprawdz czy produkt juz nie istnieje jesli istnieje to dodaj do istniejacego rekordu juz a jak nie istnieje to utworz nowy rekord
     @GetMapping("/add")
-    public String addForm() {
+    public String addForm(Model model) {
+        model.addAttribute("product", new Product());
         return "product/productAdd";
     }
-
-
-
 
     // zmein aby po zeskanowaniu/ wpisaniu barcode uzupelnilo automatcznie wszystkie pola. po co masz pisac recznie jak moze sie samo wy7pelnic
     // zrob tu flasha aby wyswietlal co jest nie tak
@@ -84,7 +83,7 @@ public class ProductController {
     }
 
     @PostMapping("/scan")
-    public String scan(@RequestParam("file") MultipartFile file, Model model) {
+    public String scan(@RequestParam("file") MultipartFile file, Model model, RedirectAttributes redirectAttributes) {
 
         try {
             String barcode = barcodeService.decodeBarcode(file);
@@ -100,11 +99,11 @@ public class ProductController {
                 return "product/productAdd";
             }
         } catch (NotFoundException e) {
-            model.addAttribute("error", "Nie rozpoznano kodu kreskowego");
-            return "product/productScan";
+            redirectAttributes.addFlashAttribute("error", "Nie rozpoznano kodu kreskowego");
+            return "redirect:/product/add";
         } catch (IOException e) {
-            model.addAttribute("error", "Błąd odczytu pliku");
-            return "product/productScan";
+            redirectAttributes.addFlashAttribute("error", "Błąd odczytu pliku");
+            return "redirect:/product/add";
         }
 
     }

@@ -19,6 +19,12 @@
 
   <h1>Dodaj produkt</h1>
 
+      <c:if test="${not empty error}">
+          <div class="alert alert-danger">
+              ${error}
+          </div>
+      </c:if>
+
           <div class="card mb-4">
               <div class="card-body">
                   <h5> zeskanuj kod kreskowy </h5>
@@ -32,6 +38,12 @@
 
        <form method="post" action="add">
         <form:errors path="quantity" cssClass="text-danger"/>
+
+            <div class="form-group">
+                <label for="barcode">Kod kreskowy</label>
+                <input value="${product.barcode}" name="barcode" type="text" class="form-control" id="barcode" placeholder="barcode">
+            </div>
+
 
             <div class="form-group">
                 <label for="name">Nazwa</label>
