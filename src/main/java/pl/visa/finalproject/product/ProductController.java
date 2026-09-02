@@ -1,5 +1,6 @@
 package pl.visa.finalproject.product;
 
+import com.google.zxing.NotFoundException;
 import jakarta.validation.Valid;
 import jakarta.validation.Validator;
 import lombok.extern.slf4j.Slf4j;
@@ -8,7 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import pl.visa.finalproject.barcode.BarcodeService;
 
+import java.io.IOException;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -17,11 +21,12 @@ import java.util.UUID;
 @Slf4j
 public class ProductController {
     private final ProductService productService;
+    private final BarcodeService barcodeService;
 
-    public ProductController(ProductService productService) {
+    public ProductController(ProductService productService, BarcodeService barcodeService) {
         this.productService = productService;
+        this.barcodeService = barcodeService;
     }
-
 
     @GetMapping("/list")
     public String listProducts(Model model) {
@@ -79,19 +84,29 @@ public class ProductController {
     }
 
     @PostMapping("/scan")
-    public String scan(@RequestParam String barcode, Model model) {
-        Optional<Product> product = productService.findByBarcode(barcode);
+    public String scan(@RequestParam("file") MultipartFile file, Model model) {
 
-        if (product.isPresent()) {
-            model.addAttribute("product", product.get());
-            return "product/productAdd";
-        } else {
-            Product newProduct = new Product();
-            newProduct.setBarcode(barcode);
-            model.addAttribute("product", newProduct);
-            return "product/productAdd";
+        try {
+            String barcode = barcodeService.decodeBarcode(file);
+            Optional<Product> product = productService.findByBarcode(barcode);
+
+            if (product.isPresent()) {
+                model.addAttribute("product", product.get());
+                return "product/productAdd";
+            } else {
+                Product newProduct = new Product();
+                newProduct.setBarcode(barcode);
+                model.addAttribute("product", newProduct);
+                return "product/productAdd";
+            }
+        } catch (NotFoundException e) {
+            model.addAttribute("error", "Nie rozpoznano kodu kreskowego");
+            return "product/productScan";
+        } catch (IOException e) {
+            model.addAttribute("error", "Błąd odczytu pliku");
+            return "product/productScan";
         }
-    }
 
+    }
 
 }

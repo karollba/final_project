@@ -19,6 +19,17 @@
 
   <h1>Dodaj produkt</h1>
 
+          <div class="card mb-4">
+              <div class="card-body">
+                  <h5> zeskanuj kod kreskowy </h5>
+                  <form action="/product/scan" method="post" enctype="multipart/form-data">
+                  <input type="file" name="file" accept="image/*" class="form-control">
+                  <button type="submit" class="btn btn-primary mt-2"> Skanuj </button>
+                  </form>
+              </div>
+          </div>
+
+
        <form method="post" action="add">
         <form:errors path="quantity" cssClass="text-danger"/>
 
