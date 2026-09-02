@@ -1,6 +1,7 @@
 package pl.visa.finalproject.product;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,17 +20,20 @@ import java.util.UUID;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long table_id;
 
-    private UUID product_id;
+    private UUID id;
 
     // nazwa pobierana automatycznie z barcode
     private String name;
 
     private boolean availability;
 
+    @Min(0)
     private int quantity;
 
+
+    // kategoria jako lista do wybrania???? ew gdy nie ma admin moze dodac nowa
     private String category;
 
     // pamietaj ze domyslnie te localdate bierze inna strefe czasowa a wiec musisz to dostosowac

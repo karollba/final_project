@@ -8,7 +8,7 @@ import java.util.UUID;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
-    Product findByUUID(UUID product_id);
+    Product findById(UUID id);
 
-    boolean existsByUUID(UUID product_id);
+    boolean existsById(UUID id);
 }

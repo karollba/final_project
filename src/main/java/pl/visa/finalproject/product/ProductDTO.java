@@ -13,8 +13,7 @@ import java.util.UUID;
 @Getter
 @Setter
 public class ProductDTO {
-    private Long id;
-    private UUID product_id;
+    private UUID id;
     private String name;
     private boolean availability;
     private int quantity;
@@ -27,7 +26,6 @@ public class ProductDTO {
 
     public ProductDTO(Product product) {
         this.id = product.getId();
-        this.product_id = product.getProduct_id();
         this.name = product.getName();
         this.category = product.getCategory();
         this.availability = product.isAvailability();

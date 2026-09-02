@@ -1,7 +1,9 @@
 package pl.visa.finalproject.product;
 
 import org.springframework.stereotype.Service;
+import pl.visa.finalproject.employee.Employee;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -26,7 +28,7 @@ public class ProductService {
 
     // usuwanie
 
-    // dodawanie
+    // dodawanie - przy dodawaniu z automatu zrob availability na true bo dodajesz nowy produtk nie
 
     // update
 
@@ -34,8 +36,14 @@ public class ProductService {
         productRepository.save(product);
     }
 
+    public List<Product> findAll() {
+        return productRepository.findAll();
+    }
+
+
+
     public Product findById(UUID product_id) {
-        return productRepository.findByUUID(product_id);
+        return productRepository.findById(product_id);
     }
 
 
@@ -49,7 +57,7 @@ public class ProductService {
     }
 
     public boolean exists(UUID product_id) {
-        return productRepository.existsByUUID(product_id);
+        return productRepository.existsById(product_id);
     }
 
 
