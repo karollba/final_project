@@ -17,39 +17,16 @@ public class EmployeeService {
     public List<Employee> findAll() {
         return employeeRepository.findAll();
     }
-    // CRUD
-
-//    public void add(String firstName, String lastName, boolean adminAccess, String password) {
-//        Employee employee = new Employee();
-//
-//        employee.setAdminAccess(adminAccess);
-//        employee.setFirstName(firstName);
-//        employee.setLastName(lastName);
-//        employee.setPassword(password);
-//        employeeRepository.save(employee);
-//    }
 
     public void add(Employee employee) {
         employeeRepository.save(employee);
     }
-
 
     public Employee findById(Long id) {
         return employeeRepository.findById(id).orElse(null);
     }
 
     // a jak z tym remove? bo bedzie ciezko c
-
-    // jeszcze to przetestuj
-//    public void update(Long id, String firstName, String lastName, boolean adminAccess,  String password) {
-//        Employee employee = employeeRepository.findById(id).orElse(null);
-//
-//        employee.setAdminAccess(adminAccess);
-//        employee.setFirstName(firstName);
-//        employee.setLastName(lastName);
-//        employee.setPassword(password);
-//        employeeRepository.save(employee);
-//    }
 
     public void update(Employee employee) {
         employeeRepository.save(employee);

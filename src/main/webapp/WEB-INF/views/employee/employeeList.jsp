@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<%@ include file="header.jsp" %>
+<%@ include file="../header.jsp" %>
 
    <!-- Begin Page Content -->
       <div class="container-fluid">
@@ -48,4 +48,4 @@
         </div>
       </div>
 
-<%@ include file="footer.jsp" %>
+<%@ include file="../footer.jsp" %>

@@ -44,7 +44,6 @@ public class Product {
     // wiersz bedzie notowal kto przyjal dostawe, kiedy i o ktorej godzinie (rozwiaze to tez probelm ze zle sprawdzona dostawa
 
 
-
     // ze jak produkty sie wyprzedaly to jakby cofalo powiadomienia???
 
     // plus dodawanie produktow/ sortowanie ile sztuk zostalo do konca danego terminu.

@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<%@ include file="header.jsp" %>
+<%@ include file="../header.jsp" %>
 
 
 
@@ -54,4 +54,4 @@
          <a href="<c:url value='/employee/employeeList'/>" class="btn btn-primary"> Strona główna</a>
        </div>
    </div>
-<%@ include file="footer.jsp" %>
+<%@ include file="../footer.jsp" %>
