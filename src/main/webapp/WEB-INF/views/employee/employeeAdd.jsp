@@ -39,7 +39,7 @@
 
             <div class="form-group">
                 <label for="adminAccess">Uprawnienia Admina</label>
-                <input name="adminAccess" type="checkbox" id="adminAccess" placeholder="adminAccess" value="true">
+                <input name="adminAccess" type="checkbox" id="adminAccess" ${employee.adminAccess ? 'checked' : ''}>
             </div>
 
             <button type="submit" class="btn btn-primary">Dodaj</button>

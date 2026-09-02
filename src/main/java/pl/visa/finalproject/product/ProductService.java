@@ -47,7 +47,8 @@ public class ProductService {
             existingProduct.setAvailability(true);
             productRepository.save(existingProduct);
         } else {
-        productRepository.save(product);
+            product.setAvailability(true);
+            productRepository.save(product);
         }
     }
 
@@ -63,10 +64,33 @@ public class ProductService {
         return productRepository.findById(product_id);
     }
 
+    public Optional<Product> findByBarcode(String barcode) {
+        return productRepository.findByBarcode(barcode);
+    }
+
 
     // uwazaj bo to zmieni wszystkie wiersze danego produktu (nadpisze ci zmiany, jak nei wszystkie beda wypelnione)
-    public void update(Product product) {
-        productRepository.save(product);
+    public void update(Product updatedProduct) {
+        Product existing = productRepository.findById(updatedProduct.getId())
+                .orElseThrow(() -> new RuntimeException("Produkt nie znaleziony"));
+
+        if (updatedProduct.getName() != null && !updatedProduct.getName().isEmpty()) {
+            existing.setName(updatedProduct.getName());
+        }
+
+        if (updatedProduct.getQuantity() > 0) {
+            existing.setQuantity(updatedProduct.getQuantity());
+        }
+
+        if (updatedProduct.getCategory() != null && !updatedProduct.getCategory().isEmpty()) {
+            existing.setCategory(updatedProduct.getCategory());
+        }
+
+        if (updatedProduct.getExpirationDate() != null) {
+            existing.setExpirationDate(updatedProduct.getExpirationDate());
+        }
+        productRepository.save(existing);
+
     }
 
     public void save(Product product) {

@@ -21,6 +21,7 @@ public class ProductDTO {
     private LocalDate expirationDate;
     private boolean deleted;
     private LocalDateTime timeDeleted;
+    private String barcode;
 
     public ProductDTO(){}
 
@@ -33,5 +34,6 @@ public class ProductDTO {
         this.expirationDate = product.getExpirationDate();
         this.deleted = product.isDeleted();
         this.timeDeleted = product.getTimeDeleted();
+        this.barcode = product.getBarcode();
     }
 }

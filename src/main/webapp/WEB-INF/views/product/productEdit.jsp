@@ -25,9 +25,6 @@
 <div class="card-body">
 <form method="post" action="edit">
 
-<input type="hidden" name="id" value="${product.id}"/>
-
-
         <input type="hidden" name="id" value="${product.id}"/>
 
           <div class="form-group">

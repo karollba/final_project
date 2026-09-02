@@ -41,6 +41,9 @@ public class Product {
 
     private LocalDateTime timeDeleted;
 
+    @Column(unique = true)
+    private String barcode;
+
     // delivery date moze pobierz i wstaw w delivery. probelm bo jak bedziesz dodawac nowa delivery to bedziesz nadpisywac
     // chyba ze utworzysz nowa powaiana tablee i tam bedzie np product id i ostatnie dostawy i kazdy nowy
     // wiersz bedzie notowal kto przyjal dostawe, kiedy i o ktorej godzinie (rozwiaze to tez probelm ze zle sprawdzona dostawa
