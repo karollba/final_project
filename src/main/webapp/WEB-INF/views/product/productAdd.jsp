@@ -20,6 +20,7 @@
   <h1>Dodaj produkt</h1>
 
        <form method="post" action="add">
+        <form:errors path="quantity" cssClass="text-danger"/>
 
             <div class="form-group">
                 <label for="name">Nazwa</label>
@@ -42,6 +43,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary">Dodaj</button>
+
              </form>
            </div>
                <a href="<c:url value='/product/list'/>" class="btn btn-primary"> Strona główna</a>

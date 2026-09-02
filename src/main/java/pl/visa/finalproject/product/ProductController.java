@@ -1,12 +1,12 @@
 package pl.visa.finalproject.product;
 
+import jakarta.validation.Valid;
+import jakarta.validation.Validator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -20,6 +20,7 @@ public class ProductController {
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
+
 
     @GetMapping("/list")
     public String listProducts(Model model) {
@@ -36,17 +37,15 @@ public class ProductController {
         return "product/productAdd";
     }
 
-    @PostMapping("/add")
-    public String add(Product product) {
-        // moze zamiast tego tutaj zrobic taki ladny update??? bo to juz troche sie robi paghetticode i nie pwoinno to tez byc w controllerze :)
-        if (productService.exists(product.getId())) {
-            Optional<Product> existingProduct = productService.findById(product.getId());
-            existingProduct.get().setQuantity(existingProduct.get().getQuantity() + product.getQuantity());
-            productService.add(existingProduct.orElse(null));
-        } else {
-            productService.add(product);
-        }
 
+
+    // zrob tu flasha aby wyswietlal co jest nie tak
+    @PostMapping("/add")
+    public String add(@Valid @ModelAttribute Product product, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "product/productAdd";
+        }
+        productService.add(product);
         return "redirect:/product/list";
     }
 

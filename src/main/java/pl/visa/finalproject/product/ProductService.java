@@ -1,5 +1,6 @@
 package pl.visa.finalproject.product;
 
+import jakarta.validation.Validator;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.UUID;
 @Service
 public class ProductService {
     private final ProductRepository productRepository;
+
 
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
@@ -32,8 +34,21 @@ public class ProductService {
 
     // update
 
+
+    // ale jesli barcodem bys szukala i dodalo to samo nazwe to by byla pewnosc ze bedzie taka sama i nie bedzie duplikatow
+
+    // nad tym sie zastanow bo name moze sie powtarzac a moze nie>????? plus tez jakis paginacja czy cos bo przy 100 tys produktow zajedziesz baze danych
     public void add(Product product) {
+        Optional<Product> existing = productRepository.findByName(product.getName());
+
+        if (existing.isPresent()) {
+            Product existingProduct = existing.get();
+            existingProduct.setQuantity(existingProduct.getQuantity() + product.getQuantity());
+            existingProduct.setAvailability(true);
+            productRepository.save(existingProduct);
+        } else {
         productRepository.save(product);
+        }
     }
 
     public List<Product> findAll() {
@@ -61,6 +76,8 @@ public class ProductService {
     public boolean exists(UUID product_id) {
         return productRepository.existsById(product_id);
     }
+
+
 
 
 }

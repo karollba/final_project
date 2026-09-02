@@ -22,7 +22,6 @@
                   <table  class="table">
                     <thead>
                     <tr>
-                         <th>ID</th>
                          <th>Nazwa</th>
                          <th>Kategoria</th>
                          <th>Dostępność</th>
@@ -33,7 +32,6 @@
                     <tbody>
                     <c:forEach var="product" items="${products}">
                       <tr>
-                          <td>${product.id}</td>
                           <td>${product.name}</td>
                           <td>${product.category}</td>
                           <td>${product.availability}</td>

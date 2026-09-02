@@ -27,7 +27,7 @@ public class Product {
 
     private boolean availability;
 
-    @Min(0)
+    @Min(value = 0, message = "Quantity cannot be below 0!")
     private int quantity;
 
 
