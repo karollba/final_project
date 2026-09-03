@@ -34,6 +34,7 @@ public class ProductService {
 
     // update
 
+    // jeszcze oblsuga bledow zeby nie wywalalo ci calego programu!!!!!
 
     // ale jesli barcodem bys szukala i dodalo to samo nazwe to by byla pewnosc ze bedzie taka sama i nie bedzie duplikatow
 

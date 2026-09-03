@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -18,21 +19,35 @@ import java.util.UUID;
 @Table(name = "delivery")
 public class Delivery {
 
+    // tabela laczona ile i co zamowiono a ile otrzymano (i tru false czy sie zgadzala czy nie)
+
+    // zeby przy wpiswyaniu produktow ktore przyszly (ilosci podkreslalo na czerdwono co sie nie zgadza)
+    // a jesli w ogole danego produktu nie ma to opcja do odzanczenia "braw w dosawie" przy danym produkcie
+
+    // lista produktow ktore przywiozl
+    // wtedy skanujesz barcode wpisujesz ile masz i ci sprawdza czy zgadza sie z tym co zamowione bylo
+
+
+    // przy wpisywaniu nowej dostawy po wybraniu/ wpisaniu id zeby samo sie uzupelnila reszta???
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    // czy mrozonki czy regular???
-    private String deliveryCategory;
-
-    private UUID deliveryManId;
-
-    private LocalDateTime dateOfAcceptTheDelivery;
-
-    private boolean deliveryIntact;
-
+    private Long deliveryManId;
     // tutaj zeby z automatu przekazalo do tabeli tego co jest zalogowany.
     private UUID acceptingEmployeeId;
+    private Long invoiceId;
+    private Long supplierId;
+    private Long deliveryId;
+    private LocalDate invoiceDue;
+    private LocalDateTime dateOfAcceptTheDelivery;
+    private boolean paid;
+    private boolean deliveryIntact;
+    private String supplierName;
+    private String category;
 
+    // czy mrozonki czy regular???
+    private String deliveryCategory;
 
 }

@@ -26,6 +26,8 @@ public class Employee {
     // pamietaj o hashu hasla
     private String password;
 
+    private Long idToShow;
+
     @NotBlank(message = "Pole imię nie może być puste")
     @Min(value = 4, message = "Imię musi mieć minim 4 znaki")
     private String firstName;
