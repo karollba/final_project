@@ -27,7 +27,6 @@
                     <tr>
                          <th>Nazwa</th>
                          <th>Kategoria</th>
-                         <th>Dostępność</th>
                          <th>Termin ważności</th>
                          <th>Ilość</th>
                     </tr>
@@ -37,7 +36,6 @@
                       <tr>
                           <td>${product.name}</td>
                           <td>${product.category}</td>
-                          <td>${product.availability}</td>
                           <td>${product.expirationDate}</td>
                           <td>${product.quantity}</td>
                           <td>
