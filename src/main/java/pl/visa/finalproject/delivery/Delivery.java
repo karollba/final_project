@@ -41,7 +41,7 @@ public class Delivery {
     private String supplierId;
     private String deliveryId;
     private LocalDate invoiceDue;
-    private LocalDateTime dateOfAcceptTheDelivery;
+    private LocalDate dateOfAcceptTheDelivery;
     private boolean paid;
     private boolean deliveryIntact;
     private String supplierName;

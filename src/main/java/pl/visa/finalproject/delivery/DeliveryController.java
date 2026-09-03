@@ -35,6 +35,7 @@ public class DeliveryController {
     public String  add(@Valid @ModelAttribute Delivery delivery,
                        BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
+            bindingResult.getAllErrors().forEach(error -> System.out.println("Errror" + error.toString()));
             return "delivery/deliveryAdd";
         }
 
