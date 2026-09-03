@@ -23,7 +23,7 @@ public class EmployeeService {
         employeeRepository.save(employee);
     }
 
-    public Employee findById(Long id) {
+    public Employee findById(UUID id) {
         return employeeRepository.findById(id).orElse(null);
     }
 
@@ -51,7 +51,7 @@ public class EmployeeService {
         employeeRepository.save(existing);
     }
 
-    public Employee get(Long id) {
+    public Employee get(UUID id) {
         return employeeRepository.getById(id);
     }
 
@@ -59,7 +59,7 @@ public class EmployeeService {
         employeeRepository.save(employee);
     }
 
-    public boolean exists(Long id) {
+    public boolean exists(UUID id) {
         return employeeRepository.existsById(id);
     }
 

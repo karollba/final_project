@@ -4,11 +4,12 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Getter
 @Setter
 public class EmployeeDTO {
-    private Long id;
+    private UUID id;
 
     // pamietaj o hashu hasla
     private String password;
