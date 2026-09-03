@@ -2,9 +2,7 @@ package pl.visa.finalproject.product;
 
 import com.google.zxing.NotFoundException;
 import jakarta.validation.Valid;
-import jakarta.validation.Validator;
 import lombok.extern.slf4j.Slf4j;
-import org.eclipse.tags.shaded.org.apache.xpath.operations.Mod;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;

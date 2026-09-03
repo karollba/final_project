@@ -7,17 +7,17 @@
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">deliveryCRUD</h1>
     <a href="<c:url value='/delivery/list'/>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-      <i class="fas fa-download fa-sm text-white-50"></i> Lista produktów</a>
+      <i class="fas fa-download fa-sm text-white-50"></i> Lista dostaw</a>
   </div>
 
  <div class="card shadow mb-4">
     <div class="card-header py-3">
-      <h6 class="m-0 font-weight-bold text-primary">Dodawanie produktu</h6>
+      <h6 class="m-0 font-weight-bold text-primary">Nowa dostawa</h6>
     </div>
 
  <div class="card-body">
 
-  <h1>Dodaj produkt</h1>
+  <h1>Nowa dostawa</h1>
 
       <c:if test="${not empty error}">
           <div class="alert alert-danger">
@@ -31,19 +31,19 @@
 
 
             <div class="form-group">
-                <label for="id">Nr dostawy </label>
-                <input value="${delivery.id}" name="id" type="number" class="form-control" id="id" placeholder="id">
+                <label for="deliveryId">Nr dostawy </label>
+                <input value="${delivery.deliveryId}" name="deliveryId" type="text" class="form-control" id="deliveryId" placeholder="deliveryId">
             </div>
 
             <div class="form-group">
                 <label for="supplierId">ID dostawcy</label>
-                <input value="${delivery.supplierId}" name="supplierId" type="number" min="0" class="form-control" id="supplierId" placeholder="supplierId">
+                <input value="${delivery.supplierId}" name="supplierId" type="text" class="form-control" id="supplierId" placeholder="supplierId">
             </div>
 
 
             <div class="form-group">
-                <label for="supplierId">Nazwa dostawcy</label>
-                <input value="${delivery.supplierId}" name="supplierId" type="number" min="0" class="form-control" id="supplierId" placeholder="supplierId">
+                <label for="supplierName">Nazwa dostawcy</label>
+                <input value="${delivery.supplierName}" name="supplierName" type="text" class="form-control" id="supplierName" placeholder="supplierName">
             </div>
 
 
@@ -52,14 +52,19 @@
                 <input value="${delivery.invoiceDue}" name="invoiceDue" type="date" class="form-control" id="invoiceDue" placeholder="invoiceDue">
             </div>
 
+             <div class="form-group">
+                <label for="paid">Zapłacono</label>
+                <input name="paid" type="checkbox" id="paid" ${delivery.paid ? 'checked' : ''}>
+            </div>
+
             <div class="form-group">
                 <label for="acceptingEmployeeId">Pracownik przyjmujący </label>
-                <input value="${delivery.acceptingEmployeeId}" name="acceptingEmployeeId" type="number" class="form-control" id="acceptingEmployeeId" placeholder="acceptingEmployeeId">
+                <input value="${delivery.acceptingEmployeeId}" name="acceptingEmployeeId" type="text" class="form-control" id="acceptingEmployeeId" placeholder="acceptingEmployeeId">
             </div>
 
              <div class="form-group">
                 <label for="deliveryManId">ID kuriera</label>
-                <input value="${delivery.deliveryManId}" name="deliveryManId" type="number" min="0" class="form-control" id="deliveryManId" placeholder="deliveryManId">
+                <input value="${delivery.deliveryManId}" name="deliveryManId" type="number" class="form-control" id="deliveryManId" placeholder="deliveryManId">
             </div>
 
             <div class="form-group">

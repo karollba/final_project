@@ -1,1 +1,5 @@
 POST http://localhost:8080/product/scan
+
+###
+
+GET http://localhost:8080/supplier/list

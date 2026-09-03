@@ -22,5 +22,9 @@ public class Supplier {
     private UUID id;
 
     private String name;
-
+    private Long NIP;
+    private Long REGON;
+    private String street;
+    private String city;
+    private String postalCode;
 }

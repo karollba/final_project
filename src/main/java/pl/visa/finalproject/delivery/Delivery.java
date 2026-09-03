@@ -38,8 +38,8 @@ public class Delivery {
     // tutaj zeby z automatu przekazalo do tabeli tego co jest zalogowany.
     private UUID acceptingEmployeeId;
     private Long invoiceId;
-    private Long supplierId;
-    private Long deliveryId;
+    private String supplierId;
+    private String deliveryId;
     private LocalDate invoiceDue;
     private LocalDateTime dateOfAcceptTheDelivery;
     private boolean paid;

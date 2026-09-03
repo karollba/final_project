@@ -18,10 +18,6 @@ public class DeliveryService {
 
     private final DeliveryRepository deliveryRepository;
 
-    public void add(Delivery delivery) {
-        deliveryRepository.save(delivery);
-    }
-
     // zmienic dostawe moze tylko admin!!!!
 //    public void update(Delivery updatedDelivery) {
 //        Delivery existing = deliveryRepository.findById(updatedDelivery.getId())
@@ -39,6 +35,10 @@ public class DeliveryService {
 
     public DeliveryService(DeliveryRepository deliveryRepository) {
         this.deliveryRepository = deliveryRepository;
+    }
+
+    public void add(Delivery delivery) {
+        deliveryRepository.save(delivery);
     }
 
     public List<Delivery> findAll() {
