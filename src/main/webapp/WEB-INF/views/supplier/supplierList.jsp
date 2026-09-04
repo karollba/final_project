@@ -32,13 +32,13 @@
                          <th>Kod pocztowy</th>
                         <th>Ulica</th>
                         <th>Miejscowość</th>
-                           <th>Działanie </th>
+                        <th>Działanie </th>
                     </tr>
                     </thead>
                     <tbody>
                     <c:forEach var="supplier" items="${suppliers}">
                       <tr>
-                          <td>${supplier.id}</td>
+                          <td>${supplier.idToShow}</td>
                           <td>${supplier.name}</td>
                           <td>${supplier.NIP}</td>
                           <td>${supplier.REGON}</td>

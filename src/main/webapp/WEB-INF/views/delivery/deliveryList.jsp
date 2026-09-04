@@ -41,8 +41,8 @@
                 <c:forEach var="delivery" items="${deliveries}">
                   <tr>
                       <td>${delivery.deliveryId}</td>
-                      <td>${delivery.supplierId}</td>
-                      <td>${delivery.supplierName}</td>
+                      <td>${delivery.supplier.idToShow}</td>
+                      <td>${delivery.supplier.name}</td>
                       <td>${delivery.dateOfAcceptTheDelivery}</td>
                       <td>${delivery.invoiceDue}</td>
                       <td>${delivery.paid}</td>

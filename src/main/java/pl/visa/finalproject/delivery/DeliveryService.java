@@ -1,7 +1,6 @@
 package pl.visa.finalproject.delivery;
 
 import org.springframework.stereotype.Service;
-import pl.visa.finalproject.product.Product;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,6 +24,8 @@ public class DeliveryService {
     }
 
     public void add(Delivery delivery) {
+        Long maxId = deliveryRepository.findMaxIdToShow().orElse(0L);
+        delivery.setIdToShow(maxId + 1);
         deliveryRepository.save(delivery);
     }
 
@@ -36,9 +37,10 @@ public class DeliveryService {
         Delivery existing = deliveryRepository.findById(updateDelivery.getId())
                 .orElseThrow(() -> new RuntimeException("Dostawcy nie znaleziono"));
 
-        if (updateDelivery.getSupplierName() != null && !updateDelivery.getSupplierName().isEmpty()) {
-            existing.setSupplierName(updateDelivery.getSupplierName());
-        }
+        // zmiana byla na nazwach bo relacje tworzymy
+//        if (updateDelivery.getSupplierName() != null && !updateDelivery.getSupplierName().isEmpty()) {
+//            existing.setSupplierName(updateDelivery.getSupplierName());
+//        }
 
         if (updateDelivery.getCategory() != null && !updateDelivery.getCategory().isEmpty()) {
             existing.setCategory(updateDelivery.getCategory());
@@ -61,6 +63,15 @@ public class DeliveryService {
     }
 
     public void save(Delivery delivery) {
+        if (delivery.getIdToShow() == null) {
+            Optional<Long> maxId = deliveryRepository.findMaxIdToShow();
+
+            if (maxId.isEmpty()) {
+                delivery.setIdToShow(1L);
+            } else {
+                delivery.setIdToShow(maxId.orElse(null) + 1);
+            }
+        }
         deliveryRepository.save(delivery);
     }
 

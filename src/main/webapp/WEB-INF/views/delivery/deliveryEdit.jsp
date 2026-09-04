@@ -14,7 +14,7 @@
   <div class="d-sm-flex align-items-center justify-content-between mb-4">
       <h1 class="h3 mb-0 text-gray-800">EmployeeCRUD</h1>
       <a href="<c:url value='/delivery/list'/>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-        <i class="fas fa-plus fa-sm text-white-50"></i> Lista dostawców</a>
+        <i class=" fa-sm text-white-50"></i> Lista dostaw</a>
     </div>
 
    <div class="card shadow mb-4">
@@ -31,11 +31,6 @@
               <label> Nr dostawy: </label>
               <span>${delivery.deliveryId}</span>
                </div>
-
-            <div class="form-group">
-                <label for="supplierName">Nazwa dostawcy</label>
-                <input value="${delivery.supplierName}" name="supplierName" type="text" class="form-control" id="supplierName" placeholder="supplierName">
-            </div>
 
 
             <div class="form-group">

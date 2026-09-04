@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.web.bind.annotation.GetMapping;
+import pl.visa.finalproject.supplier.Supplier;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -38,16 +39,21 @@ public class Delivery {
     // tutaj zeby z automatu przekazalo do tabeli tego co jest zalogowany.
     private UUID acceptingEmployeeId;
     private Long invoiceId;
-    private String supplierId;
     private String deliveryId;
     private LocalDate invoiceDue;
     private LocalDate dateOfAcceptTheDelivery;
     private boolean paid;
     private boolean deliveryIntact;
-    private String supplierName;
     private String category;
+
+    @Column(unique = true, nullable = false)
+    private Long idToShow;
 
     // czy mrozonki czy regular???
     private String deliveryCategory;
+
+    @ManyToOne
+    @JoinColumn(name = "supplier_id", nullable = false)
+    private Supplier supplier;
 
 }

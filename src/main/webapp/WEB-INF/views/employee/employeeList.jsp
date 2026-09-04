@@ -8,7 +8,7 @@
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
           <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-          <a href="<c:url value='employee/add'/>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+          <a href="<c:url value='/employee/add'/>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                   class="fas fa-plus fa-sm text-white-50"></i> Dodaj nowego pracownika</a>
         </div>
 
@@ -22,18 +22,20 @@
                   <table  class="table">
                     <thead>
                     <tr>
-                         <th>ID</th>
+                         <th>Nr pracownika</th>
                          <th>Imię</th>
                          <th>Nazwisko</th>
+                         <th>Uprawnienia admina </th>
                          <th>Działanie </th>
                     </tr>
                     </thead>
                     <tbody>
                     <c:forEach var="employee" items="${employees}">
                       <tr>
-                       <td>${employee.id}</td>
+                          <td>${employee.idToShow}</td>
                           <td>${employee.firstName}</td>
                           <td>${employee.lastName}</td>
+                          <td>${employee.adminAccess}</td>
                           <td>
                             <a href="edit?id=${employee.id}" class="btn btn-info btn-sm">Edit</a>
                             <a href="delete?id=${employee.id}" class="btn btn-info btn-sm">Usuń</a>

@@ -35,16 +35,16 @@
                 <input value="${delivery.deliveryId}" name="deliveryId" type="text" class="form-control" id="deliveryId" placeholder="deliveryId">
             </div>
 
-            <div class="form-group">
-                <label for="supplierId">ID dostawcy</label>
-                <input value="${delivery.supplierId}" name="supplierId" type="text" class="form-control" id="supplierId" placeholder="supplierId">
-            </div>
 
-
-            <div class="form-group">
-                <label for="supplierName">Nazwa dostawcy</label>
-                <input value="${delivery.supplierName}" name="supplierName" type="text" class="form-control" id="supplierName" placeholder="supplierName">
-            </div>
+           <div clas="form-group">
+               <label for="supplier">Dostawca</label>
+               <select name="supplier.id" class="form-control" id="supplier">
+                   <option value=""> wybierz</option>
+                   <c:forEach var="s" items="${suppliers}">
+                      <option value="${s.id}" >${s.name}</option>
+                   </c:forEach>
+               </select>
+           </div>
 
 
             <div class="form-group">

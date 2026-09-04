@@ -30,7 +30,8 @@ public class EmployeeController {
     // dodawanie nowego pracownika
 
     @GetMapping("/add")
-    public String addForm() {
+    public String addForm(Model model) {
+        model.addAttribute("employee", new Employee());
         return "employee/employeeAdd";
     }
 

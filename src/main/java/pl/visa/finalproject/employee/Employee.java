@@ -26,6 +26,7 @@ public class Employee {
     // pamietaj o hashu hasla
     private String password;
 
+    @Column(unique = true, nullable = false)
     private Long idToShow;
 
     @NotBlank(message = "Pole imię nie może być puste")

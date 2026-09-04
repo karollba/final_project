@@ -16,6 +16,8 @@ public class SupplierService {
     }
 
      public void add(Supplier supplier) {
+         Long maxId = supplierRespository.findMaxIdToShow().orElse(0L);
+         supplier.setIdToShow(maxId + 1);
         supplierRespository.save(supplier);
     }
 

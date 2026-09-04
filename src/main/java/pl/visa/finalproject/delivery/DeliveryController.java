@@ -4,17 +4,23 @@ import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import pl.visa.finalproject.supplier.Supplier;
+import pl.visa.finalproject.supplier.SupplierService;
 
+import java.beans.PropertyEditorSupport;
 import java.util.UUID;
 
 @Controller
 @RequestMapping("/delivery")
 public class DeliveryController {
     private final DeliveryService deliveryService;
+    private final SupplierService supplierService;
 
-    public DeliveryController(DeliveryService deliveryService) {
+    public DeliveryController(DeliveryService deliveryService, SupplierService supplierService) {
         this.deliveryService = deliveryService;
+        this.supplierService = supplierService;
     }
 
 
@@ -27,6 +33,7 @@ public class DeliveryController {
     @GetMapping("/add")
     public String addForm(Model model) {
         model.addAttribute("delivery", new Delivery());
+        model.addAttribute("suppliers", supplierService.findAll());
         return "delivery/deliveryAdd";
     }
 
@@ -56,6 +63,20 @@ public class DeliveryController {
         }
         deliveryService.update(delivery);
         return "redirect:/delivery/list";
+    }
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(Supplier.class, new PropertyEditorSupport() {
+            @Override
+            public void setAsText(String text) {
+                if (text != null && !text.isEmpty()) {
+                    UUID uuid = UUID.fromString(text);
+                    Supplier supplier = supplierService.findById(uuid).orElse(null);
+                    setValue(supplier);
+                }
+            }
+        });
     }
 
 }

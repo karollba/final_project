@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.eclipse.tags.shaded.org.apache.bcel.generic.CALOAD;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -30,10 +31,6 @@ public class Product {
     @Min(value = 0, message = "Quantity cannot be below 0!")
     private int quantity;
 
-
-    // kategoria jako lista do wybrania???? ew gdy nie ma admin moze dodac nowa
-    private String category;
-
     // pamietaj ze domyslnie te localdate bierze inna strefe czasowa a wiec musisz to dostosowac
     private LocalDate expirationDate;
 
@@ -43,6 +40,9 @@ public class Product {
 
     @Column(unique = true)
     private String barcode;
+
+    @Enumerated(EnumType.STRING)
+    private Category category;
 
     // delivery date moze pobierz i wstaw w delivery. probelm bo jak bedziesz dodawac nowa delivery to bedziesz nadpisywac
     // chyba ze utworzysz nowa powaiana tablee i tam bedzie np product id i ostatnie dostawy i kazdy nowy

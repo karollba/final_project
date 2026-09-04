@@ -27,4 +27,7 @@ public class Supplier {
     private String street;
     private String city;
     private String postalCode;
+
+    @Column(unique = true, nullable = false)
+    private Long idToShow;
 }

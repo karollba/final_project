@@ -1,5 +1,6 @@
 package pl.visa.finalproject.employee;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,10 +17,14 @@ public class EmployeeService {
     }
 
     public List<Employee> findAll() {
-        return employeeRepository.findAll();
+        return employeeRepository.findAllOrderByIdToShowAsc();
     }
 
     public void add(Employee employee) {
+        String hashed = BCrypt.hashpw(employee.getPassword(), BCrypt.gensalt());
+        employee.setPassword(hashed);
+        Long maxId = employeeRepository.findMaxIdToShow().orElse(0L);
+        employee.setIdToShow(maxId + 1);
         employeeRepository.save(employee);
     }
 
@@ -43,7 +48,8 @@ public class EmployeeService {
         }
 
         if (updatedEmployee.getPassword() != null && !updatedEmployee.getPassword().isEmpty()) {
-            existing.setPassword(updatedEmployee.getPassword());
+            String hashed = BCrypt.hashpw(updatedEmployee.getPassword(), BCrypt.gensalt());
+            existing.setPassword(hashed);
         }
 
         existing.setAdminAccess(updatedEmployee.isAdminAccess());
