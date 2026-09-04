@@ -19,6 +19,10 @@ public class OrderedProductService {
         orderedProductRepository.save(orderedProduct);
     }
 
+    public List<OrderedProduct> findAll() {
+        return orderedProductRepository.findAll();
+    }
+
     public List<OrderedProduct> findBYDelivery(Delivery delivery) {
         return orderedProductRepository.findByDelivery(delivery);
     }

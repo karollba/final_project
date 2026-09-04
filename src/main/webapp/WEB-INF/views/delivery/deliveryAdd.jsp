@@ -59,7 +59,7 @@
 
             <div class="form-group">
                 <label for="acceptingEmployeeId">Pracownik przyjmujący </label>
-                <input value="${delivery.acceptingEmployeeId}" name="acceptingEmployeeId" type="text" class="form-control" id="acceptingEmployeeId" placeholder="acceptingEmployeeId">
+                <input value="${delivery.acceptingEmployee.idToShow}" name="acceptingEmployeeId" type="text" class="form-control" id="acceptingEmployeeId" placeholder="acceptingEmployeeId">
             </div>
 
              <div class="form-group">
