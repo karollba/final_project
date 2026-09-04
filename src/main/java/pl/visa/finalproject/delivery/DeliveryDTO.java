@@ -15,12 +15,10 @@ public class DeliveryDTO {
     private Long deliveryManId;
     private LocalDate dateOfAcceptTheDelivery;
     private boolean deliveryIntact;
-    private UUID acceptingEmployeeId;
 
     public DeliveryDTO() {}
 
     public DeliveryDTO(Delivery delivery){
-        this.acceptingEmployeeId = delivery.getAcceptingEmployeeId();
         this.dateOfAcceptTheDelivery = delivery.getDateOfAcceptTheDelivery();
         this.deliveryManId = delivery.getDeliveryManId();
         this.deliveryIntact = delivery.isDeliveryIntact();

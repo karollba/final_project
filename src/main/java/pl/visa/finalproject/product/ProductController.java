@@ -83,7 +83,6 @@ public class ProductController {
 
     @PostMapping("/scan")
     public String scan(@RequestParam("file") MultipartFile file, Model model, RedirectAttributes redirectAttributes) {
-
         try {
             String barcode = barcodeService.decodeBarcode(file);
             Optional<Product> product = productService.findByBarcode(barcode);

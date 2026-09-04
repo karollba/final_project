@@ -3,8 +3,10 @@ package pl.visa.finalproject.orderedProducts;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.visa.finalproject.delivery.Delivery;
 import pl.visa.finalproject.delivery.DeliveryService;
 
@@ -33,10 +35,14 @@ public class OrderedProductController {
         return "orderedproduct/check";
     }
 
-//    @PostMapping("/updateQuantity")
-//    public String updateQuantity(@RequestParam UUID id, @RequestParam UUID deliveryId, @RequestParam double recievedQuantity) {
-//        orderedProductService.updateRecievedQuantity(id, recievedQuantity);
-//        return "redirect:/orderedproduct/check/"
-//    }
+    // do zastanowienia jeszcze to roziwazanie (te dodawanie id)
+    @PostMapping("/updateQuantity")
+    public String updateQuantity(@RequestParam UUID id,
+                                 @RequestParam UUID deliveryId,
+                                 @RequestParam double recievedQuantity, RedirectAttributes redirectAttributes) {
+        orderedProductService.updateRecievedQuantity(id, recievedQuantity);
+        redirectAttributes.addFlashAttribute("deliveryId", deliveryId);
+        return "redirect:/orderedproduct/check";
+    }
 
 }

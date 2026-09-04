@@ -43,7 +43,6 @@ public class Delivery {
     @JoinColumn(name = "accepting_employee_id")
     private Employee acceptingEmployee;
 
-    private UUID acceptingEmployeeId;
     private Long invoiceId;
     private String deliveryId;
     private LocalDate invoiceDue;
