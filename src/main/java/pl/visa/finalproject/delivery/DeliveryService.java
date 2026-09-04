@@ -42,9 +42,9 @@ public class DeliveryService {
 //            existing.setSupplierName(updateDelivery.getSupplierName());
 //        }
 
-        if (updateDelivery.getCategory() != null && !updateDelivery.getCategory().isEmpty()) {
-            existing.setCategory(updateDelivery.getCategory());
-        }
+//        if (updateDelivery.getCategory() != null && !updateDelivery.getCategory().isEmpty()) {
+//            existing.setCategory(updateDelivery.getCategory());
+//        }
 
         if (updateDelivery.getInvoiceDue() != null) {
             existing.setInvoiceDue(updateDelivery.getInvoiceDue());

@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.eclipse.tags.shaded.org.apache.bcel.generic.CALOAD;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -42,7 +41,7 @@ public class Product {
     private String barcode;
 
     @Enumerated(EnumType.STRING)
-    private Category category;
+    private ProductCategory category;
 
     // delivery date moze pobierz i wstaw w delivery. probelm bo jak bedziesz dodawac nowa delivery to bedziesz nadpisywac
     // chyba ze utworzysz nowa powaiana tablee i tam bedzie np product id i ostatnie dostawy i kazdy nowy

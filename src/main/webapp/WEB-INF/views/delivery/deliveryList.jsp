@@ -46,7 +46,7 @@
                       <td>${delivery.dateOfAcceptTheDelivery}</td>
                       <td>${delivery.invoiceDue}</td>
                       <td>${delivery.paid}</td>
-                      <td>${delivery.acceptingEmployeeId}</td>
+                      <td>${delivery.acceptingEmployeeId.idToShow}</td>
                       <td>${delivery.deliveryManId}</td>
                       <td>${delivery.deliveryIntact}</td>
                       <td>${delivery.category}</td>

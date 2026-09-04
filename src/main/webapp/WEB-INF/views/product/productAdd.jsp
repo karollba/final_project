@@ -51,8 +51,13 @@
             </div>
 
             <div class="form-group">
-                <label for="category">Kategoria</label>
-                <input value="${product.category}" name="category" type="text" class="form-control" id="category" placeholder="category">
+            <label for="category"> Kategoria </label>
+                <select name="category" class="form-control" id="category">
+                <option value=""> wybierz </option>
+                    <c:forEach var="cat" items="${productCategories}">
+                      <option value="${cat}">${cat}</option>
+                </c:forEach>
+                </select>
             </div>
 
             <div class="form-group">

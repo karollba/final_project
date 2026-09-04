@@ -40,6 +40,7 @@ public class ProductController {
     @GetMapping("/add")
     public String addForm(Model model) {
         model.addAttribute("product", new Product());
+        model.addAttribute("productCategories", ProductCategory.values());
         return "product/productAdd";
     }
 

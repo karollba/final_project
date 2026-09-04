@@ -35,6 +35,15 @@ public class SupplierService {
     }
 
     public void save(Supplier supplier) {
+
+        if (supplier.getIdToShow() == null) {
+            Optional<Long> maxId = supplierRespository.findMaxIdToShow();
+            if (maxId.isEmpty())  {
+                supplier.setIdToShow(1L);
+            } else {
+                supplier.setIdToShow(maxId.orElse(null) + 1);
+            }
+        }
         supplierRespository.save(supplier);
     }
 

@@ -82,10 +82,10 @@ public class ProductService {
         if (updatedProduct.getQuantity() > 0) {
             existing.setQuantity(updatedProduct.getQuantity());
         }
-
-        if (updatedProduct.getCategory() != null && !updatedProduct.getCategory().isEmpty()) {
-            existing.setCategory(updatedProduct.getCategory());
-        }
+//
+//        if (updatedProduct.getCategory() != null && !updatedProduct.getCategory().isEmpty()) {
+//            existing.setCategory(updatedProduct.getCategory());
+//        }
 
         if (updatedProduct.getExpirationDate() != null) {
             existing.setExpirationDate(updatedProduct.getExpirationDate());

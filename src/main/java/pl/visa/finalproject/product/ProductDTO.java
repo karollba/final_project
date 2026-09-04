@@ -17,7 +17,6 @@ public class ProductDTO {
     private String name;
     private boolean availability;
     private int quantity;
-    private String category;
     private LocalDate expirationDate;
     private boolean deleted;
     private LocalDateTime timeDeleted;
@@ -28,7 +27,6 @@ public class ProductDTO {
     public ProductDTO(Product product) {
         this.id = product.getId();
         this.name = product.getName();
-        this.category = product.getCategory();
         this.availability = product.isAvailability();
         this.quantity = product.getQuantity();
         this.expirationDate = product.getExpirationDate();

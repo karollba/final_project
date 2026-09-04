@@ -34,6 +34,7 @@ public class DeliveryController {
     public String addForm(Model model) {
         model.addAttribute("delivery", new Delivery());
         model.addAttribute("suppliers", supplierService.findAll());
+        model.addAttribute("deliveryCategories", DeliveryCategory.values());
         return "delivery/deliveryAdd";
     }
 
