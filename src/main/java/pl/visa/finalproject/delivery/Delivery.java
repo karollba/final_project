@@ -5,13 +5,13 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.web.bind.annotation.GetMapping;
 import pl.visa.finalproject.employee.Employee;
-import pl.visa.finalproject.product.ProductCategory;
+import pl.visa.finalproject.orderedProducts.OrderedProduct;
 import pl.visa.finalproject.supplier.Supplier;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -61,4 +61,6 @@ public class Delivery {
     @JoinColumn(name = "supplier_id", nullable = false)
     private Supplier supplier;
 
+    @OneToMany(mappedBy = "delivery", cascade = CascadeType.ALL)
+    private List<OrderedProduct> orderedProducts = new ArrayList<>();
 }

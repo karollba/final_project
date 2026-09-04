@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import pl.visa.finalproject.orderedProducts.Unit;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -42,6 +43,9 @@ public class Product {
 
     @Enumerated(EnumType.STRING)
     private ProductCategory category;
+
+    @Enumerated(EnumType.STRING)
+    private Unit deafultUnit;
 
     // delivery date moze pobierz i wstaw w delivery. probelm bo jak bedziesz dodawac nowa delivery to bedziesz nadpisywac
     // chyba ze utworzysz nowa powaiana tablee i tam bedzie np product id i ostatnie dostawy i kazdy nowy
