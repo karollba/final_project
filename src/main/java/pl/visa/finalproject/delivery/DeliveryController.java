@@ -4,10 +4,9 @@ import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/delivery")
@@ -43,5 +42,20 @@ public class DeliveryController {
         return "redirect:/delivery/list";
     }
 
+    @GetMapping("/edit")
+    public String editForm(@RequestParam UUID id, Model model) {
+        Delivery delivery = deliveryService.findById(id).orElseThrow();
+        model.addAttribute("delivery", delivery);
+        return "delivery/deliveryEdit";
+    }
+
+    @PostMapping("/edit")
+    public String edit(@Valid @ModelAttribute Delivery delivery, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "delivery/deliveryEdit";
+        }
+        deliveryService.update(delivery);
+        return "redirect:/delivery/list";
+    }
 
 }

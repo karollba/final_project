@@ -19,19 +19,6 @@ public class DeliveryService {
     private final DeliveryRepository deliveryRepository;
 
     // zmienic dostawe moze tylko admin!!!!
-//    public void update(Delivery updatedDelivery) {
-//        Delivery existing = deliveryRepository.findById(updatedDelivery.getId())
-//                .orElseThrow(() -> new RuntimeException("Nie znaleziono dostawy o numerze " + updatedDelivery.getDeliveryId()));
-//
-//
-//        // ilosc edytowac
-//
-//        // kategorie (ktos moze sie machnac wybeirajac zla)
-//
-//
-//    }
-
-
 
     public DeliveryService(DeliveryRepository deliveryRepository) {
         this.deliveryRepository = deliveryRepository;
@@ -42,7 +29,28 @@ public class DeliveryService {
     }
 
     public List<Delivery> findAll() {
-        return deliveryRepository.findAll();}
+        return deliveryRepository.findAll();
+    }
+
+    public void update(Delivery updateDelivery) {
+        Delivery existing = deliveryRepository.findById(updateDelivery.getId())
+                .orElseThrow(() -> new RuntimeException("Dostawcy nie znaleziono"));
+
+        if (updateDelivery.getSupplierName() != null && !updateDelivery.getSupplierName().isEmpty()) {
+            existing.setSupplierName(updateDelivery.getSupplierName());
+        }
+
+        if (updateDelivery.getCategory() != null && !updateDelivery.getCategory().isEmpty()) {
+            existing.setCategory(updateDelivery.getCategory());
+        }
+
+        if (updateDelivery.getInvoiceDue() != null) {
+            existing.setInvoiceDue(updateDelivery.getInvoiceDue());
+        }
+
+        existing.setPaid(updateDelivery.isPaid());
+        deliveryRepository.save(existing);
+    }
 
     public Optional<Delivery> get(UUID id) {
         return deliveryRepository.findById(id);
@@ -55,6 +63,7 @@ public class DeliveryService {
     public void save(Delivery delivery) {
         deliveryRepository.save(delivery);
     }
+
     public boolean exists(UUID id) {
         return deliveryRepository.existsById(id);
     }
