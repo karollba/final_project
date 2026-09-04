@@ -9,7 +9,7 @@
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
           <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
           <a href="<c:url value='/product/add'/>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                  class="fas fa-download fa-sm text-white-50"></i> Dodaj nowy produkt</a>
+                  class="fas fa-plus fa-sm text-white-50"></i> Dodaj nowy produkt</a>
         </div>
 
   <div class="row">
@@ -29,6 +29,7 @@
                          <th>Kategoria</th>
                          <th>Termin ważności</th>
                          <th>Ilość</th>
+                        <th>Działanie </th>
                     </tr>
                     </thead>
                     <tbody>
