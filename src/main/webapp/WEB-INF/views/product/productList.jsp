@@ -10,6 +10,9 @@
           <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
           <a href="<c:url value='/product/add'/>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                   class="fas fa-plus fa-sm text-white-50"></i> Dodaj nowy produkt</a>
+
+        <a href="<c:url value='/product/addBatch'/>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                        class="fas fa-plus fa-sm text-white-50"></i> Dodaj nową partię </a>
         </div>
 
   <div class="row">
@@ -22,6 +25,25 @@
                   <h6 class="m-0 font-weight-bold text-primary"> Lista produktów</h6>
                 </div>
                 <div class="card-body">
+
+
+            <!-- Filtry -->
+            <form method="get" action="${pageContext.request.contextPath}/product/list" class="mb-3">
+                <select name="category" calss="form-control d-inline-block w-auto" onchange="this.form.submit()">
+                    <option value="">Wszystkie kategorie</option>
+                    <c:forEach var="cat" items="${productCategories}">
+                        <option value="${cat}" ${cat.toString() == selectedCategory ? 'selected' : ''}>${cat} </option>
+                    </c:forEach>
+                </select>
+
+
+                <select name="expiryFilter" calss="form-control d-inline-block w-auto" onchange="this.form.submit()">
+                    <option value="">Wszystkie terminy</option>
+                    <option value="today" ${selectedExpiryFilter == 'today' ? 'selected' : ''}>Dziś</option>
+                    <option value="week" ${selectedExpiryFilter == 'week' ? 'selected' : ''}> W tym tygodniu</option>
+                </select>
+                </form>
+
                   <table  class="table">
                     <thead>
                     <tr>

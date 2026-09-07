@@ -3,6 +3,7 @@ package pl.visa.finalproject.product;
 import jakarta.validation.Validator;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -10,7 +11,6 @@ import java.util.UUID;
 @Service
 public class ProductService {
     private final ProductRepository productRepository;
-
 
     public ProductService(ProductRepository productRepository) {
         this.productRepository = productRepository;
@@ -101,7 +101,6 @@ public class ProductService {
     public boolean exists(UUID product_id) {
         return productRepository.existsById(product_id);
     }
-
 
 
 

@@ -53,7 +53,7 @@
                       <td>
                         <a href="edit?id=${delivery.id}" class="btn btn-info btn-sm">Edytuj</a>
                         <a href="delete?id=${delivery.id}" class="btn btn-info btn-sm">Usuń</a>
-                        <a href="show?id=${delivery.id}" class="btn btn-info btn-sm">Pokaż</a>
+                        <a href="${pageContext.request.contextPath}/orderedproduct/check?deliveryId=${d.id}" class="btn btn-info btn-sm">Szczegóły</a>
                       </td>
                   </tr>
                 </c:forEach>

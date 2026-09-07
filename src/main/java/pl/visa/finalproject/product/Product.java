@@ -10,6 +10,7 @@ import pl.visa.finalproject.orderedProducts.Unit;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.UUID;
 
 @Entity
@@ -46,6 +47,16 @@ public class Product {
 
     @Enumerated(EnumType.STRING)
     private Unit deafultUnit;
+
+    @Transient
+    public String getExpiryStatus() {
+        if (expirationDate == null) return "";
+
+        long daysUntilExpiry = ChronoUnit.DAYS.between(LocalDate.now(), expirationDate);
+        if (daysUntilExpiry <= 0) return "danger";
+        if (daysUntilExpiry <= 7) return "warning";
+        return "";
+    }
 
     // delivery date moze pobierz i wstaw w delivery. probelm bo jak bedziesz dodawac nowa delivery to bedziesz nadpisywac
     // chyba ze utworzysz nowa powaiana tablee i tam bedzie np product id i ostatnie dostawy i kazdy nowy
