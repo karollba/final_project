@@ -31,13 +31,13 @@ public class OrderedProductController {
     @GetMapping("/list")
     public String listOrderedProducts(Model model) {
         model.addAttribute("orderedProducts", orderedProductService.findAll());
-        return "orderedproduct/orderedproductList";
+        return "orderedproduct/orderedList";
     }
 
     @GetMapping("/add")
     public String addForm(Model model) {
         model.addAttribute("orderedProduct", new OrderedProduct());
-        return "orderedproduct/orderedproductAdd";
+        return "orderedproduct/orderedList";
     }
 
     @PostMapping("/add")
@@ -47,17 +47,18 @@ public class OrderedProductController {
     }
 
     @GetMapping("/check")
-    public String checkForm(@RequestParam UUID deliveryId, Model model) {
+    public String checkForm(@RequestParam UUID deliveryId, Model model, RedirectAttributes redirectAttributes) {
         Delivery delivery = deliveryService.findById(deliveryId).orElseThrow();
         List<OrderedProduct> items = orderedProductService.findBYDelivery(delivery);
 
         model.addAttribute("items", items);
         model.addAttribute("deliveryId", deliveryId);
-        return "orderedproduct/check";
+        redirectAttributes.addAttribute("deliveryId", deliveryId);
+        return "redirect:/orderedproduct/check";
     }
 
     // do zastanowienia jeszcze to roziwazanie (te dodawanie id)
-    @PostMapping("/updateQuantity")
+    @PostMapping("/updatequantity")
     public String updateQuantity(@RequestParam UUID id,
                                  @RequestParam UUID deliveryId,
                                  @RequestParam double recievedQuantity, RedirectAttributes redirectAttributes) {

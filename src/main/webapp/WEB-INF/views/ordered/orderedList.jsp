@@ -37,12 +37,12 @@
                     <c:forEach var="item" items="${items}">
                       <tr>
                           <td>${item.product.name}</td>
-                          <td>${product.orderedQuantity}</td>
+                          <td>${item.orderedQuantity}</td>
                           <td>
                             <c:choose>
                                 <c:when test="${item.checked}"> ${item.recievedQuantity} </c:when>
                                 <c:otherwise>
-                                    <form action="${pageContext.request.contextPath}/orderedproduct/updateQiantity" method="post" class="form-inline">
+                                    <form action="${pageContext.request.contextPath}/orderedproduct/updatequantity" method="post" class="form-inline">
                                         <input type="hidden" name="id" value="${item.id}">
                                         <input type="hidden" name="deliveryId" value="${deliveryId}">
                                         <input type="number" step="0.1" name="recievedQuantity" class="form-control" style="width:100px" required>
