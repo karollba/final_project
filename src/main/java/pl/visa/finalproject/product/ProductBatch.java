@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.visa.finalproject.delivery.Delivery;
+import pl.visa.finalproject.orderedProducts.Unit;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -31,6 +32,9 @@ public class ProductBatch {
 
     private double quantity;
     private LocalDateTime deliveryDate;
+
+    @Enumerated(EnumType.STRING)
+    private Unit defaultUnit;
 
     @ManyToOne
     @JoinColumn(name = "delivery_id")

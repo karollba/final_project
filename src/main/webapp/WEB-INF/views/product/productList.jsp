@@ -62,8 +62,8 @@
                           <td>${batch.product.name}</td>
                           <td>${batch.product.category}</td>
                           <td>${batch.expirationDate}</td>
-                          <td>${product.quantity}</td>
-                          <td>${batch.product.defultUnit}</td>
+                          <td>${batch.product.quantity}</td>
+                          <td>${batch.product.defaultUnit}</td>
                           <td>
                             <a href="edit?id=${product.id}" class="btn btn-info btn-sm">Edit</a>
                             <a href="delete?id=${product.id}" class="btn btn-info btn-sm">Usuń</a>

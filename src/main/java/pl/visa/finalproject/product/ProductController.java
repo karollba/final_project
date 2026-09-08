@@ -8,6 +8,7 @@ import org.eclipse.tags.shaded.org.apache.xpath.operations.Mod;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -15,6 +16,7 @@ import pl.visa.finalproject.barcode.BarcodeService;
 import pl.visa.finalproject.orderedProducts.Unit;
 
 import javax.swing.*;
+import java.beans.PropertyEditorSupport;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
@@ -147,5 +149,21 @@ public class ProductController {
         }
         productBatchService.add(product);
         return "redirect:/product/list";
+    }
+
+
+    // a po co to deokaldnie???
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(Product.class, new PropertyEditorSupport() {
+            @Override
+            public void setAsText(String text) {
+                if (text != null && !text.isEmpty()) {
+                    UUID uuid = UUID.fromString(text);
+                    Product product = productService.findById(uuid).orElse(null);
+                    setValue(product);
+                }
+            }
+        });
     }
 }
