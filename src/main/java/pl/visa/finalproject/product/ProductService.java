@@ -7,13 +7,16 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
     private final ProductRepository productRepository;
+    private final ProductBatchService productBatchService;
 
-    public ProductService(ProductRepository productRepository) {
+    public ProductService(ProductRepository productRepository, ProductBatchService productBatchService) {
         this.productRepository = productRepository;
+        this.productBatchService = productBatchService;
     }
 
     // jeszcze musisz dodac obsluge bledow (ze jak nie znajdzie nie zapisze do bazy etc to co wtedy
@@ -51,6 +54,25 @@ public class ProductService {
             product.setAvailability(true);
             productRepository.save(product);
         }
+    }
+
+    public double getTotalQuantity(Product product) {
+        return productBatchService.getTotalQuantity(product);
+    }
+
+    public List<Product> findFiltered(String category) {
+        ProductCategory cat = (category != null && !category.isEmpty())
+                ? ProductCategory.valueOf(category) : null;
+
+        return productRepository.findFiltered(cat);
+    }
+
+    public List<ProductDTO> findAllWithTotalQuantity(String category) {
+        List<Product> products = findFiltered(category);
+
+        return products.stream()
+                .map(p -> new ProductDTO(p, productBatchService.getTotalQuantity(p)))
+                .collect(Collectors.toList());
     }
 
     public List<Product> findAll() {

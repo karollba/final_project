@@ -27,6 +27,9 @@ public class ProductBatchService {
         return productBatchRepository.findById(id);
     }
 
+    public List<ProductBatch> findByProduct(Product product) {
+        return productBatchRepository.findByProduct(product);
+    }
 
     public List<ProductBatch> findFiltered(String category, String expiryFilter) {
         ProductCategory cat = (category != null && !category.isEmpty()) ? ProductCategory.valueOf(category) : null;
@@ -42,7 +45,7 @@ public class ProductBatchService {
     }
 
     public double getTotalQuantity(Product product) {
-        Double total = productBatchRepository.getTotalQuantity(product);
+        Double total = productBatchRepository.getTotalQuantity(product, LocalDate.now());
         return total != null ? total : 0;
     }
 

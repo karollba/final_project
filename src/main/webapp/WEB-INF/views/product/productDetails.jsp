@@ -48,24 +48,21 @@
                   <table  class="table">
                     <thead>
                     <tr>
-                         <th>Nazwa</th>
-                         <th>Kategoria</th>
                          <th>Ilość</th>
-                         <th>Jednostka</th>
-                        <th>Działanie </th>
+                         <th>Termin ważności</th>
+                         <th>Data dostawy</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="product" items="${products}">
+                    <c:forEach var="batch" items="${batches}">
                       <tr>
-                          <td>${product.name}</td>
-                          <td>${product.category}</td>
-                          <td>${product.totalQuantity}</td>
-                          <td>${product.defaultUnit}</td>
+                          <td>${batch.quantity}</td>
+                          <td>${batch.expirationDate}</td>
+                          <td>${batch.dateAdded</td>
                           <td>
-                            <a href="details?id=${product.id}" class="btn btn-info btn-sm">Edit</a>
-                            <a href="edit?id=${product.id}" class="btn btn-info btn-sm">Szczegóły</a>
-                            <a href="delete?id=${product.id}" class="btn btn-info btn-sm">Usuń</a>
+                            <a href="details?id=${batch.id}" class="btn btn-info btn-sm">Edit</a>
+                            <a href="edit?id=${batch.id}" class="btn btn-info btn-sm">Szczegóły</a>
+                            <a href="delete?id=${batch.id}" class="btn btn-info btn-sm">Usuń</a>
                           </td>
                     </tr>
                     </c:forEach>

@@ -42,11 +42,7 @@ public class ProductController {
             @RequestParam(required = false) String expiryFilter,
             Model model) {
 
-        List<ProductBatch> products = productBatchService.findFiltered(category, expiryFilter);
-
-        System.out.println(category);
-        System.out.println(expiryFilter);
-
+        List<ProductDTO> products = productService.findAllWithTotalQuantity(category);
         model.addAttribute("products", products);
         model.addAttribute("productCategories", ProductCategory.values());
         model.addAttribute("selectedCategory", category);
@@ -54,6 +50,20 @@ public class ProductController {
 
         return "product/productList";
     }
+
+
+    // detalis dla partii produtku
+    @GetMapping("/details")
+    public String details(@RequestParam UUID id, Model model) {
+        Product product = productService.findById(id).orElseThrow();
+        List<ProductBatch> batches = productBatchService.findByProduct(product);
+        model.addAttribute("product", product);
+        model.addAttribute("batches", batches);
+        return "product/productDetails";
+    }
+
+
+
 
     // poszukujac filtruj napierw przez kategorie potem szukaj uuid bo tak to zajedziesz baze danych
 
@@ -134,7 +144,7 @@ public class ProductController {
     }
 
     // dodawanie nowej partii (temrminy)
-    @GetMapping("/addbacth")
+    @GetMapping("/addbatch")
     public String addBatchForm(Model model) {
         model.addAttribute("batch", new ProductBatch());
         model.addAttribute("products", productService.findAll());

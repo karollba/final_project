@@ -1,5 +1,6 @@
 package pl.visa.finalproject.product;
 
+import org.springframework.cglib.core.Local;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -20,7 +21,9 @@ public interface ProductBatchRepository extends JpaRepository<ProductBatch, UUID
 
     // łączna ilośc danego produktu
     @Query("select coalesce(sum(pb.quantity), 0) from ProductBatch pb where pb.product = :product and pb.expirationDate >= :today")
-    Double getTotalQuantity(@Param("product") Product product);
+    Double getTotalQuantity(@Param("product") Product product, @Param("today")LocalDate today);
 
+
+    List<ProductBatch> findByProduct(Product product);
 
 }

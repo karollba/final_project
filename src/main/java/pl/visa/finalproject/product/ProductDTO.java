@@ -1,12 +1,9 @@
 package pl.visa.finalproject.product;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
+import pl.visa.finalproject.orderedProducts.Unit;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -20,9 +17,13 @@ public class ProductDTO {
 //    private LocalDate expirationDate;
     private boolean deleted;
     private LocalDateTime timeDeleted;
+    private Unit deafultUnit;
+    private double totalQuantity;
     private String barcode;
+    private ProductCategory category;
+    private Unit defaultUnit;
 
-    public ProductDTO(){}
+    public ProductDTO(Product p, double totalQuantity){}
 
     public ProductDTO(Product product) {
         this.id = product.getId();
@@ -33,5 +34,7 @@ public class ProductDTO {
         this.deleted = product.isDeleted();
         this.timeDeleted = product.getTimeDeleted();
         this.barcode = product.getBarcode();
+        this.deafultUnit = product.getDefaultUnit();
+        this.totalQuantity = getTotalQuantity();
     }
 }

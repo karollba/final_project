@@ -18,6 +18,9 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
 
     Optional<Product> findByBarcode(String barcode);
 
+    @Query("select p from Product p where (:category is null or p.category = :category)")
+    List<Product> findFiltered(@Param("category") ProductCategory category);
+
     // produkty z bliskim terminem przydatności do spożycia
 //    @Query("select pb from ProductBatch pb where pb.expirationDate between :today and :weeklater")
 //    List<ProductBatch> findExpiringBatches(@Param("today") LocalDate today, @Param("weeklater") LocalDate weeklater);
