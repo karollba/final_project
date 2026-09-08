@@ -14,12 +14,12 @@ public interface ProductBatchRepository extends JpaRepository<ProductBatch, UUID
 
     @Query("select pb from ProductBatch pb " +
             "where (:category is null or pb.product.category = :category) " +
-            "and (:today is null or pb.product.expirationDate <= :today)")
+            "and (:today is null or pb.expirationDate <= :today)")
     List<ProductBatch> findFiltered(@Param("category") ProductCategory category,
                                @Param("today") LocalDate expiryLimit);
 
     // łączna ilośc danego produktu
-    @Query("select sum(pb.quantity) from ProductBatch pb where pb.product = :product and pb.expirationDate >= :today")
+    @Query("select coalesce(sum(pb.quantity), 0) from ProductBatch pb where pb.product = :product and pb.expirationDate >= :today")
     Double getTotalQuantity(@Param("product") Product product);
 
 

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.visa.finalproject.barcode.BarcodeService;
+import pl.visa.finalproject.orderedProducts.Unit;
 
 import javax.swing.*;
 import java.io.IOException;
@@ -40,6 +41,10 @@ public class ProductController {
             Model model) {
 
         List<ProductBatch> products = productBatchService.findFiltered(category, expiryFilter);
+
+        System.out.println(category);
+        System.out.println(expiryFilter);
+
         model.addAttribute("products", products);
         model.addAttribute("productCategories", ProductCategory.values());
         model.addAttribute("selectedCategory", category);
@@ -56,6 +61,7 @@ public class ProductController {
     public String addForm(Model model) {
         model.addAttribute("product", new Product());
         model.addAttribute("productCategories", ProductCategory.values());
+        model.addAttribute("units", Unit.values());
         return "product/productAdd";
     }
 
@@ -104,13 +110,17 @@ public class ProductController {
 
             if (product.isPresent()) {
                 model.addAttribute("product", product.get());
-                return "product/productAdd";
             } else {
                 Product newProduct = new Product();
                 newProduct.setBarcode(barcode);
                 model.addAttribute("product", newProduct);
-                return "product/productAdd";
             }
+
+            model.addAttribute("productCategories", ProductCategory.values());
+            model.addAttribute("units", Unit.values());
+
+            return "product/productAdd";
+
         } catch (NotFoundException e) {
             redirectAttributes.addFlashAttribute("error", "Nie rozpoznano kodu kreskowego");
             return "redirect:/product/add";

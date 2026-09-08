@@ -30,10 +30,7 @@ public class Product {
     private boolean availability;
 
     @Min(value = 0, message = "Quantity cannot be below 0!")
-    private int quantity;
-
-    // pamietaj ze domyslnie te localdate bierze inna strefe czasowa a wiec musisz to dostosowac
-    private LocalDate expirationDate;
+    private double quantity;
 
     private boolean deleted;
 
@@ -46,17 +43,17 @@ public class Product {
     private ProductCategory category;
 
     @Enumerated(EnumType.STRING)
-    private Unit deafultUnit;
+    private Unit defaultUnit;
 
-    @Transient
-    public String getExpiryStatus() {
-        if (expirationDate == null) return "";
-
-        long daysUntilExpiry = ChronoUnit.DAYS.between(LocalDate.now(), expirationDate);
-        if (daysUntilExpiry <= 0) return "danger";
-        if (daysUntilExpiry <= 7) return "warning";
-        return "";
-    }
+//    @Transient
+//    public String getExpiryStatus() {
+//        if (expirationDate == null) return "";
+//
+//        long daysUntilExpiry = ChronoUnit.DAYS.between(LocalDate.now(), expirationDate);
+//        if (daysUntilExpiry <= 0) return "danger";
+//        if (daysUntilExpiry <= 7) return "warning";
+//        return "";
+//    }
 
     // delivery date moze pobierz i wstaw w delivery. probelm bo jak bedziesz dodawac nowa delivery to bedziesz nadpisywac
     // chyba ze utworzysz nowa powaiana tablee i tam bedzie np product id i ostatnie dostawy i kazdy nowy

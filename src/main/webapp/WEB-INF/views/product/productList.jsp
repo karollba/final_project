@@ -42,6 +42,7 @@
                     <option value="today" ${selectedExpiryFilter == 'today' ? 'selected' : ''}>Dziś</option>
                     <option value="week" ${selectedExpiryFilter == 'week' ? 'selected' : ''}> W tym tygodniu</option>
                 </select>
+
                 </form>
 
                   <table  class="table">
@@ -51,6 +52,7 @@
                          <th>Kategoria</th>
                          <th>Termin ważności</th>
                          <th>Ilość</th>
+                         <th>Jednostka</th>
                         <th>Działanie </th>
                     </tr>
                     </thead>
@@ -59,7 +61,8 @@
                       <tr>
                           <td>${product.name}</td>
                           <td>${product.category}</td>
-                          <td>${product.expirationDate}</td>
+                          <td>${productBatch.expirationDate}</td>
+                          <td>${batch.unit.defultUnit}</td>
                           <td>${product.quantity}</td>
                           <td>
                             <a href="edit?id=${product.id}" class="btn btn-info btn-sm">Edit</a>

@@ -37,7 +37,7 @@
                   <tr>
                       <td>${delivery.deliveryId}</td>
                       <td>${item.product.name}</td>
-                      <td>${item.orderedQuantity</td>
+                      <td>${item.orderedQuantity}</td>
                       <td>
                       <c:choose>
                         <c:when test="${item.checked}">
@@ -63,7 +63,7 @@
                                 </c:when>
                                 <c:otherwise>
                                     <span class="badge badge-danger"> Rozbieżność</span>
-                                </c:ptherwise>
+                                </c:otherwise>
                             </c:choose>
                         </c:if>
                         <c:if test="${!item.checked}">

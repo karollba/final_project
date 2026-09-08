@@ -40,7 +40,7 @@ public class OrderedProductController {
     @PostMapping("/add")
     public String add(OrderedProduct orderedProduct) {
         orderedProductService.add(orderedProduct);
-        return "redirect:/ordered/list";
+        return "redirect:/orderedproduct/list";
     }
 
     @GetMapping("/check")
@@ -59,8 +59,8 @@ public class OrderedProductController {
                                  @RequestParam UUID deliveryId,
                                  @RequestParam double recievedQuantity, RedirectAttributes redirectAttributes) {
         orderedProductService.updateRecievedQuantity(id, recievedQuantity);
-        redirectAttributes.addFlashAttribute("deliveryId", deliveryId);
-        return "redirect:/ordered/check";
+        redirectAttributes.addAttribute("deliveryId", deliveryId);
+        return "redirect:/orderedproduct/check";
     }
 
 

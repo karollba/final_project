@@ -87,9 +87,9 @@ public class ProductService {
 //            existing.setCategory(updatedProduct.getCategory());
 //        }
 
-        if (updatedProduct.getExpirationDate() != null) {
-            existing.setExpirationDate(updatedProduct.getExpirationDate());
-        }
+//        if (updatedProduct.getExpirationDate() != null) {
+//            existing.setExpirationDate(updatedProduct.getExpirationDate());
+//        }
         productRepository.save(existing);
 
     }

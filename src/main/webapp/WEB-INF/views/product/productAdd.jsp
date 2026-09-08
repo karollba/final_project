@@ -60,9 +60,19 @@
                 </select>
             </div>
 
+             <div class="form-group">
+                <label for="defaultUnit"> Jednostka </label>
+                    <select name="defaultUnit" class="form-control" id="defaultUnit">
+                    <option value=""> wybierz </option>
+                        <c:forEach var="u" items="${units}">
+                        <option value="${u}">${u}</option>
+                </c:forEach>
+                </select>
+            </div>
+
             <div class="form-group">
                 <label for="expirationDate">Termin ważności</label>
-                <input value="${product.expirationDate}" name="expirationDate" type="date" class="form-control" id="expirationDate" placeholder="expirationDate">
+                <input value="${productBatch.expirationDate}" name="expirationDate" type="date" class="form-control" id="expirationDate" placeholder="expirationDate">
             </div>
 
             <div class="form-group">
