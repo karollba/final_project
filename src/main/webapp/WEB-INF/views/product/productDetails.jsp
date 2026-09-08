@@ -5,12 +5,6 @@
    <!-- Begin Page Content -->
       <div class="container-fluid">
 
-        <!-- Page Heading -->
-        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-          <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-          <a href="<c:url value='/product/add'/>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                  class="fas fa-plus fa-sm text-white-50"></i> Dodaj nowy produkt</a>
-
         <a href="<c:url value='/product/addbatch'/>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                         class="fas fa-plus fa-sm text-white-50"></i> Dodaj nową partię </a>
         </div>
@@ -22,20 +16,9 @@
             <div class="col-12">
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary"> Lista produktów</h6>
+                  <h6 class="m-0 font-weight-bold text-primary"> ${product.name}</h6>
                 </div>
                 <div class="card-body">
-
-
-            <!-- Filtry -->
-            <form method="get" action="${pageContext.request.contextPath}/product/list" class="mb-3">
-                <select name="category" calss="form-control d-inline-block w-auto" onchange="this.form.submit()">
-                    <option value="">Wszystkie kategorie</option>
-                    <c:forEach var="cat" items="${productCategories}">
-                        <option value="${cat}" ${cat.toString() == selectedCategory ? 'selected' : ''}>${cat} </option>
-                    </c:forEach>
-                </select>
-
 
                 <select name="expiryFilter" calss="form-control d-inline-block w-auto" onchange="this.form.submit()">
                     <option value="">Wszystkie terminy</option>
@@ -49,19 +32,18 @@
                     <thead>
                     <tr>
                          <th>Ilość</th>
+                         <th>Jednostka</th>
                          <th>Termin ważności</th>
-                         <th>Data dostawy</th>
+                         <th>Działanie</th>
                     </tr>
                     </thead>
                     <tbody>
                     <c:forEach var="batch" items="${batches}">
                       <tr>
                           <td>${batch.quantity}</td>
+                           <td>${batch.product.defaultUnit}</td>
                           <td>${batch.expirationDate}</td>
-                          <td>${batch.dateAdded</td>
                           <td>
-                            <a href="details?id=${batch.id}" class="btn btn-info btn-sm">Edit</a>
-                            <a href="edit?id=${batch.id}" class="btn btn-info btn-sm">Szczegóły</a>
                             <a href="delete?id=${batch.id}" class="btn btn-info btn-sm">Usuń</a>
                           </td>
                     </tr>

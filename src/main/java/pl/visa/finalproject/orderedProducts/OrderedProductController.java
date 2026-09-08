@@ -20,7 +20,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("/orderedproduct")
+@RequestMapping("/order")
 public class OrderedProductController {
 
     private final OrderedProductService orderedProductService;
@@ -79,7 +79,7 @@ public class OrderedProductController {
         batch.setDeliveryDate(LocalDateTime.now());
         productBatchService.add(batch);
 
-        orderedProductService.addRecievedQuantity(id, recievedQuantity);
+        orderedProductService.updateRecievedQuantity(id, recievedQuantity);
         redirectAttributes.addAttribute("deliveryId", deliveryId);
         return "redirect:/orderedproduct/check";
     }

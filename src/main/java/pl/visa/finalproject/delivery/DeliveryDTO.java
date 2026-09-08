@@ -12,7 +12,6 @@ import java.util.UUID;
 public class DeliveryDTO {
     private UUID id;
     private String deliveryCategory;
-    private Long deliveryManId;
     private LocalDate dateOfAcceptTheDelivery;
     private boolean deliveryIntact;
 
@@ -20,7 +19,6 @@ public class DeliveryDTO {
 
     public DeliveryDTO(Delivery delivery){
         this.dateOfAcceptTheDelivery = delivery.getDateOfAcceptTheDelivery();
-        this.deliveryManId = delivery.getDeliveryManId();
         this.deliveryIntact = delivery.isDeliveryIntact();
     }
 

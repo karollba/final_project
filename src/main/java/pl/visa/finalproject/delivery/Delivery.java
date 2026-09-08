@@ -37,7 +37,6 @@ public class Delivery {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    private Long deliveryManId;
     // tutaj zeby z automatu przekazalo do tabeli tego co jest zalogowany.
     @ManyToOne
     @JoinColumn(name = "accepting_employee_id")

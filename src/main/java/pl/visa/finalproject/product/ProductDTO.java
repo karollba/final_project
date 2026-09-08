@@ -1,6 +1,7 @@
 package pl.visa.finalproject.product;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.visa.finalproject.orderedProducts.Unit;
 
@@ -9,6 +10,8 @@ import java.util.UUID;
 
 @Getter
 @Setter
+@NoArgsConstructor
+
 public class ProductDTO {
     private UUID id;
     private String name;
@@ -17,24 +20,22 @@ public class ProductDTO {
 //    private LocalDate expirationDate;
     private boolean deleted;
     private LocalDateTime timeDeleted;
-    private Unit deafultUnit;
+    private Unit defaultUnit;
     private double totalQuantity;
     private String barcode;
     private ProductCategory category;
-    private Unit defaultUnit;
 
-    public ProductDTO(Product p, double totalQuantity){}
-
-    public ProductDTO(Product product) {
+    public ProductDTO(Product product, double totalQuantity) {
         this.id = product.getId();
         this.name = product.getName();
         this.availability = product.isAvailability();
         this.quantity = product.getQuantity();
-//        this.expirationDate = product.getExpirationDate();
         this.deleted = product.isDeleted();
         this.timeDeleted = product.getTimeDeleted();
         this.barcode = product.getBarcode();
-        this.deafultUnit = product.getDefaultUnit();
-        this.totalQuantity = getTotalQuantity();
+        this.defaultUnit = product.getDefaultUnit();
+        this.totalQuantity = totalQuantity;
+        this.category = product.getCategory();
+
     }
 }

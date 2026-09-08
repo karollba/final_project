@@ -68,6 +68,12 @@
                     <span>Produkty</span></a>
             </li>
 
+            <!-- Nav Item - Zamówienia -->
+            <li class="nav-item">
+                <a class="nav-link" href="${pageContext.request.contextPath}/orderedproduct/list">
+                    <i class="fas fa-box"></i>
+                    <span>Zamówienia</span></a>
+            </li>
 
             <!-- Nav Item - Dostawy -->
             <li class="nav-item">

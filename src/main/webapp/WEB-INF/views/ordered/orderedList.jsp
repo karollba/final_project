@@ -9,7 +9,7 @@
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
           <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
           <a href="<c:url value='/delivery/list'/>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                  class="fas fa-plus fa-sm text-white-50"></i>Lista dostaw</a>
+                  class="fas fa-plus fa-sm text-white-50"></i>Lista zamówień</a>
         </div>
 
   <div class="row">
@@ -42,7 +42,7 @@
                             <c:choose>
                                 <c:when test="${item.checked}"> ${item.recievedQuantity} </c:when>
                                 <c:otherwise>
-                                    <form action="${pageContext.request.contextPath}/orderedproduct/updatequantity" method="post" class="form-inline">
+                                    <form action="${pageContext.request.contextPath}/order/updatequantity" method="post" class="form-inline">
                                         <input type="hidden" name="id" value="${item.id}">
                                         <input type="hidden" name="deliveryId" value="${deliveryId}">
                                         <input type="number" step="0.1" name="recievedQuantity" class="form-control" style="width:100px" required>
