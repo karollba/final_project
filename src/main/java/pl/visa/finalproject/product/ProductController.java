@@ -136,14 +136,14 @@ public class ProductController {
     public String addBatchForm(Model model) {
         model.addAttribute("batch", new ProductBatch());
         model.addAttribute("products", productService.findAll());
-        return "product/batchadd";
+        return "product/batchAdd";
     }
 
     @PostMapping("/addbatch")
     public String addBatch(@Valid @ModelAttribute ProductBatch product,
                       BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "product/porudctBatchAdd";
+            return "product/batchAdd";
         }
         productBatchService.add(product);
         return "redirect:/product/list";

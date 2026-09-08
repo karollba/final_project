@@ -57,17 +57,16 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="product" items="${products}">
+                    <c:forEach var="batch" items="${products}">
                       <tr>
-                          <td>${product.name}</td>
-                          <td>${product.category}</td>
-                          <td>${productBatch.expirationDate}</td>
-                          <td>${batch.unit.defultUnit}</td>
+                          <td>${batch.product.name}</td>
+                          <td>${batch.product.category}</td>
+                          <td>${batch.expirationDate}</td>
                           <td>${product.quantity}</td>
+                          <td>${batch.product.defultUnit}</td>
                           <td>
                             <a href="edit?id=${product.id}" class="btn btn-info btn-sm">Edit</a>
                             <a href="delete?id=${product.id}" class="btn btn-info btn-sm">Usuń</a>
-                            <a href="show?id=${product.id}" class="btn btn-info btn-sm">Pokaż</a>
                           </td>
                     </tr>
                     </c:forEach>

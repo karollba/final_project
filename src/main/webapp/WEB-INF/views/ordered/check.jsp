@@ -48,6 +48,7 @@
                                 <input type="hidden" name="id" value="${item.id}">
                                 <input type="hidden" name="deliveryId" value="${deliveryId}">
                                 <input type="number" step="0.1" name="recievedQuantity" class="form-control" style="width:100px" required>
+                                <iput type="date" name="expirationDate" class="form-control" style="width:150px" required>
                                 <button type="submit" class="btn btn-sm btn-primary ml-2">Zatwierdź </button>
                             </form>
                         </c:otherwise>

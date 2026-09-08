@@ -2,6 +2,8 @@ package pl.visa.finalproject.delivery;
 
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -24,8 +26,12 @@ public class DeliveryService {
     }
 
     public void add(Delivery delivery) {
-        Long maxId = deliveryRepository.findMaxIdToShow().orElse(0L);
-        delivery.setIdToShow(maxId + 1);
+        String today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+
+        Long maxNumber = deliveryRepository.findMaxDeliveryNumber().orElse(0L);
+        String deliveryId = today + "-" + (maxNumber + 1);
+
+        delivery.setDeliveryId(String.valueOf(deliveryId));
         deliveryRepository.save(delivery);
     }
 

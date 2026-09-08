@@ -14,4 +14,7 @@ public interface DeliveryRepository extends JpaRepository<Delivery, UUID> {
 
     @Query("select MAX(e.idToShow) from Delivery e")
     Optional<Long> findMaxIdToShow();
+
+    @Query("select max(cast(substring( d.deliveryId, locate('-', d.deliveryId) + 1, 10) as long)) from Delivery d")
+    Optional<Long> findMaxDeliveryNumber();
 }

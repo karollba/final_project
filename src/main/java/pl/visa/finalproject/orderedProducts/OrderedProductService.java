@@ -2,8 +2,10 @@ package pl.visa.finalproject.orderedProducts;
 
 import org.springframework.stereotype.Service;
 import pl.visa.finalproject.delivery.Delivery;
+import pl.visa.finalproject.product.ProductBatch;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -14,6 +16,12 @@ public class OrderedProductService {
     public OrderedProductService(OrderedProductRepository orderedProductRepository) {
         this.orderedProductRepository = orderedProductRepository;
     }
+
+
+    public Optional<OrderedProduct> findById(UUID id) {
+        return orderedProductRepository.findById(id);
+    }
+
 
     public void add(OrderedProduct orderedProduct) {
         orderedProductRepository.save(orderedProduct);
@@ -36,6 +44,15 @@ public class OrderedProductService {
         item.setMatches(item.getOrderedQuantity() == recievedQuantity);
         orderedProductRepository.save(item);
     }
+
+    public void addRecievedQuantity(UUID id, double quantity) {
+        OrderedProduct item = orderedProductRepository.findById(id).orElseThrow();
+
+        item.setRecievedQuantity(item.getRecievedQuantity() + quantity);
+        item.setMatches(item.getOrderedQuantity() == item.getRecievedQuantity());
+        orderedProductRepository.save(item);
+    }
+
 
 
 }

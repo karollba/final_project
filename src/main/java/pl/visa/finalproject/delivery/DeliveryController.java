@@ -6,10 +6,15 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import pl.visa.finalproject.orderedProducts.OrderedProduct;
+import pl.visa.finalproject.orderedProducts.OrderedProductService;
+import pl.visa.finalproject.product.Product;
+import pl.visa.finalproject.product.ProductService;
 import pl.visa.finalproject.supplier.Supplier;
 import pl.visa.finalproject.supplier.SupplierService;
 
 import java.beans.PropertyEditorSupport;
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -17,10 +22,14 @@ import java.util.UUID;
 public class DeliveryController {
     private final DeliveryService deliveryService;
     private final SupplierService supplierService;
+    private final ProductService productService;
+    private final OrderedProductService orderedProductService;
 
-    public DeliveryController(DeliveryService deliveryService, SupplierService supplierService) {
+    public DeliveryController(DeliveryService deliveryService, SupplierService supplierService, ProductService productService, OrderedProductService orderedProductService) {
         this.deliveryService = deliveryService;
         this.supplierService = supplierService;
+        this.productService = productService;
+        this.orderedProductService = orderedProductService;
     }
 
 
@@ -78,6 +87,38 @@ public class DeliveryController {
                 }
             }
         });
+    }
+
+
+    // lista produktow
+
+    @GetMapping("/addwithitems")
+    public String addOrderForm(Model model) {
+        model.addAttribute("suppliers", supplierService.findAll());
+        model.addAttribute("products", productService.findAll());
+        return "delivery/addOrder";
+    }
+
+    @PostMapping("/addwithitems")
+    public String addOrderWithItems(@RequestParam UUID supplierId,
+                                    @RequestParam List<UUID> productsIds,
+                                    @RequestParam List<Double> orderQuantities) {
+        Supplier supplier = supplierService.findById(supplierId).orElseThrow();
+        Delivery delivery = new Delivery();
+
+        delivery.setSupplier(supplier);
+        delivery.setDateOfAcceptTheDelivery(null);
+        deliveryService.add(delivery);
+
+        for (int i = 0; i < productsIds.size(); i++) {
+            Product product = productService.findById(productsIds.get(i)).orElseThrow();
+
+            OrderedProduct item = new OrderedProduct();
+            orderedProductService.add(item);
+
+        }
+
+        return "redirect:/delivery/list";
     }
 
 }
