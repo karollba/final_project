@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.visa.finalproject.employee.Employee;
 import pl.visa.finalproject.orderedProducts.OrderedProduct;
+import pl.visa.finalproject.orderedProducts.ProductOrder;
+import pl.visa.finalproject.product.Product;
 import pl.visa.finalproject.supplier.Supplier;
 
 import java.time.LocalDate;
@@ -61,4 +63,7 @@ public class Delivery {
 
     @OneToMany(mappedBy = "delivery", cascade = CascadeType.ALL)
     private List<OrderedProduct> orderedProducts = new ArrayList<>();
+
+    @ManyToOne
+    private ProductOrder order;
 }

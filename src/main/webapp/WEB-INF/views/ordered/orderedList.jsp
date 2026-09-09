@@ -59,15 +59,12 @@
               </td>
 
               <td>
-                <c:if test="${item.delivery != null}">
+                <c:if test="${item.delivery != null || item.delivery == null}">
                     <a href="${pageContext.request.contextPath}/order/check?deliveryId=${item.delivery.id}"
                         class="btn btn-sm btn-info"> Sprawdź dostawę</a>
                     </c:if>
 
-                <c:if test="${item.delivery == null}">
-                    <a href="${pageContext.request.contextPath}/order/receive?supplierId=${item.supplier.id}"
-                        class="btn btn-sm btn-info"> Przyjmij dostawę</a>
-                  </c:if>
+
                </td>
           </tr>
       </c:forEach>

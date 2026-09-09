@@ -45,6 +45,12 @@ public class OrderedProductController {
         return "ordered/orderedList";
     }
 
+    @GetMapping("/show")
+    public String showDetails(Model model) {
+        model.addAttribute("productOrder", productOrderService.findAll());
+        return "ordered/orderedList";
+    }
+
     @GetMapping("/add")
     public String addForm(Model model) {
         model.addAttribute("orderedProduct", new OrderedProduct());

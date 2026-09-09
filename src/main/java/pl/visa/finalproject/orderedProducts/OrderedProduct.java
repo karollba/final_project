@@ -46,4 +46,6 @@ public class OrderedProduct {
 
     private LocalDateTime orderDate;
 
+    @ManyToOne
+    private ProductOrder productOrder;
 }

@@ -26,22 +26,25 @@
                 <thead>
                 <tr>
                      <th>Produkt</th>
+                     <th>Jednostka</th>
                      <th>Zamówiono</th>
                      <th>Otrzymano</th>
-                     <th>Termin ważnośći</th>
-                     <th>Jednostka</th>
                      <th>Status</th>
+
+
                 </tr>
                 </thead>
                 <tbody>
                 <c:forEach var="item" items="${items}">
                   <tr>
                       <td>${item.product.name}</td>
+                      <td>${item.product.defaultUnit}</td>
                       <td>${item.orderedQuantity}</td>
                       <td>
                       <c:choose>
                         <c:when test="${item.checked}">
                             ${item.recievedQuantity}
+
                             </c:when>
                         <c:otherwise>
                             <form action="${pageContext.request.contextPath}/order/updatequantity" method="post" class="form-inline">
@@ -54,7 +57,6 @@
                         </c:otherwise>
                        </c:choose>
                       </td>
-                      <td>${item.unit}</td>
                       <td>
                         <c:if test="${item.checked}">
                             <c:choose>
