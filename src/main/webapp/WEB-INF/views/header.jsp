@@ -70,7 +70,7 @@
 
             <!-- Nav Item - Zamówienia -->
             <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/order/list">
+                <a class="nav-link" href="${pageContext.request.contextPath}/productorder/list">
                     <i class="fas fa-box"></i>
                     <span>Zamówienia</span></a>
             </li>
