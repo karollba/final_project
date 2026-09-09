@@ -44,7 +44,7 @@ public class OrderedProductController {
 
     @GetMapping("/list")
     public String listOrderedProducts(Model model) {
-        model.addAttribute("orderedProducts", orderedProductService.findAll());
+        model.addAttribute("productOrderedProducts", productOrderService.findAll());
         return "ordered/orderList";
     }
 
@@ -81,7 +81,7 @@ public class OrderedProductController {
     // do zastanowienia jeszcze to roziwazanie (te dodawanie id)
     @PostMapping("/updatequantity")
     public String updateQuantity(@RequestParam UUID id,
-                                 @RequestParam UUID deliveryId,
+                                 @RequestParam UUID orderId,
                                  @RequestParam double recievedQuantity,
                                  @RequestParam LocalDate expirationDate,
                                  RedirectAttributes redirectAttributes) {
@@ -97,8 +97,7 @@ public class OrderedProductController {
         productBatchService.add(batch);
 
         orderedProductService.updateRecievedQuantity(id, recievedQuantity);
-        redirectAttributes.addAttribute("deliveryId", deliveryId);
-        return "redirect:/order/check";
+        return "redirect:/productorder/show?id=" + orderId;
     }
 
 

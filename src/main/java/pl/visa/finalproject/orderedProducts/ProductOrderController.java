@@ -42,8 +42,8 @@ public class ProductOrderController {
 
     @GetMapping("/list")
     public String listOrderedProducts(Model model) {
-        model.addAttribute("orders", orderedProductService.findAll());
-        return "productorder/orderList";
+        model.addAttribute("orders", productOrderService.findAll());
+        return "ordered/orderList";
     }
 
     @GetMapping("/show")
@@ -54,14 +54,14 @@ public class ProductOrderController {
         model.addAttribute("order", order);
         model.addAttribute("items", items);
 
-        return "productorder/orderShow";
+        return "ordered/orderShow";
     }
 
     @GetMapping("/add")
     public String addForm(Model model) {
         model.addAttribute("suppliers", supplierService.findAll());
         model.addAttribute("products", productService.findAll());
-        return "productorder/orderAdd";
+        return "ordered/orderAdd";
     }
 
     @PostMapping("/add")

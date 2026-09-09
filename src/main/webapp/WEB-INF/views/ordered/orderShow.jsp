@@ -10,7 +10,7 @@
   <div class="card shadow mb-4">
         <div class="card-header py-3">
             <h6 class="m-0 font-weight-bold text-primary">Zamówienie: ${order.orderNumber}</h6>
-            <a href="${pageContext.request.contextPath/productorder/list" class="btn btn-sm btn-primary">
+            <a href="${pageContext.request.contextPath}/productorder/list" class="btn btn-sm btn-primary">
                 Lista zamówień</a>
 
         </div>
@@ -27,9 +27,11 @@
             <thead>
             <tr>
                 <th>Produkt</th>
+               <th>Jednostka</th>
                 <th>Zamówiono</th>
                 <th>Otrzymano</th>
-                <th>Jednostka</th>
+
+                <th>Termin przydatności</th>
                 <th>Status</th>
             </tr>
             </thead>
@@ -37,7 +39,10 @@
                 <c:forEach var="item" items="${items}">
                   <tr>
                     <td>${item.product.name}</td>
+                 <td>${item.unit}</td>
                     <td>${item.orderedQuantity}</td>
+
+
                   <td>
                     <c:choose>
                         <c:when test="${item.checked}">
@@ -54,24 +59,23 @@
                           </c:otherwise>
                   </c:choose>
                   </td>
-                  <td>${item.unit}</td>
-                  <td>
-                     <c:if test="${item.checked}">
-                          <c:choose>
-                              <c:when test="${item.matches}">
-                                  <span class="badge badge-success"> Zgadza się</span>
-                              </c:when>
-                              <c:otherwise>
-                                  <span class="badge badge-danger"> Rozbieżność</span>
-                              </c:otherwise>
-                          </c:choose>
-                      </c:if>
-                      <c:if test="${!item.checked}">
-                        <span class="badge badge-warning"> Nie sprawdzono!</span>
-                      </c:if>
-                    </td>
+                    <td>
+                        <c:if test="${item.checked}">
+                             <c:choose>
+                                 <c:when test="${item.matches}">
+                                     <span class="badge badge-success"> Zgadza się</span>
+                                 </c:when>
+                                 <c:otherwise>
+                                     <span class="badge badge-danger"> Rozbieżność</span>
+                                 </c:otherwise>
+                             </c:choose>
+                         </c:if>
+                         <c:if test="${!item.checked}">
+                           <span class="badge badge-warning"> Nie sprawdzono!</span>
+                         </c:if>
+                     </td>
+
                     </tr>
-                        </c:forEach>
                     </c:forEach>
                 </tbody>
             </table>
