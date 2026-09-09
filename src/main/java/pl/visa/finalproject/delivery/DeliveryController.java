@@ -14,6 +14,8 @@ import pl.visa.finalproject.supplier.Supplier;
 import pl.visa.finalproject.supplier.SupplierService;
 
 import java.beans.PropertyEditorSupport;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -106,21 +108,38 @@ public class DeliveryController {
                                     @RequestParam List<UUID> productsIds,
                                     @RequestParam List<Double> orderQuantities) {
         Supplier supplier = supplierService.findById(supplierId).orElseThrow();
-        Delivery delivery = new Delivery();
-
-        delivery.setSupplier(supplier);
-        delivery.setDateOfAcceptTheDelivery(null);
-        deliveryService.add(delivery);
 
         for (int i = 0; i < productsIds.size(); i++) {
             Product product = productService.findById(productsIds.get(i)).orElseThrow();
 
             OrderedProduct item = new OrderedProduct();
+            item.setSupplier(supplier);
+            item.setProduct(product);
+            item.setOrderedQuantity(orderQuantities.get(i));
+            item.setUnit(product.getDefaultUnit());
+            item.setChecked(false);
+            item.setOrderDate(LocalDateTime.now());
             orderedProductService.add(item);
 
         }
 
         return "redirect:/delivery/list";
+    }
+
+    @PostMapping("/recievedDelivery")
+    public String recievedDelivery(@RequestParam UUID supplierId,
+                                   @RequestParam List<UUID> orderedProductsIds) {
+        Supplier supplier = supplierService.findById(supplierId).orElseThrow();
+
+        Delivery delivery = new Delivery();
+        delivery.setSupplier(supplier);
+        delivery.setDateOfAcceptTheDelivery(LocalDate.now());
+        deliveryService.add(delivery);
+
+        for (UUID id : orderedProductsIds) {
+            orderedProductService.assignToDelivery(id, delivery);
+        }
+        return "redirect:/orderedproduct/check?deliveryId=" + delivery.getIdToShow();
     }
 
 }

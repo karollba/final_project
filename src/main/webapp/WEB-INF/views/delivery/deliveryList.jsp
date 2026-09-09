@@ -47,7 +47,6 @@
                       <td>${delivery.invoiceDue}</td>
                       <td>${delivery.paid}</td>
                       <td>${delivery.acceptingEmployee.idToShow}</td>
-                      <td>${delivery.deliveryManId}</td>
                       <td>${delivery.deliveryIntact}</td>
                       <td>${delivery.category}</td>
                       <td>

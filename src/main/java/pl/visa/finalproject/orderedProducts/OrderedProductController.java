@@ -12,6 +12,8 @@ import pl.visa.finalproject.delivery.Delivery;
 import pl.visa.finalproject.delivery.DeliveryService;
 import pl.visa.finalproject.product.ProductBatch;
 import pl.visa.finalproject.product.ProductBatchService;
+import pl.visa.finalproject.product.ProductService;
+import pl.visa.finalproject.supplier.SupplierService;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -26,11 +28,15 @@ public class OrderedProductController {
     private final OrderedProductService orderedProductService;
     private final DeliveryService deliveryService;
     private final ProductBatchService productBatchService;
+    private final SupplierService supplierService;
+    private final ProductService productService;
 
-    public OrderedProductController(OrderedProductService orderedProductService, DeliveryService deliveryService, ProductBatchService productBatchService) {
+    public OrderedProductController(OrderedProductService orderedProductService, DeliveryService deliveryService, ProductBatchService productBatchService, SupplierService supplierService, ProductService productService) {
         this.orderedProductService = orderedProductService;
         this.deliveryService = deliveryService;
         this.productBatchService = productBatchService;
+        this.supplierService = supplierService;
+        this.productService = productService;
     }
 
     @GetMapping("/list")
@@ -42,6 +48,8 @@ public class OrderedProductController {
     @GetMapping("/add")
     public String addForm(Model model) {
         model.addAttribute("orderedProduct", new OrderedProduct());
+        model.addAttribute("suppliers", supplierService.findAll());
+        model.addAttribute("products", productService.findAll());
         return "ordered/orderAdd";
     }
 

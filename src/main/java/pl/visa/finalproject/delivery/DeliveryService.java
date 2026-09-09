@@ -30,8 +30,11 @@ public class DeliveryService {
 
         Long maxNumber = deliveryRepository.findMaxDeliveryNumber().orElse(0L);
         String deliveryId = today + "-" + (maxNumber + 1);
+        delivery.setDeliveryId(deliveryId);
 
-        delivery.setDeliveryId(String.valueOf(deliveryId));
+        Long maxId = deliveryRepository.findMaxIdToShow().orElse(0L);
+        delivery.setIdToShow(maxId + 1);
+
         deliveryRepository.save(delivery);
     }
 

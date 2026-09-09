@@ -9,33 +9,33 @@
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
           <h1 class="h3 mb-0 text-gray-800">Sprawdzanie dostawy</h1>
           <a href="<c:url value='/delivery/list'/>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                  class="fas fa-plus fa-sm text-white-50"></i> Nowe zamówienie</a>
+                  class="fas fa-plus fa-sm text-white-50"></i> Lista dostaw</a>
         </div>
 
-  <div class="row">
+<div class="row">
 
     <input type="hidden" name="id" value="${delivery.id}"/>
         <div class="col-12">
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary"> Lista dostaw</h6>
+              <h6 class="m-0 font-weight-bold text-primary"> Dostawa nr: ${item.delivery.id}</h6>
             </div>
-            <div class="card-body">
-              <table  class="table">
+
+  <div class="card-body">
+    <table class="table">
                 <thead>
                 <tr>
-                     <th>Nr dostawy</th>
                      <th>Produkt</th>
                      <th>Zamówiono</th>
                      <th>Otrzymano</th>
+                     <th>Termin ważnośći</th>
                      <th>Jednostka</th>
                      <th>Status</th>
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach var="delivery" items="${deliveries}">
+                <c:forEach var="item" items="${items}">
                   <tr>
-                      <td>${delivery.deliveryId}</td>
                       <td>${item.product.name}</td>
                       <td>${item.orderedQuantity}</td>
                       <td>
@@ -44,17 +44,16 @@
                             ${item.recievedQuantity}
                             </c:when>
                         <c:otherwise>
-                            <form action="${pageContext.request.contextPath}/order/uptadequantity" method="post" class="form-inline">
+                            <form action="${pageContext.request.contextPath}/order/updatequantity" method="post" class="form-inline">
                                 <input type="hidden" name="id" value="${item.id}">
                                 <input type="hidden" name="deliveryId" value="${deliveryId}">
                                 <input type="number" step="0.1" name="recievedQuantity" class="form-control" style="width:100px" required>
-                                <iput type="date" name="expirationDate" class="form-control" style="width:150px" required>
+                                <input type="date" name="expirationDate" class="form-control" style="width:150px" required>
                                 <button type="submit" class="btn btn-sm btn-primary ml-2">Zatwierdź </button>
                             </form>
                         </c:otherwise>
                        </c:choose>
                       </td>
-
                       <td>${item.unit}</td>
                       <td>
                         <c:if test="${item.checked}">

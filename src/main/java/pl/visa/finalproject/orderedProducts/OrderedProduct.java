@@ -7,7 +7,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.visa.finalproject.delivery.Delivery;
 import pl.visa.finalproject.product.Product;
+import pl.visa.finalproject.supplier.Supplier;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -21,12 +24,16 @@ public class OrderedProduct {
     private UUID id;
 
     @ManyToOne
-    @JoinColumn(name = "delivery_id")
+    @JoinColumn(name = "delivery_id", nullable = true)
     private Delivery delivery;
 
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
+
+    @ManyToOne
+    @JoinColumn(name = "supplier_id")
+    private Supplier supplier;
 
     private double orderedQuantity;
     private double recievedQuantity;
@@ -36,5 +43,7 @@ public class OrderedProduct {
 
     private boolean checked;
     private boolean matches;
+
+    private LocalDateTime orderDate;
 
 }

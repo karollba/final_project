@@ -15,7 +15,7 @@
 
               <div class="card shadow mb-4">
                 <div class="card-body">
-                    <form method="post: action=${pageContext.request.contextPath}/delivery/addwithitems" id="orderForm">
+                    <form method="post" action="${pageContext.request.contextPath}/delivery/addwithitems" id="orderForm">
 
                     <div class="form-group">
                         <label for="supplier">Dostawca</label>
@@ -48,7 +48,7 @@
                             </select>
                             </td>
                             <td>
-                                <input type="number" step="0.1" name="orderedQuantities" class="form-control">
+                                <input type="number" step="0.1" name="orderQuantities" class="form-control">
                                 </td>
                                     <td>
                                         <button type="button" class="btn btn-danger btn-sm removeRow"> Usuń </button>

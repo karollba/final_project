@@ -62,11 +62,6 @@
                 <input value="${delivery.acceptingEmployee.idToShow}" name="acceptingEmployeeId" type="text" class="form-control" id="acceptingEmployeeId" placeholder="acceptingEmployeeId">
             </div>
 
-             <div class="form-group">
-                <label for="deliveryManId">ID kuriera</label>
-                <input value="${delivery.deliveryManId}" name="deliveryManId" type="number" class="form-control" id="deliveryManId" placeholder="deliveryManId">
-            </div>
-
 
              <div class="form-group">
                 <label for="category"> Kategoria </label>

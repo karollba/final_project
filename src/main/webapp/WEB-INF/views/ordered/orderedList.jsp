@@ -25,11 +25,7 @@
           <table  class="table">
             <thead>
             <tr>
-                 <th>Produkt</th>
-                 <th>Dostawa</th>
-                 <th>Zamówiono</th>
-                 <th>Otrzymano</th>
-                 <th>Jednostka</th>
+                <th>Zamówienie</th>
                 <th>Status </th>
                 <th>Akcja </th>
             </tr>
@@ -38,10 +34,14 @@
         <tbody>
         <c:forEach var="item" items="${orderedProducts}">
           <tr>
-              <td>${item.product.name}</td>
-              <td>${item.delivery.deliveryId.name}</td>
-              <td>${item.orderedQuantity}</td>
-              <td>${item.recievedQuantity}</td>
+              <td>
+                  <c:if test="${item.delivery != null}">
+                      ${item.delivery.deliveryId}
+                   </c:if>
+                  <c:if test="${item.delivery == null}">
+                      <span class="text-muted"> Oczekuje na dostawę</span>
+                  </c:if>
+              </td>
               <td>
                 <c:if test="${item.checked}">
                   <c:choose>
@@ -53,11 +53,22 @@
                   </c:otherwise>
                   </c:choose>
                 </c:if>
-
                 <c:if test="${!item.checked}">
                     <span class="badge badge-warning"> Nie sprawdzono</span>
                 </c:if>
               </td>
+
+              <td>
+                <c:if test="${item.delivery != null}">
+                    <a href="${pageContext.request.contextPath}/order/check?deliveryId=${item.delivery.id}"
+                        class="btn btn-sm btn-info"> Sprawdź dostawę</a>
+                    </c:if>
+
+                <c:if test="${item.delivery == null}">
+                    <a href="${pageContext.request.contextPath}/order/receive?supplierId=${item.supplier.id}"
+                        class="btn btn-sm btn-info"> Przyjmij dostawę</a>
+                  </c:if>
+               </td>
           </tr>
       </c:forEach>
               </tbody>

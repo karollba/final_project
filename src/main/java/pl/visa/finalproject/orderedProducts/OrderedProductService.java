@@ -53,6 +53,11 @@ public class OrderedProductService {
         orderedProductRepository.save(item);
     }
 
+    public void assignToDelivery(UUID itemId, Delivery delivery) {
+        OrderedProduct item = orderedProductRepository.findById(itemId).orElseThrow();
+        item.setDelivery(delivery);
+        orderedProductRepository.save(item);
+    }
 
 
 }
