@@ -113,7 +113,6 @@ public class DeliveryController {
             Product product = productService.findById(productsIds.get(i)).orElseThrow();
 
             OrderedProduct item = new OrderedProduct();
-            item.setSupplier(supplier);
             item.setProduct(product);
             item.setOrderedQuantity(orderQuantities.get(i));
             item.setUnit(product.getDefaultUnit());

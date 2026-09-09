@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import pl.visa.finalproject.delivery.Delivery;
+import pl.visa.finalproject.supplier.Supplier;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -21,23 +23,17 @@ public class ProductOrder {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    private Long orderNumber;
+    @Column(unique = true)
+    private String orderNumber;
+
+    @ManyToOne
+    @JoinColumn(name = "supplier_id")
+    private Supplier supplier;
+
+
     private LocalDate orderDate;
 
-    @OneToMany(mappedBy = "productOrder")
-    private List<OrderedProduct> orderedProducts;
+    @ManyToOne
+    @JoinColumn(name = "delivery_id")
+    private Delivery delivery;
 }
-
-//1. Stworzyć encję ProductOrder
-//
-//2. Dodać @ManyToOne ProductOrder w OrderedProduct
-//
-//3. Dodać orderNumber
-//
-// 4. Lista zamówień (orderList.jsp)
-//
-//    5. Szczegóły zamówienia (orderShow.jsp)
-//
-//6. Dodawanie produktów do konkretnego zamówienia
-//
-//7. Przepiąć obecny quantity check na produkty należące do danego zamówienia

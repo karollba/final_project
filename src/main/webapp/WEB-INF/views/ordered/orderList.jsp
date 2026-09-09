@@ -1,0 +1,61 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ include file="../header.jsp" %>
+
+   <!-- Begin Page Content -->
+      <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+          <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+          <a href="<c:url value='/order/add'/>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                  class="fas fa-plus fa-sm text-white-50"></i>Nowe zamówienie</a>
+        </div>
+
+  <div class="row">
+
+<input type="hidden" name="id" value="${product.id}"/>
+
+    <div class="col-12">
+      <div class="card shadow mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary"> Lista produktów</h6>
+        </div>
+        <div class="card-body">
+          <table  class="table">
+            <thead>
+            <tr>
+                <th>Nr zamówienia</th>
+                <th>Dostawca</th>
+                <th>Data złożenia </th>
+                <th>Status dostawy </th>
+            </tr>
+        </thead>
+        <tbody>
+        <c:forEach var="order" items="${orders}">
+          <tr>
+            <td>${order.orderNumber}</td>
+            <td>${order.supplier.name}</td>
+            <td>${order.orderDate}</td>
+
+              <td>
+                  <c:choose>
+                        <c:when test="${order.delivery != null}">
+                            <span class="badge badge-success"> Dostarczono</span>
+                        </c:when>
+                        <c:otherwise>
+                            <span class="badge badge-warning"> Oczekuje</span>
+                        </c:otherwise>
+                    </c:choose>
+                    </td>
+                    <td>
+                        <a href="${pageContext.request.contextPath}/productorder/show?id=${order.id}" class="btn btn-sm btn-info"> Szczegóły </a>
+               </td>
+          </tr>
+      </c:forEach>
+              </tbody>
+          </table>
+      </div>
+  </div>
+  </div>
+<%@ include file="../footer.jsp" %>

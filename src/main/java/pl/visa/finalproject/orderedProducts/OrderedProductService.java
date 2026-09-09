@@ -60,4 +60,7 @@ public class OrderedProductService {
     }
 
 
+    public List<OrderedProduct> findByProductOrder(ProductOrder order) {
+        return orderedProductRepository.findByProductOrder(order);
+    }
 }

@@ -12,4 +12,5 @@ import java.util.UUID;
 public interface OrderedProductRepository extends JpaRepository<OrderedProduct, UUID> {
     List<OrderedProduct> findByDelivery(Delivery delivery);
     List<OrderedProduct> findByDeliveryAndMatchesFalse(Delivery delivery);
+    List<OrderedProduct> findByProductOrder(ProductOrder order);
 }

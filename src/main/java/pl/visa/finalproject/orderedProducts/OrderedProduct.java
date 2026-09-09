@@ -31,10 +31,6 @@ public class OrderedProduct {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    @ManyToOne
-    @JoinColumn(name = "supplier_id")
-    private Supplier supplier;
-
     private double orderedQuantity;
     private double recievedQuantity;
 
@@ -47,5 +43,6 @@ public class OrderedProduct {
     private LocalDateTime orderDate;
 
     @ManyToOne
+    @JoinColumn(name = "product_order_id")
     private ProductOrder productOrder;
 }
