@@ -34,7 +34,7 @@
                     <thead>
                     <tr>
                          <th>Produkt</th>
-                         <th>Zamówiono</th>
+                         <th>Podaj ilość</th>
                          <th></th>
                     </tr>
                     </thead>
@@ -69,7 +69,7 @@
                 document.getElementById('addRow').addEventListener('click', function() {
                     const body = document.getElementById('itemsBody');
                     const newRow = body.rows[0].cloneNode(true);
-                    newRow.queryselectorAll('input').forEach(input => input.value = '');
+                    newRow.querySelectorAll('input').forEach(input => input.value = '');
                     body.appendChild(newRow);
                 });
 
