@@ -96,8 +96,10 @@ public class DeliveryController {
     public String addOrderForm(Model model) {
         model.addAttribute("suppliers", supplierService.findAll());
         model.addAttribute("products", productService.findAll());
-        return "delivery/addOrder";
+        return "ordered/orderAdd";
     }
+
+    // przemysl to jeszcze bo jest troche nagmatwane
 
     @PostMapping("/addwithitems")
     public String addOrderWithItems(@RequestParam UUID supplierId,

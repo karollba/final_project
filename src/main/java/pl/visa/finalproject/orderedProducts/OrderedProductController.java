@@ -42,13 +42,13 @@ public class OrderedProductController {
     @GetMapping("/add")
     public String addForm(Model model) {
         model.addAttribute("orderedProduct", new OrderedProduct());
-        return "ordered/add";
+        return "ordered/orderAdd";
     }
 
     @PostMapping("/add")
     public String add(OrderedProduct orderedProduct) {
         orderedProductService.add(orderedProduct);
-        return "redirect:/orderedproduct/list";
+        return "redirect:/order/list";
     }
 
     @GetMapping("/check")
@@ -81,7 +81,7 @@ public class OrderedProductController {
 
         orderedProductService.updateRecievedQuantity(id, recievedQuantity);
         redirectAttributes.addAttribute("deliveryId", deliveryId);
-        return "redirect:/orderedproduct/check";
+        return "redirect:/order/check";
     }
 
 
