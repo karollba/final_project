@@ -30,8 +30,6 @@
                      <th>Zamówiono</th>
                      <th>Otrzymano</th>
                      <th>Status</th>
-
-
                 </tr>
                 </thead>
                 <tbody>

@@ -89,13 +89,14 @@ public class ProductOrderController {
 
     @PostMapping("/updatequantity")
     public String updateQuantity(@RequestParam UUID id,
-                                 @RequestParam UUID deliveryId,
+                                 @RequestParam UUID orderId,
                                  @RequestParam double recievedQuantity,
                                  @RequestParam LocalDate expirationDate,
                                  RedirectAttributes redirectAttributes) {
 
         OrderedProduct item = orderedProductService.findById(id).orElseThrow();
 
+        // zapisz partie z terminem
         ProductBatch batch = new ProductBatch();
         batch.setProduct(item.getProduct());
         batch.setQuantity(recievedQuantity);
@@ -103,8 +104,12 @@ public class ProductOrderController {
         batch.setDeliveryDate(LocalDateTime.now());
         productBatchService.add(batch);
 
-        orderedProductService.updateRecievedQuantity(id, recievedQuantity);
-        redirectAttributes.addAttribute("deliveryId", deliveryId);
-        return "redirect:/order/check";
+        item.setRecievedQuantity(recievedQuantity);
+        item.setExpirationDate(expirationDate);
+        item.setChecked(true);
+        item.setMatches(item.getOrderedQuantity() == recievedQuantity);
+        orderedProductService.save(item);
+
+        return "redirect:/productorder/show?id=" + orderId;
     }
 }

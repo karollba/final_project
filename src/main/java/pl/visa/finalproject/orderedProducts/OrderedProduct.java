@@ -45,4 +45,6 @@ public class OrderedProduct {
     @ManyToOne
     @JoinColumn(name = "product_order_id")
     private ProductOrder productOrder;
+
+    private LocalDate expirationDate;
 }

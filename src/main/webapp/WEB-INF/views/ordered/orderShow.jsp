@@ -32,7 +32,7 @@
                 <th>Otrzymano</th>
                 <th>Termin przydatności</th>
                 <th>Status</th>
-               <th>Operacja</th>
+                <th>Operacja</th>
 
             </tr>
             </thead>
@@ -42,6 +42,17 @@
                     <td>${item.product.name}</td>
                     <td>${item.unit}</td>
                     <td>${item.orderedQuantity}</td>
+                     <td>
+                        <c:choose>
+                            <c:when test="${item.checked}">
+                              ${item.expirationDate}
+                           </c:when>
+                        <c:otherwise>
+                            <input type="date" name="expirationDate" class="form-control" style="width:150px" form="form-${item.id}" required>
+                       </c:otherwise>
+                       <c/:choose>
+                     </td>
+
 
                   <td>
                     <c:choose>
@@ -49,7 +60,7 @@
                             ${item.recievedQuantity}
                         </c:when>
                         <c:otherwise>
-                             <form action="${pageContext.request.contextPath}/productorder/updatequantity" method="post" class="form-inline">
+                             <form id="form-${item.id}" action="${pageContext.request.contextPath}/productorder/updatequantity" method="post" class="form-inline">
                                 <input type="hidden" name="id" value="${item.id}">
                                 <input type="hidden" name="orderId" value="${order.id}">
                                 <input type="number" step="0.1" name="recievedQuantity" class="form-control" style="width:100px" required>
@@ -57,11 +68,7 @@
                           </c:otherwise>
                   </c:choose>
                   </td>
-                  <td>
-                    <c:if test="${!item.checked}">
-                        <input type="date" name="expirationDate" class="form-control" style="width:150px" form="form-${item.id}" required>
-                   </c:if>
-                   </td>
+
                     <td>
                         <c:if test="${item.checked}">
                              <c:choose>

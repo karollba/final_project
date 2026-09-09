@@ -2,6 +2,7 @@ package pl.visa.finalproject.orderedProducts;
 
 import org.springframework.stereotype.Service;
 import pl.visa.finalproject.delivery.Delivery;
+import pl.visa.finalproject.product.Product;
 import pl.visa.finalproject.product.ProductBatch;
 
 import java.util.List;
@@ -22,6 +23,10 @@ public class OrderedProductService {
         return orderedProductRepository.findById(id);
     }
 
+
+    public void save(OrderedProduct orderedProduct) {
+        orderedProductRepository.save(orderedProduct);
+    }
 
     public void add(OrderedProduct orderedProduct) {
         orderedProductRepository.save(orderedProduct);
@@ -63,4 +68,6 @@ public class OrderedProductService {
     public List<OrderedProduct> findByProductOrder(ProductOrder order) {
         return orderedProductRepository.findByProductOrder(order);
     }
+
+
 }

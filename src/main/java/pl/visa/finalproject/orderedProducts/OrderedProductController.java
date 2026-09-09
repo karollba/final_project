@@ -74,31 +74,31 @@ public class OrderedProductController {
         List<OrderedProduct> items = orderedProductService.findBYDelivery(delivery);
 
         model.addAttribute("items", items);
-        model.addAttribute("deliveryId", deliveryId);
         return "order/check";
     }
 
-    // do zastanowienia jeszcze to roziwazanie (te dodawanie id)
-    @PostMapping("/updatequantity")
-    public String updateQuantity(@RequestParam UUID id,
-                                 @RequestParam UUID orderId,
-                                 @RequestParam double recievedQuantity,
-                                 @RequestParam LocalDate expirationDate,
-                                 RedirectAttributes redirectAttributes) {
-
-        Optional<OrderedProduct> item = Optional.of(orderedProductService.findById(id).orElseThrow());
-
-        ProductBatch batch = new ProductBatch();
-        batch.setDelivery(item.get().getDelivery());
-        batch.setProduct(item.get().getProduct());
-        batch.setQuantity(recievedQuantity);
-        batch.setExpirationDate(expirationDate);
-        batch.setDeliveryDate(LocalDateTime.now());
-        productBatchService.add(batch);
-
-        orderedProductService.updateRecievedQuantity(id, recievedQuantity);
-        return "redirect:/productorder/show?id=" + orderId;
-    }
+//    // do zastanowienia jeszcze to roziwazanie (te dodawanie id)
+//    @PostMapping("/updatequantity")
+//    public String updateQuantity(@RequestParam UUID id,
+//                                 @RequestParam UUID orderId,
+//                                 @RequestParam double recievedQuantity,
+//                                 @RequestParam LocalDate expirationDate,
+//                                 RedirectAttributes redirectAttributes) {
+//
+//        Optional<OrderedProduct> item = Optional.of(orderedProductService.findById(id).orElseThrow());
+//
+//        ProductBatch batch = new ProductBatch();
+//        batch.setProduct(item.get().getProduct());
+//        batch.setQuantity(recievedQuantity);
+//        batch.setExpirationDate(expirationDate);
+//        batch.setDeliveryDate(LocalDateTime.now());
+//        productBatchService.add(batch);
+//
+//
+//
+//        orderedProductService.updateRecievedQuantity(id, recievedQuantity);
+//        return "redirect:/productorder/show?id=" + orderId;
+//    }
 
 
 }
