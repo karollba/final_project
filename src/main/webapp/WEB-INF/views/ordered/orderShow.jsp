@@ -30,18 +30,18 @@
                <th>Jednostka</th>
                 <th>Zamówiono</th>
                 <th>Otrzymano</th>
-
                 <th>Termin przydatności</th>
                 <th>Status</th>
+               <th>Operacja</th>
+
             </tr>
             </thead>
             <tbody>
                 <c:forEach var="item" items="${items}">
                   <tr>
                     <td>${item.product.name}</td>
-                 <td>${item.unit}</td>
+                    <td>${item.unit}</td>
                     <td>${item.orderedQuantity}</td>
-
 
                   <td>
                     <c:choose>
@@ -53,12 +53,15 @@
                                 <input type="hidden" name="id" value="${item.id}">
                                 <input type="hidden" name="orderId" value="${order.id}">
                                 <input type="number" step="0.1" name="recievedQuantity" class="form-control" style="width:100px" required>
-                                <input type="date" name="expirationDate" class="form-control" style="width:150px" required>
-                                <button type="submit" class="btn btn-sm btn-primary ml-2">Zatwierdź </button>
-                            </form>
+                               </form>
                           </c:otherwise>
                   </c:choose>
                   </td>
+                  <td>
+                    <c:if test="${!item.checked}">
+                        <input type="date" name="expirationDate" class="form-control" style="width:150px" form="form-${item.id}" required>
+                   </c:if>
+                   </td>
                     <td>
                         <c:if test="${item.checked}">
                              <c:choose>
@@ -74,7 +77,11 @@
                            <span class="badge badge-warning"> Nie sprawdzono!</span>
                          </c:if>
                      </td>
-
+                    <td>
+                     <c:if test="${!item.checked}">
+                        <button type="submit" form="form-${item.id}" class="btn btn-sm btn-primary ml-2">Zatwierdź </button>
+                    </c:if>
+                    </td>
                     </tr>
                     </c:forEach>
                 </tbody>
