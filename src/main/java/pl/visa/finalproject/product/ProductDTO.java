@@ -24,9 +24,11 @@ public class ProductDTO {
     private double totalQuantity;
     private String barcode;
     private ProductCategory category;
+    private Long idToShow;
 
     public ProductDTO(Product product, double totalQuantity) {
         this.id = product.getId();
+        this.idToShow = product.getIdToShow();
         this.name = product.getName();
         this.availability = product.isAvailability();
         this.quantity = product.getQuantity();

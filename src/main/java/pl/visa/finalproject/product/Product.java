@@ -24,6 +24,8 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    private Long idToShow;
+
     // nazwa pobierana automatycznie z barcode
     private String name;
 

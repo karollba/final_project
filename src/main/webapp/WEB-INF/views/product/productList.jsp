@@ -24,6 +24,15 @@
                 <div class="card-body">
 
 
+           <form method="get" action="${pageContext.request.contextPath}/product/search" class="mb-3 form-inline">
+                    <input type="text" name="query" value="${query}" class="form-control mr-2" placeholder="Szukaj po ID, kategorii lub nazwie">
+                        <button type="submit" class="btn btn-primary">Szukaj</button>
+                    <a href="${pageContext.request.contextPath}/employee/list" class="btn btn-secondary ml-2"> Wyczyść</a>
+                </form>
+
+
+
+
             <!-- Filtry -->
             <form method="get" action="${pageContext.request.contextPath}/product/list" class="mb-3">
                 <select name="category" calss="form-control d-inline-block w-auto" onchange="this.form.submit()">
@@ -44,7 +53,7 @@
 
                   <table  class="table">
                     <thead>
-                    <tr>
+                         <th>ID</th>
                          <th>Nazwa</th>
                          <th>Kategoria</th>
                          <th>Ilość</th>
@@ -55,6 +64,7 @@
                     <tbody>
                     <c:forEach var="product" items="${products}">
                       <tr>
+                          <td>${product.idToShow}</td>
                           <td>${product.name}</td>
                           <td>${product.category}</td>
                           <td>${product.totalQuantity}</td>

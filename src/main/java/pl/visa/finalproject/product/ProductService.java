@@ -51,6 +51,8 @@ public class ProductService {
             existingProduct.setAvailability(true);
             productRepository.save(existingProduct);
         } else {
+            Long maxId = productRepository.findMaxIdToShow().orElse(0L);
+            product.setIdToShow(maxId + 1);
             product.setAvailability(true);
             productRepository.save(product);
         }
@@ -91,6 +93,12 @@ public class ProductService {
         return productRepository.findByBarcode(barcode);
     }
 
+    public List<Product> search(String query) {
+        if (query == null || query.isEmpty()) {
+            return findAll();
+        }
+        return productRepository.search(query);
+    }
 
     // uwazaj bo to zmieni wszystkie wiersze danego produktu (nadpisze ci zmiany, jak nei wszystkie beda wypelnione)
     public void update(Product updatedProduct) {

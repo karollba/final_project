@@ -51,6 +51,13 @@ public class ProductController {
         return "product/productList";
     }
 
+    @GetMapping("/search")
+    public String search(@RequestParam String query, Model model) {
+        model.addAttribute("products", productService.search(query));
+        model.addAttribute("query", query);
+        return "product/productList";
+    }
+
 
     // detalis dla partii produtku
     @GetMapping("/details")

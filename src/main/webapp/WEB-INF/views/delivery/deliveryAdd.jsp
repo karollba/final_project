@@ -30,10 +30,17 @@
         <form:errors path="quantity" cssClass="text-danger"/>
 
 
-            <div class="form-group">
-                <label for="deliveryId">Nr dostawy </label>
-                <input value="${delivery.deliveryId}" name="deliveryId" type="text" class="form-control" id="deliveryId" placeholder="deliveryId">
-            </div>
+            <div clas="form-group">
+               <label for="orderNumber">Zamówienie</label>
+               <select name="orderId" class="form-control" id="orderNumber" onchange="fillSupplier(this)">
+                   <option value=""> wybierz</option>
+                   <c:forEach var="o" items="${orders}">
+                      <option value="${o.id}" data-supplier="${o.supplier.id}">${o.orderNumber}</option>
+                   </c:forEach>
+               </select>
+           </div>
+
+
 
 
            <div clas="form-group">

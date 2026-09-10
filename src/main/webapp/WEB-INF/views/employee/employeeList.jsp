@@ -12,43 +12,54 @@
                   class="fas fa-plus fa-sm text-white-50"></i> Dodaj nowego pracownika</a>
         </div>
 
-  <div class="row">
+        <div class="row">
             <div class="col-12">
-              <div class="card shadow mb-4">
+                <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary"> Lista pracowników</h6>
-                </div>
-                <div class="card-body">
-                  <table  class="table">
-                    <thead>
-                    <tr>
-                         <th>Nr pracownika</th>
-                         <th>Imię</th>
-                         <th>Nazwisko</th>
-                         <th>Uprawnienia admina </th>
-                         <th>Działanie </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach var="employee" items="${employees}">
-                      <tr>
-                          <td>${employee.idToShow}</td>
-                          <td>${employee.firstName}</td>
-                          <td>${employee.lastName}</td>
-                          <td>${employee.adminAccess}</td>
-                          <td>
-                            <a href="edit?id=${employee.id}" class="btn btn-info btn-sm">Edit</a>
-                            <a href="delete?id=${employee.id}" class="btn btn-info btn-sm">Usuń</a>
-                            <a href="show?id=${employee.id}" class="btn btn-info btn-sm">Pokaż</a>
-                          </td>
-                    </tr>
-                    </c:forEach>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
+                    <h6 class="m-0 font-weight-bold text-primary"> Lista pracowników</h6>
+        </div>
+
+        <form method="get" action="${pageContext.request.contextPath}/employee/search" class="mb-3 form-inline">
+            <input type="text" name="query" value="${query}" class="form-control mr-2" placeholder="Szukaj po ID, imieniu lub nazwisku">
+                <button type="submit" class="btn btn-primary">Szukaj</button>
+            <a href="${pageContext.request.contextPath}/employee/list" class="btn btn-secondary ml-2"> Wyczyść</a>
+        </form>
+
+
+
+
+        <div class="card-body">
+          <table  class="table">
+            <thead>
+            <tr>
+                 <th>Nr pracownika</th>
+                 <th>Imię</th>
+                 <th>Nazwisko</th>
+                 <th>Uprawnienia admina </th>
+                 <th>Działanie </th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach var="employee" items="${employees}">
+              <tr>
+                  <td>${employee.idToShow}</td>
+                  <td>${employee.firstName}</td>
+                  <td>${employee.lastName}</td>
+                  <td>${employee.adminAccess}</td>
+                  <td>
+                    <a href="edit?id=${employee.id}" class="btn btn-info btn-sm">Edit</a>
+                    <a href="delete?id=${employee.id}" class="btn btn-info btn-sm">Usuń</a>
+                    <a href="show?id=${employee.id}" class="btn btn-info btn-sm">Pokaż</a>
+                    <a href="${pageContext.request.contextPath}/employee/show?id=${employee.id}" class="btn btn-sm btn-info"> Szczegóły </a>
+                  </td>
+            </tr>
+            </c:forEach>
+            </tbody>
+          </table>
         </div>
       </div>
+    </div>
+</div>
+</div>
 
 <%@ include file="../footer.jsp" %>

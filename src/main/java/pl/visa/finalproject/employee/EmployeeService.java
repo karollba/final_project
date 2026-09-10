@@ -28,6 +28,13 @@ public class EmployeeService {
         employeeRepository.save(employee);
     }
 
+    public List<Employee> search(String query) {
+        if (query == null || query.isEmpty()) {
+            return findAll();
+        }
+        return employeeRepository.search(query);
+    }
+
     public Employee findById(UUID id) {
         return employeeRepository.findById(id).orElse(null);
     }

@@ -32,11 +32,19 @@ public class ProductOrderService {
         return productOrderRepository.save(order);
     }
 
-    List<ProductOrder> findAll() {
+    public List<ProductOrder> findAll() {
         return productOrderRepository.findAll();
     }
 
-    Optional<ProductOrder> findById(UUID id) {
+    public Optional<ProductOrder> findById(UUID id) {
         return  productOrderRepository.findById(id);
+    }
+
+    public void save(ProductOrder order) {
+        productOrderRepository.save(order);
+    }
+
+    public Optional<ProductOrder> findByDelivery(Delivery delivery) {
+        return productOrderRepository.findByDelivery(delivery);
     }
 }

@@ -8,6 +8,8 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import pl.visa.finalproject.orderedProducts.OrderedProduct;
 import pl.visa.finalproject.orderedProducts.OrderedProductService;
+import pl.visa.finalproject.orderedProducts.ProductOrder;
+import pl.visa.finalproject.orderedProducts.ProductOrderService;
 import pl.visa.finalproject.product.Product;
 import pl.visa.finalproject.product.ProductService;
 import pl.visa.finalproject.supplier.Supplier;
@@ -26,12 +28,14 @@ public class DeliveryController {
     private final SupplierService supplierService;
     private final ProductService productService;
     private final OrderedProductService orderedProductService;
+    private final ProductOrderService productOrderService;
 
-    public DeliveryController(DeliveryService deliveryService, SupplierService supplierService, ProductService productService, OrderedProductService orderedProductService) {
+    public DeliveryController(DeliveryService deliveryService, SupplierService supplierService, ProductService productService, OrderedProductService orderedProductService, ProductOrderService productOrderService) {
         this.deliveryService = deliveryService;
         this.supplierService = supplierService;
         this.productService = productService;
         this.orderedProductService = orderedProductService;
+        this.productOrderService = productOrderService;
     }
 
 
@@ -46,19 +50,36 @@ public class DeliveryController {
         model.addAttribute("delivery", new Delivery());
         model.addAttribute("suppliers", supplierService.findAll());
         model.addAttribute("deliveryCategories", DeliveryCategory.values());
+        model.addAttribute("orders", productOrderService.findAll());
         return "delivery/deliveryAdd";
     }
 
     @PostMapping("/add")
     public String  add(@Valid @ModelAttribute Delivery delivery,
-                       BindingResult bindingResult) {
+                       BindingResult bindingResult,
+                       @RequestParam UUID orderId) {
+
         if (bindingResult.hasErrors()) {
             bindingResult.getAllErrors().forEach(error -> System.out.println("Errror" + error.toString()));
             return "delivery/deliveryAdd";
         }
+        ProductOrder order = productOrderService.findById(orderId).orElseThrow();
+        delivery.setSupplier(order.getSupplier());
+        delivery.setDeliveryId(order.getOrderNumber());
 
         deliveryService.save(delivery);
+
+        order.setDelivery(delivery);
+        productOrderService.save(order);
+
         return "redirect:/delivery/list";
+    }
+
+    @GetMapping("/showorder")
+    public String showOrderDelivery(@RequestParam UUID deliveryId) {
+        Delivery delivery = deliveryService.findById(deliveryId).orElseThrow();
+        ProductOrder order = productOrderService.findByDelivery(delivery).orElseThrow();
+        return "redirect:/productorder/show?id=" + order.getId();
     }
 
     @GetMapping("/edit")

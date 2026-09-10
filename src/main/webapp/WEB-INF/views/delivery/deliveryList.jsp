@@ -31,7 +31,6 @@
                      <th>Płatność do</th>
                      <th>Opłacono </th>
                      <th>Pracownik przyjmujący</th>
-                     <th>ID kuriera</th>
                      <th>Dostawa nienaruszona</th>
                      <th>Kategoria</th>
                      <th>Działanie </th>
@@ -52,7 +51,7 @@
                       <td>
                         <a href="edit?id=${delivery.id}" class="btn btn-info btn-sm">Edytuj</a>
                         <a href="delete?id=${delivery.id}" class="btn btn-info btn-sm">Usuń</a>
-                        <a href="${pageContext.request.contextPath}/orderedproduct/check?deliveryId=${delivery.id}" class="btn btn-info btn-sm">Szczegóły</a>
+                        <a href="${pageContext.request.contextPath}/delivery/showorder?deliveryId=${delivery.id}" class="btn btn-info btn-sm">Szczegóły</a>
                       </td>
                   </tr>
                 </c:forEach>

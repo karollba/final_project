@@ -1,6 +1,7 @@
 package pl.visa.finalproject.employee;
 
 import lombok.extern.slf4j.Slf4j;
+import org.eclipse.tags.shaded.org.apache.xpath.operations.Mod;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +23,13 @@ public class EmployeeController {
         model.addAttribute("employees", employeeService.findAll());
         return "employee/employeeList";
 
+    }
+
+    @GetMapping("/search")
+    public String searchEmployee(@RequestParam String query, Model model) {
+        model.addAttribute("employees", employeeService.search(query));
+        model.addAttribute("query", query);
+        return "employee/employeeList";
     }
 
     // walidacja pamietaj!
