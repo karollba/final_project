@@ -46,6 +46,13 @@ public class ProductOrderController {
         return "ordered/orderList";
     }
 
+    @GetMapping("/search")
+    public String search(@RequestParam String query, Model model) {
+        model.addAttribute("orders", productOrderService.search(query));
+        model.addAttribute("query", query);
+        return "ordered/orderList";
+    }
+
     @GetMapping("/show")
     public String showOrder(@RequestParam UUID id, Model model) {
         ProductOrder order = productOrderService.findById(id).orElseThrow();

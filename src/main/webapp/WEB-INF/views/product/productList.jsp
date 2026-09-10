@@ -27,7 +27,7 @@
            <form method="get" action="${pageContext.request.contextPath}/product/search" class="mb-3 form-inline">
                     <input type="text" name="query" value="${query}" class="form-control mr-2" placeholder="Szukaj po ID, kategorii lub nazwie">
                         <button type="submit" class="btn btn-primary">Szukaj</button>
-                    <a href="${pageContext.request.contextPath}/employee/list" class="btn btn-secondary ml-2"> Wyczyść</a>
+                    <a href="${pageContext.request.contextPath}/product/list" class="btn btn-secondary ml-2"> Wyczyść</a>
                 </form>
 
 
@@ -43,11 +43,6 @@
                 </select>
 
 
-                <select name="expiryFilter" calss="form-control d-inline-block w-auto" onchange="this.form.submit()">
-                    <option value="">Wszystkie terminy</option>
-                    <option value="today" ${selectedExpiryFilter == 'today' ? 'selected' : ''}>Dziś</option>
-                    <option value="week" ${selectedExpiryFilter == 'week' ? 'selected' : ''}> W tym tygodniu</option>
-                </select>
 
                 </form>
 

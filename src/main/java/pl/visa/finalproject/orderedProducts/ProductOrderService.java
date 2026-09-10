@@ -32,6 +32,13 @@ public class ProductOrderService {
         return productOrderRepository.save(order);
     }
 
+    public List<ProductOrder> search(String query) {
+        if (query == null || query.isEmpty()) {
+            return findAll();
+        }
+        return productOrderRepository.search(query);
+    }
+
     public List<ProductOrder> findAll() {
         return productOrderRepository.findAll();
     }

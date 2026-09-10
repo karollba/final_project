@@ -61,15 +61,24 @@ public class ProductController {
 
     // detalis dla partii produtku
     @GetMapping("/details")
-    public String details(@RequestParam UUID id, Model model) {
+    public String details(@RequestParam UUID id,
+                          @RequestParam(required = false) String expiryFilter,
+                          Model model) {
         Product product = productService.findById(id).orElseThrow();
-        List<ProductBatch> batches = productBatchService.findByProduct(product);
+        List<ProductBatch> batches = productBatchService.findByProductFiltered(product, expiryFilter);
         model.addAttribute("product", product);
         model.addAttribute("batches", batches);
+        model.addAttribute("selectedExpiryFilter", expiryFilter);
         return "product/productDetails";
     }
 
 
+    @GetMapping("/deletebatch")
+    public String deleteBatch(@RequestParam UUID id) {
+        productBatchService.delete(id);
+        return "redirect:/product/details?id=" + id;
+        // tutaj musisz dodac plus id
+    }
 
 
     // poszukujac filtruj napierw przez kategorie potem szukaj uuid bo tak to zajedziesz baze danych
@@ -168,8 +177,13 @@ public class ProductController {
         return "redirect:/product/list";
     }
 
+    @GetMapping("/delete")
+    public String delete(@RequestParam UUID id) {
+        productService.delete(id);
+        return "redirect:/product/list";
+    }
 
-    // a po co to deokaldnie???
+
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         binder.registerCustomEditor(Product.class, new PropertyEditorSupport() {

@@ -6,8 +6,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import pl.visa.finalproject.delivery.Delivery;
 
+import java.util.List;
 import java.util.UUID;
+
+import static org.antlr.v4.runtime.tree.xpath.XPath.findAll;
 
 @Controller
 @RequestMapping("/supplier")
@@ -22,6 +26,13 @@ public class SupplierController {
     public String listSuppliers(Model model) {
         model.addAttribute("suppliers", supplierService.findAll());
         return  "supplier/supplierList";
+    }
+
+    @GetMapping("/search")
+    public String search(@RequestParam String query, Model model) {
+        model.addAttribute("suppliers", supplierService.search(query));
+        model.addAttribute("query", query);
+        return "supplier/supplierList";
     }
 
     @GetMapping("/add")

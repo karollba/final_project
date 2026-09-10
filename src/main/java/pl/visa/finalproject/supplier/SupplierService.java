@@ -1,58 +1,66 @@
 package pl.visa.finalproject.supplier;
 
 import org.springframework.stereotype.Service;
-import pl.visa.finalproject.product.Product;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import static org.antlr.v4.runtime.tree.xpath.XPath.findAll;
+
 @Service
 public class SupplierService {
-    private final SupplierRespository supplierRespository;
+    private final SupplierRepository supplierRepository;
 
-    public SupplierService(SupplierRespository supplierRespository) {
-        this.supplierRespository = supplierRespository;
+    public SupplierService(SupplierRepository supplierRepository) {
+        this.supplierRepository = supplierRepository;
     }
 
      public void add(Supplier supplier) {
-         Long maxId = supplierRespository.findMaxIdToShow().orElse(0L);
+         Long maxId = supplierRepository.findMaxIdToShow().orElse(0L);
          supplier.setIdToShow(maxId + 1);
-        supplierRespository.save(supplier);
+        supplierRepository.save(supplier);
     }
 
 
+    public List<Supplier> search(String query) {
+        if (query == null || query.isEmpty()) {
+            return findAll();
+        }
+        return supplierRepository.search(query);
+    }
+
     public List<Supplier> findAll() {
-        return supplierRespository.findAll();
+        return supplierRepository.findAll();
     }
 
     public Optional<Supplier> get(UUID id) {
-        return supplierRespository.findById(id);
+        return supplierRepository.findById(id);
     }
 
     public Optional<Supplier> findById(UUID product_id) {
-        return supplierRespository.findById(product_id);
+        return supplierRepository.findById(product_id);
     }
 
     public void save(Supplier supplier) {
 
         if (supplier.getIdToShow() == null) {
-            Optional<Long> maxId = supplierRespository.findMaxIdToShow();
+            Optional<Long> maxId = supplierRepository.findMaxIdToShow();
             if (maxId.isEmpty())  {
                 supplier.setIdToShow(1L);
             } else {
                 supplier.setIdToShow(maxId.orElse(null) + 1);
             }
         }
-        supplierRespository.save(supplier);
+        supplierRepository.save(supplier);
     }
 
     public boolean exists(UUID id) {
-        return supplierRespository.existsById(id);
+        return supplierRepository.existsById(id);
     }
 
     public void update(Supplier updatedSupplier) {
-        Supplier existing = supplierRespository.findById(updatedSupplier.getId())
+        Supplier existing = supplierRepository.findById(updatedSupplier.getId())
                 .orElseThrow(() -> new RuntimeException("Nie znaleziono dostawcy"));
 
         if (updatedSupplier.getName() != null && !updatedSupplier.getName().isEmpty()) {
@@ -78,7 +86,7 @@ public class SupplierService {
         if (updatedSupplier.getStreet() != null && !updatedSupplier.getStreet().isEmpty()) {
             existing.setStreet(updatedSupplier.getStreet());
         }
-        supplierRespository.save(existing);
+        supplierRepository.save(existing);
     }
 
 

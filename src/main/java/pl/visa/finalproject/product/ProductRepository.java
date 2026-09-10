@@ -19,13 +19,13 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
 
     Optional<Product> findByBarcode(String barcode);
 
-    @Query("select p from Product p where (:category is null or p.category = :category)")
+    @Query("select p from Product p where p.deleted = false " + " and (:category is null or p.category = :category)")
     List<Product> findFiltered(@Param("category") ProductCategory category);
 
-    @Query("select MAX(p.idToShow) from Product p")
+    @Query("select MAX(p.idToShow) from Product p where p.deleted = false ")
     Optional<Long> findMaxIdToShow();
 
-    @Query("select p from Product p where " +
+    @Query("select p from Product p where p.deleted = false and " +
             "cast(p.idToShow as string) like %:query% or " +
             "lower(p.name) like lower(concat('%', :query, '%')) or " +
             "lower(p.category) like lower(concat('%', :query, '%')) ")
@@ -36,10 +36,4 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
 //    @Query("select pb from ProductBatch pb where pb.expirationDate between :today and :weeklater")
 //    List<ProductBatch> findExpiringBatches(@Param("today") LocalDate today, @Param("weeklater") LocalDate weeklater);
 
-
-
-
-//    Optional<Product> findById(UUID id);
-//
-//    boolean existsById(UUID id);
 }

@@ -1,11 +1,15 @@
 package pl.visa.finalproject.product;
 
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductBatchService {
@@ -31,22 +35,37 @@ public class ProductBatchService {
         return productBatchRepository.findByProduct(product);
     }
 
-    public List<ProductBatch> findFiltered(String category, String expiryFilter) {
-        ProductCategory cat = (category != null && !category.isEmpty()) ? ProductCategory.valueOf(category) : null;
+    public List<ProductBatch> findByProductFiltered(Product product, String expiryFilter) {
+       List<ProductBatch> batches = findByProduct(product);
+        LocalDate today = LocalDate.now();
 
-        LocalDate expiryLimit = null;
-        if ("today".equals(expiryFilter)) {
-            expiryLimit = LocalDate.now();
-        } else if ("week".equals(expiryFilter)) {
-            expiryLimit = LocalDate.now().plusDays(7);
-        }
-
-        return productBatchRepository.findFiltered(cat, expiryLimit);
+       if ("today".equals(expiryFilter)) {
+           batches = batches.stream()
+                   .filter(b -> b.getExpirationDate().isEqual(today))
+                   .collect(Collectors.toList());
+       } else if ("week".equals(expiryFilter)) {
+           LocalDate week = LocalDate.now().plusDays(7);
+           batches = batches.stream()
+                   .filter(b -> !b.getExpirationDate().isBefore(today) && !b.getExpirationDate().isAfter(week))
+                   .collect(Collectors.toList());
+       }
+       return batches;
     }
 
     public double getTotalQuantity(Product product) {
         Double total = productBatchRepository.getTotalQuantity(product, LocalDate.now());
         return total != null ? total : 0;
     }
+
+    public void delete(UUID id) {
+        ProductBatch product = productBatchRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Produkt nie znaleziony"));
+
+        product.setDeleted(true);
+        product.setTimeDeleted(LocalDateTime.now());
+
+        productBatchRepository.save(product);
+    }
+
 
 }

@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.cglib.core.Local;
 import pl.visa.finalproject.delivery.Delivery;
 import pl.visa.finalproject.orderedProducts.Unit;
 
@@ -44,10 +45,15 @@ public class ProductBatch {
     public String getExpiryStatus() {
         if (expirationDate == null) return "";
 
-        long daysUntilExpiry = ChronoUnit.DAYS.between(LocalDate.now(), expirationDate);
-        if(daysUntilExpiry <= 0) return "danger";
-        if(daysUntilExpiry <= 7) return "danger";
+        LocalDate today = LocalDate.now();
+        if (expirationDate.isBefore(today)) return "danger";
+        if (expirationDate.isEqual(today)) return "danger";
+        if (!expirationDate.isAfter(today.plusDays(7))) return "warning";
 
         return "";
     }
+
+    private boolean deleted;
+    private LocalDateTime timeDeleted;
+
 }

@@ -45,6 +45,14 @@ public class DeliveryController {
         return "delivery/deliveryList";
     }
 
+
+    @GetMapping("/search")
+    public String search(@RequestParam String query, Model model) {
+        model.addAttribute("deliveries", deliveryService.search(query));
+        model.addAttribute("query", query);
+        return "delivery/deliveryList";
+    }
+
     @GetMapping("/add")
     public String addForm(Model model) {
         model.addAttribute("delivery", new Delivery());

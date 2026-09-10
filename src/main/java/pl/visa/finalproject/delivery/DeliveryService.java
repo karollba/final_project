@@ -1,12 +1,16 @@
 package pl.visa.finalproject.delivery;
 
 import org.springframework.stereotype.Service;
+import pl.visa.finalproject.employee.Employee;
+import pl.visa.finalproject.product.Product;
+import pl.visa.finalproject.product.ProductDTO;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class DeliveryService {
@@ -62,6 +66,14 @@ public class DeliveryService {
         existing.setPaid(updateDelivery.isPaid());
         deliveryRepository.save(existing);
     }
+
+    public List<Delivery> search(String query) {
+        if (query == null || query.isEmpty()) {
+            return findAll();
+        }
+        return deliveryRepository.search(query);
+    }
+
 
     public Optional<Delivery> get(UUID id) {
         return deliveryRepository.findById(id);

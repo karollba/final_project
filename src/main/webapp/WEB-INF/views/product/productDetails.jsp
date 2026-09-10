@@ -16,14 +16,16 @@
             <div class="col-12">
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary"> ${product.name}</h6>
+                  <h3 class="m-0 font-weight-bold text-primary"> ${product.name}</h3>
                 </div>
                 <div class="card-body">
 
-                <select name="expiryFilter" calss="form-control d-inline-block w-auto" onchange="this.form.submit()">
-                    <option value="">Wszystkie terminy</option>
-                    <option value="today" ${selectedExpiryFilter == 'today' ? 'selected' : ''}>Dziś</option>
-                    <option value="week" ${selectedExpiryFilter == 'week' ? 'selected' : ''}> W tym tygodniu</option>
+                <form method="get" action="${pageContext.request.contextPath}/product/details">
+                <input type="hidden" name="id" value="${product.id}">
+                    <select name="expiryFilter" calss="form-control d-inline-block w-auto" onchange="this.form.submit()">
+                        <option value="">Wszystkie terminy</option>
+                        <option value="today" ${selectedExpiryFilter == 'today' ? 'selected' : ''}>Dziś</option>
+                        <option value="week" ${selectedExpiryFilter == 'week' ? 'selected' : ''}> W tym tygodniu</option>
                 </select>
 
                 </form>
@@ -39,12 +41,12 @@
                     </thead>
                     <tbody>
                     <c:forEach var="batch" items="${batches}">
-                      <tr>
+                      <tr class="table-${batch.expiryStatus}">
                           <td>${batch.quantity}</td>
                            <td>${batch.product.defaultUnit}</td>
                           <td>${batch.expirationDate}</td>
                           <td>
-                            <a href="delete?id=${batch.id}" class="btn btn-info btn-sm">Usuń</a>
+                            <a href="${pageContext.request.contextPath}/product/deletebatch?id=${batch.id}" class="btn btn-info btn-sm">Usuń</a>
                           </td>
                     </tr>
                     </c:forEach>

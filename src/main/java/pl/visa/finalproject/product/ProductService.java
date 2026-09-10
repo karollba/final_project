@@ -4,6 +4,7 @@ import jakarta.validation.Validator;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -19,29 +20,6 @@ public class ProductService {
         this.productBatchService = productBatchService;
     }
 
-    // jeszcze musisz dodac obsluge bledow (ze jak nie znajdzie nie zapisze do bazy etc to co wtedy
-
-    // find by id
-
-    // find by name
-
-    // lisdt all??? chyba tak srednio bo zapcha baze danych (chyba ze tutja paginacje zrobic i to byloby najrozsadniejsze
-
-    // filtrowanie (produtky datą ktore najszybciej sie zepsują)
-
-    // filtorwanie po tym kto przyjal dostawe???
-
-    // usuwanie
-
-    // dodawanie - przy dodawaniu z automatu zrob availability na true bo dodajesz nowy produtk nie
-
-    // update
-
-    // jeszcze oblsuga bledow zeby nie wywalalo ci calego programu!!!!!
-
-    // ale jesli barcodem bys szukala i dodalo to samo nazwe to by byla pewnosc ze bedzie taka sama i nie bedzie duplikatow
-
-    // nad tym sie zastanow bo name moze sie powtarzac a moze nie>????? plus tez jakis paginacja czy cos bo przy 100 tys produktow zajedziesz baze danych
     public void add(Product product) {
         Optional<Product> existing = productRepository.findByName(product.getName());
 
@@ -93,11 +71,17 @@ public class ProductService {
         return productRepository.findByBarcode(barcode);
     }
 
-    public List<Product> search(String query) {
+    public List<ProductDTO> search(String query) {
+        List<Product> products;
         if (query == null || query.isEmpty()) {
-            return findAll();
+            products = findAll();
+        } else {
+            products = productRepository.search(query);
         }
-        return productRepository.search(query);
+
+        return products.stream()
+                .map(p -> new ProductDTO(p, productBatchService.getTotalQuantity(p)))
+                .collect(Collectors.toList());
     }
 
     // uwazaj bo to zmieni wszystkie wiersze danego produktu (nadpisze ci zmiany, jak nei wszystkie beda wypelnione)
@@ -112,14 +96,6 @@ public class ProductService {
         if (updatedProduct.getQuantity() > 0) {
             existing.setQuantity(updatedProduct.getQuantity());
         }
-//
-//        if (updatedProduct.getCategory() != null && !updatedProduct.getCategory().isEmpty()) {
-//            existing.setCategory(updatedProduct.getCategory());
-//        }
-
-//        if (updatedProduct.getExpirationDate() != null) {
-//            existing.setExpirationDate(updatedProduct.getExpirationDate());
-//        }
         productRepository.save(existing);
 
     }
@@ -132,6 +108,14 @@ public class ProductService {
         return productRepository.existsById(product_id);
     }
 
+    public void delete(UUID id) {
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Produkt nie znaleziony"));
 
+        product.setDeleted(true);
+        product.setTimeDeleted(LocalDateTime.now());
+
+        productRepository.save(product);
+    }
 
 }

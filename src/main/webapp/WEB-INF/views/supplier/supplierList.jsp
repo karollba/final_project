@@ -21,6 +21,15 @@
                 <div class="card-header py-3">
                   <h6 class="m-0 font-weight-bold text-primary"> Lista dostawców</h6>
                 </div>
+
+
+
+           <form method="get" action="${pageContext.request.contextPath}/supplier/search" class="mb-3 form-inline">
+                    <input type="text" name="query" value="${query}" class="form-control mr-2" placeholder="Szukaj po ID, kategorii lub nazwie">
+                        <button type="submit" class="btn btn-primary">Szukaj</button>
+                    <a href="${pageContext.request.contextPath}/supplier/list" class="btn btn-secondary ml-2"> Wyczyść</a>
+                </form>
+
                 <div class="card-body">
                   <table  class="table">
                     <thead>
