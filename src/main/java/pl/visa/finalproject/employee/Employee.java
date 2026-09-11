@@ -7,8 +7,14 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.config.core.GrantedAuthorityDefaults;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
+import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -17,7 +23,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "employee")
-public class Employee {
+public class Employee implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -36,12 +42,38 @@ public class Employee {
     @Min(value = 4, message = "Nazwisko musi mieć min 4 znaki!")
     private String lastName;
 
-    // zastanow sie nad usuwaniem pracownikow (moze odejsc ale jak bylo robione ze nastepni pracownicy "przejmowali stare konta"
-
-    // to do zastanowienia, czy moze usuwac/ mocno ingerowac w baze
     private boolean adminAccess;
-
     private boolean deleted;
     private LocalDateTime timeDeleted;
     private String login;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if (adminAccess) {
+            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        }
+        return List.of(new SimpleGrantedAuthority("ROLE_EMPLOYEE"));
+    }
+
+    @Override
+    public String getUsername() {
+        return login;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return !deleted;
+    }
+
+
 }

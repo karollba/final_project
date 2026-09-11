@@ -21,13 +21,12 @@ public interface DeliveryRepository extends JpaRepository<Delivery, UUID> {
     @Query("select max(cast(substring( d.deliveryId, locate('-', d.deliveryId) + 1, 10) as long)) from Delivery d")
     Optional<Long> findMaxDeliveryNumber();
 
-    @Query("select d from Delivery d where d.deleted = false and " +
+    @Query("select d from Delivery d where d.deleted = false and (" +
             "cast(d.deliveryId as string ) like %:query% or " +
             "lower(d.supplier.name) like lower(concat('%', :query, '%')) or " +
-            "cast(d.idToShow as string ) like %:query% or " +
             "lower(cast(d.category as string)) like lower(concat('%', :query, '%')) or " +
             "lower(cast(d.paid as string )) like lower(concat('%', :query, '%')) or " +
-            "cast(d.dateOfAcceptTheDelivery as string ) like %:query%" )
+            "cast(d.dateOfAcceptTheDelivery as string ) like %:query%)" )
     List<Delivery> search(@Param("query") String query);
 
     @Override

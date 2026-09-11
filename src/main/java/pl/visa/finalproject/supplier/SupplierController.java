@@ -35,6 +35,7 @@ public class SupplierController {
         return "supplier/supplierList";
     }
 
+
     @GetMapping("/add")
     public String addForm(Model model) {
         model.addAttribute("supplier", new Supplier());

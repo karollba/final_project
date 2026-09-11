@@ -1,15 +1,12 @@
 package pl.visa.finalproject.supplier;
 
 import org.springframework.stereotype.Service;
-import pl.visa.finalproject.product.Product;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
-
-import static org.antlr.v4.runtime.tree.xpath.XPath.findAll;
 
 @Service
 public class SupplierService {
@@ -24,6 +21,8 @@ public class SupplierService {
          supplier.setIdToShow(maxId + 1);
         supplierRepository.save(supplier);
     }
+
+
 
 
     public List<SupplierDTO> search(String query) {

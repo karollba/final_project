@@ -41,9 +41,8 @@ public class DeliveryDTO {
         this.id = delivery.getId();
         this.idToShow = delivery.getIdToShow();
         this.deliveryId = delivery.getDeliveryId();
-        // supplierName??
-        // acceptingemployeeidtoshow
-
+        this.supplier = delivery.getSupplier();
+        this.acceptingEmployee = delivery.getAcceptingEmployee();
         this.invoiceDue = delivery.getInvoiceDue();
         this.dateOfAcceptTheDelivery = delivery.getDateOfAcceptTheDelivery();
         this.paid = delivery.isPaid();

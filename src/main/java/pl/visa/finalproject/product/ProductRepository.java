@@ -19,16 +19,16 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
 
     Optional<Product> findByBarcode(String barcode);
 
-    @Query("select p from Product p where p.deleted = false " + " and (:category is null or p.category = :category)")
+    @Query("select p from Product p where p.deleted = false and (:category is null or p.category = :category)")
     List<Product> findFiltered(@Param("category") ProductCategory category);
 
     @Query("select MAX(p.idToShow) from Product p where p.deleted = false ")
     Optional<Long> findMaxIdToShow();
 
-    @Query("select p from Product p where p.deleted = false and " +
+    @Query("select p from Product p where p.deleted = false and (" +
             "cast(p.idToShow as string) like %:query% or " +
             "lower(p.name) like lower(concat('%', :query, '%')) or " +
-            "lower(p.category) like lower(concat('%', :query, '%')) ")
+            "lower(p.category) like lower(concat('%', :query, '%'))) ")
     List<Product> search(@Param("query") String query);
 
 

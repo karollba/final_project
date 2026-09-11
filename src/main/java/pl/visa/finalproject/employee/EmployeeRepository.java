@@ -26,4 +26,7 @@ public interface EmployeeRepository extends JpaRepository<Employee, UUID> {
             "lower(e.firstName) like lower(concat('%', :query, '%')) or " +
             "lower(e.lastName) like lower(concat('%', :query, '%'))) ")
     List<Employee> search(@Param("query") String query);
+
+
+    Optional<Employee> findByLogin(String login);
 }

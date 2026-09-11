@@ -14,19 +14,17 @@ public interface SupplierRepository extends JpaRepository<Supplier, UUID> {
     @Query("select MAX(e.idToShow) from Supplier e")
     Optional<Long> findMaxIdToShow();
 
-
-    // nip i regon zeby suzkalo
-
-    @Query("select s from Supplier s where s.deleted = false and " +
+    @Query("select s from Supplier s where s.deleted = false and (" +
             "lower(s.name) like lower(concat('%', :query, '%')) or " +
             "cast(s.idToShow as string ) like %:query% or " +
             "cast(s.NIP as string ) like %:query% or " +
             "cast(s.REGON as string ) like %:query% or " +
             "lower(s.city) like lower(concat('%', :query, '%')) or " +
-            "lower(s.street) like lower(concat('%', :query, '%')) ")
+            "lower(s.street) like lower(concat('%', :query, '%'))) ")
     List<Supplier> search(@Param("query") String query);
 
     @Override
     @Query("select s from Supplier s where s.deleted = false ")
     List<Supplier> findAll();
+
 }
