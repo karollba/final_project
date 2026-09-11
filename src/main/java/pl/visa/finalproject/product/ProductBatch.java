@@ -1,6 +1,10 @@
 package pl.visa.finalproject.product;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,10 +31,15 @@ public class ProductBatch {
 
     @ManyToOne
     @JoinColumn (name = "product_id")
+    @NotNull(message = "Produkt jest wymagany")
     private Product product;
 
+    @NotNull(message = "Termin ważności jest wymagany")
+    @Future(message = "Termin musi być w przyszłości")
     private LocalDate expirationDate;
 
+    @Min(value = 0, message = "Ilość nie może być ujemna!")
+    @NotBlank
     private double quantity;
     private LocalDateTime deliveryDate;
 

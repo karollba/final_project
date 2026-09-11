@@ -113,7 +113,7 @@
 
                  <ul class="navbar-nav ml-auto">
                     <!-- Nav Item - User Information -->
-                    <li class="nav-item dropdown no-arrow">
+                    <li class="nav-item">
                         <span class="mr-2 d-none d-lg-inline text-gray-800 small font-weight-bold">
                            ${loggedInEmployee.firstName} ${loggedInEmployee.lastName}
                         </span>
@@ -121,8 +121,7 @@
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Wyloguj
                             </a>
-                        </div>
-                    </li>
+                        </li>
                 </ul>
             </nav>
 

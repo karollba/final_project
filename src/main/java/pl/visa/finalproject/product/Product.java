@@ -2,6 +2,7 @@ package pl.visa.finalproject.product;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,12 +27,13 @@ public class Product {
 
     private Long idToShow;
 
-    // nazwa pobierana automatycznie z barcode
+    @NotBlank(message = "Nazwa jest wymagana")
     private String name;
 
     private boolean availability;
 
-    @Min(value = 0, message = "Quantity cannot be below 0!")
+    @Min(value = 0, message = "Ilość nie może być ujemna!")
+    @NotBlank
     private double quantity;
 
     private boolean deleted;
@@ -39,6 +41,7 @@ public class Product {
     private LocalDateTime timeDeleted;
 
     @Column(unique = true)
+    @NotBlank(message = "Kod kreskowy jest wymagany")
     private String barcode;
 
     @Enumerated(EnumType.STRING)
@@ -46,30 +49,6 @@ public class Product {
 
     @Enumerated(EnumType.STRING)
     private Unit defaultUnit;
-
-//    @Transient
-//    public String getExpiryStatus() {
-//        if (expirationDate == null) return "";
-//
-//        long daysUntilExpiry = ChronoUnit.DAYS.between(LocalDate.now(), expirationDate);
-//        if (daysUntilExpiry <= 0) return "danger";
-//        if (daysUntilExpiry <= 7) return "warning";
-//        return "";
-//    }
-
-    // delivery date moze pobierz i wstaw w delivery. probelm bo jak bedziesz dodawac nowa delivery to bedziesz nadpisywac
-    // chyba ze utworzysz nowa powaiana tablee i tam bedzie np product id i ostatnie dostawy i kazdy nowy
-    // wiersz bedzie notowal kto przyjal dostawe, kiedy i o ktorej godzinie (rozwiaze to tez probelm ze zle sprawdzona dostawa
-
-
-    // ze jak produkty sie wyprzedaly to jakby cofalo powiadomienia???
-
-    // plus dodawanie produktow/ sortowanie ile sztuk zostalo do konca danego terminu.
-    // (ze jak masz 100 opakowan to np 10 jewst do 06.06; 40 jest to 08.08 etc
-
-    // numer dostawy w jakiej przyszedl dany produkt??? zeby mozna bylo latwo namierzyc jak cos sie zepsulo wczesniej czy cso??
-    // to powyzej to juz chyba overengineering
-
 
 
 }

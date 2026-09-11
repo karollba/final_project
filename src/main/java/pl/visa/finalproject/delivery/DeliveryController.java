@@ -141,12 +141,25 @@ public class DeliveryController {
         return "ordered/orderAdd";
     }
 
-    // przemysl to jeszcze bo jest troche nagmatwane
 
     @PostMapping("/addwithitems")
     public String addOrderWithItems(@RequestParam UUID supplierId,
                                     @RequestParam List<UUID> productsIds,
-                                    @RequestParam List<Double> orderQuantities) {
+                                    @RequestParam List<Double> orderQuantities, Model model) {
+
+        if (productsIds.size() != orderQuantities.size()) {
+            model.addAttribute("errod", "Błąd danych formualrza");
+            return "ordered/orderAdd";
+        }
+        for (Double quantity : orderQuantities) {
+            if (quantity == null || quantity <= 0) {
+                model.addAttribute("error", "Ilość musi być większa od 0!");
+                model.addAttribute("suppliers", supplierService.findAll());
+                model.addAttribute("products", productService.findAll());
+                return "ordered/orderAdd";
+            }
+        }
+
         Supplier supplier = supplierService.findById(supplierId).orElseThrow();
 
         for (int i = 0; i < productsIds.size(); i++) {
@@ -168,7 +181,12 @@ public class DeliveryController {
     @PostMapping("/recievedDelivery")
     public String recievedDelivery(@RequestParam UUID supplierId,
                                    @RequestParam List<UUID> orderedProductsIds,
-                                   @AuthenticationPrincipal Employee loggedInEmployee) {
+                                   @AuthenticationPrincipal Employee loggedInEmployee, Model model) {
+        if (orderedProductsIds == null || orderedProductsIds.isEmpty()) {
+            model.addAttribute("error", "Musisz wybrać przynajmniej jedną pozycję!");
+            return "redirect:/order/list";
+        }
+
         Supplier supplier = supplierService.findById(supplierId).orElseThrow();
 
         Delivery delivery = new Delivery();

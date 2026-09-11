@@ -1,10 +1,12 @@
 package pl.visa.finalproject.orderedProducts;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.context.MessageSource;
 import pl.visa.finalproject.delivery.Delivery;
 import pl.visa.finalproject.supplier.Supplier;
 
@@ -25,12 +27,13 @@ public class ProductOrder {
     private UUID id;
 
     @Column(unique = true)
+    @NotBlank
     private String orderNumber;
 
     @ManyToOne
     @JoinColumn(name = "supplier_id")
+    @NotBlank(message = "Dostawca jest wymagany")
     private Supplier supplier;
-
 
     private LocalDate orderDate;
 

@@ -1,6 +1,8 @@
 package pl.visa.finalproject.delivery;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,9 +35,17 @@ public class Delivery {
     @JoinColumn(name = "accepting_employee_id")
     private Employee acceptingEmployee;
 
+    @NotBlank
     private Long invoiceId;
+
+    @NotBlank
     private String deliveryId;
+
+    @NotBlank
+    @Future(message = "Data płatności musi być w przyszłości!")
     private LocalDate invoiceDue;
+
+    @NotBlank
     private LocalDate dateOfAcceptTheDelivery;
     private boolean paid;
     private boolean deliveryIntact;
@@ -48,12 +58,14 @@ public class Delivery {
 
     @ManyToOne
     @JoinColumn(name = "supplier_id", nullable = false)
+    @NotBlank
     private Supplier supplier;
 
     @OneToMany(mappedBy = "delivery", cascade = CascadeType.ALL)
     private List<OrderedProduct> orderedProducts = new ArrayList<>();
 
     @ManyToOne
+
     private ProductOrder order;
 
     private boolean deleted;

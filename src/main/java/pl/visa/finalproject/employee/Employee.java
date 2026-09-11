@@ -36,6 +36,7 @@ public class Employee implements UserDetails {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @NotBlank
     private String password;
 
     @Column(unique = true, nullable = false)

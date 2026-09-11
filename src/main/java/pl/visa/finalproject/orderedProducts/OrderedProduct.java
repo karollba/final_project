@@ -1,6 +1,8 @@
 package pl.visa.finalproject.orderedProducts;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,7 +33,9 @@ public class OrderedProduct {
     @JoinColumn(name = "product_id")
     private Product product;
 
+    @NotBlank
     private double orderedQuantity;
+    @NotBlank(message = "Podaj ilość otrzymanego produktu!")
     private double recievedQuantity;
 
     @Enumerated(EnumType.STRING)
@@ -46,5 +50,7 @@ public class OrderedProduct {
     @JoinColumn(name = "product_order_id")
     private ProductOrder productOrder;
 
+    @NotBlank(message = "Podaj termin ważności!")
+    @Future
     private LocalDate expirationDate;
 }
