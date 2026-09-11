@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class EmployeeService {
@@ -16,8 +17,8 @@ public class EmployeeService {
         this.employeeRepository = employeeRepository;
     }
 
-    public List<Employee> findAll() {
-        return employeeRepository.findAllOrderByIdToShowAsc();
+    public List<EmployeeDTO> findAll() {
+        return employeeRepository.findAllOrderByIdToShowAsc().stream().map(EmployeeDTO::new).collect(Collectors.toList());
     }
 
     public void add(Employee employee) {
@@ -28,11 +29,14 @@ public class EmployeeService {
         employeeRepository.save(employee);
     }
 
-    public List<Employee> search(String query) {
+    public List<EmployeeDTO> search(String query) {
         if (query == null || query.isEmpty()) {
             return findAll();
         }
-        return employeeRepository.search(query);
+        List<Employee> employees = employeeRepository.search(query);
+        return employees.stream()
+                .map(EmployeeDTO::new)
+                .collect(Collectors.toList());
     }
 
     public Employee findById(UUID id) {

@@ -11,7 +11,7 @@ import java.util.UUID;
 
 @Repository
 public interface SupplierRepository extends JpaRepository<Supplier, UUID> {
-    @Query("select MAX(e.idToShow) from Supplier e where e.deleted = false ")
+    @Query("select MAX(e.idToShow) from Supplier e")
     Optional<Long> findMaxIdToShow();
 
 

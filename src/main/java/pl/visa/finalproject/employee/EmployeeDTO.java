@@ -10,26 +10,23 @@ import java.util.UUID;
 @Setter
 public class EmployeeDTO {
     private UUID id;
-
-    // pamietaj o hashu hasla
-    private String password;
     private String firstName;
     private String lastName;
-
-    // to do zastanowienia, czy moze usuwac/ mocno ingerowac w baze
     private boolean adminAccess;
-
     private boolean deleted;
-
     private LocalDateTime timeDeleted;
+    private Long idToShow;
+    private String login;
     public EmployeeDTO() {}
 
     public EmployeeDTO(Employee employee) {
         this.id = employee.getId();
+        this.idToShow = employee.getIdToShow();
         this.firstName = employee.getFirstName();
         this.lastName = employee.getLastName();
         this.deleted = employee.isDeleted();
         this.timeDeleted = employee.getTimeDeleted();
+        this.login = employee.getLogin();
     }
 
 

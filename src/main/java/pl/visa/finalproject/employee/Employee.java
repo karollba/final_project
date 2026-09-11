@@ -23,7 +23,6 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    // pamietaj o hashu hasla
     private String password;
 
     @Column(unique = true, nullable = false)
@@ -44,4 +43,5 @@ public class Employee {
 
     private boolean deleted;
     private LocalDateTime timeDeleted;
+    private String login;
 }

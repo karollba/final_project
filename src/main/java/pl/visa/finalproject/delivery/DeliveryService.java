@@ -15,17 +15,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class DeliveryService {
-
-    // szukaj po:
-        // data z dnia
-        // id osoby ktora przywiozla
-        // id osoby ktora odebrala
-        // produktach (wybierasz jaki produkt i pokazuje ci dni w ktorych zostal dostarczony
-
     private final DeliveryRepository deliveryRepository;
-
-    // zmienic dostawe moze tylko admin!!!!
-
     public DeliveryService(DeliveryRepository deliveryRepository) {
         this.deliveryRepository = deliveryRepository;
     }
@@ -43,22 +33,13 @@ public class DeliveryService {
         deliveryRepository.save(delivery);
     }
 
-    public List<Delivery> findAll() {
-        return deliveryRepository.findAll();
+    public List<DeliveryDTO> findAll() {
+        return deliveryRepository.findAll().stream().map(DeliveryDTO::new).collect(Collectors.toList());
     }
 
     public void update(Delivery updateDelivery) {
         Delivery existing = deliveryRepository.findById(updateDelivery.getId())
                 .orElseThrow(() -> new RuntimeException("Dostawcy nie znaleziono"));
-
-        // zmiana byla na nazwach bo relacje tworzymy
-//        if (updateDelivery.getSupplierName() != null && !updateDelivery.getSupplierName().isEmpty()) {
-//            existing.setSupplierName(updateDelivery.getSupplierName());
-//        }
-
-//        if (updateDelivery.getCategory() != null && !updateDelivery.getCategory().isEmpty()) {
-//            existing.setCategory(updateDelivery.getCategory());
-//        }
 
         if (updateDelivery.getInvoiceDue() != null) {
             existing.setInvoiceDue(updateDelivery.getInvoiceDue());
@@ -68,11 +49,12 @@ public class DeliveryService {
         deliveryRepository.save(existing);
     }
 
-    public List<Delivery> search(String query) {
+    public List<DeliveryDTO> search(String query) {
         if (query == null || query.isEmpty()) {
             return findAll();
         }
-        return deliveryRepository.search(query);
+        List<Delivery> deliveries = deliveryRepository.search(query);
+        return deliveries.stream().map(DeliveryDTO::new).collect(Collectors.toList());
     }
 
 

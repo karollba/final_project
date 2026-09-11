@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import static org.antlr.v4.runtime.tree.xpath.XPath.findAll;
 
@@ -25,15 +26,18 @@ public class SupplierService {
     }
 
 
-    public List<Supplier> search(String query) {
+    public List<SupplierDTO> search(String query) {
         if (query == null || query.isEmpty()) {
             return findAll();
         }
-        return supplierRepository.search(query);
+        List<Supplier> suppliers = supplierRepository.search(query);
+        return suppliers.stream()
+                .map(SupplierDTO::new)
+                .collect(Collectors.toList());
     }
 
-    public List<Supplier> findAll() {
-        return supplierRepository.findAll();
+    public List<SupplierDTO> findAll() {
+        return supplierRepository.findAll().stream().map(SupplierDTO::new).collect(Collectors.toList());
     }
 
     public Optional<Supplier> get(UUID id) {
