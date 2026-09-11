@@ -54,4 +54,15 @@ public class ProductOrderService {
     public Optional<ProductOrder> findByDelivery(Delivery delivery) {
         return productOrderRepository.findByDelivery(delivery);
     }
+
+
+    public void delete(UUID id) {
+        ProductOrder order = productOrderRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Dostawa nie znaleziona"));
+
+        order.setDeleted(true);
+        order.setTimeDeleted(LocalDateTime.now());
+
+        productOrderRepository.save(order);
+    }
 }

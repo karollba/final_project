@@ -17,12 +17,13 @@ public interface EmployeeRepository extends JpaRepository<Employee, UUID> {
     @Query("select MAX(e.idToShow) from Employee e")
     Optional<Long> findMaxIdToShow();
 
-    @Query("select e from Employee e order by e.idToShow asc")
+    @Query("select e from Employee e where e.deleted = false " +
+            "order by e.idToShow asc")
     List<Employee> findAllOrderByIdToShowAsc();
 
-    @Query("select e from Employee e where " +
+    @Query("select e from Employee e where e.deleted = false and (" +
             "cast(e.idToShow as string) like %:query% or " +
             "lower(e.firstName) like lower(concat('%', :query, '%')) or " +
-            "lower(e.lastName) like lower(concat('%', :query, '%')) ")
+            "lower(e.lastName) like lower(concat('%', :query, '%'))) ")
     List<Employee> search(@Param("query") String query);
 }

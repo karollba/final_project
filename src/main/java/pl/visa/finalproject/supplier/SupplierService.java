@@ -1,7 +1,9 @@
 package pl.visa.finalproject.supplier;
 
 import org.springframework.stereotype.Service;
+import pl.visa.finalproject.product.Product;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -87,6 +89,16 @@ public class SupplierService {
             existing.setStreet(updatedSupplier.getStreet());
         }
         supplierRepository.save(existing);
+    }
+
+    public void delete(UUID id) {
+        Supplier supplier = supplierRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Dostawcy nie znaleziony"));
+
+        supplier.setDeleted(true);
+        supplier.setTimeDeleted(LocalDateTime.now());
+
+        supplierRepository.save(supplier);
     }
 
 

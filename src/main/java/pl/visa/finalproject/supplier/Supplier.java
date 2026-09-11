@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Getter
@@ -30,4 +31,8 @@ public class Supplier {
 
     @Column(unique = true, nullable = false)
     private Long idToShow;
+
+    private boolean deleted;
+    private LocalDateTime timeDeleted;
+
 }

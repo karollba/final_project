@@ -20,9 +20,14 @@ public interface ProductOrderRepository extends JpaRepository<ProductOrder, UUID
 
     Optional<ProductOrder> findByDelivery(Delivery delivery);
 
-    @Query("select p from ProductOrder p where " +
+    @Query("select p from ProductOrder p where p.deleted = false and (" +
             "p.orderNumber Like %:query% or " +
-            "lower(p.supplier.name) like lower(concat('%', :query, '%'))")
+            "lower(p.supplier.name) like lower(concat('%', :query, '%')))")
     List<ProductOrder> search(@Param("query") String query);
+
+    @Override
+    @Query("select p from ProductOrder p where p.deleted = false ")
+    List<ProductOrder> findAll();
+
 
 }

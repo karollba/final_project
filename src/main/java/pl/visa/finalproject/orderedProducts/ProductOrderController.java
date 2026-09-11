@@ -46,6 +46,12 @@ public class ProductOrderController {
         return "ordered/orderList";
     }
 
+    @GetMapping("/delete")
+    public String delete(@RequestParam UUID id) {
+        productOrderService.delete(id);
+        return "redirect:/productorder/list";
+    }
+
     @GetMapping("/search")
     public String search(@RequestParam String query, Model model) {
         model.addAttribute("orders", productOrderService.search(query));

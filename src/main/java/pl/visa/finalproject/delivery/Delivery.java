@@ -12,6 +12,7 @@ import pl.visa.finalproject.product.Product;
 import pl.visa.finalproject.supplier.Supplier;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -24,22 +25,10 @@ import java.util.UUID;
 @Table(name = "delivery")
 public class Delivery {
 
-    // tabela laczona ile i co zamowiono a ile otrzymano (i tru false czy sie zgadzala czy nie)
-
-    // zeby przy wpiswyaniu produktow ktore przyszly (ilosci podkreslalo na czerdwono co sie nie zgadza)
-    // a jesli w ogole danego produktu nie ma to opcja do odzanczenia "braw w dosawie" przy danym produkcie
-
-    // lista produktow ktore przywiozl
-    // wtedy skanujesz barcode wpisujesz ile masz i ci sprawdza czy zgadza sie z tym co zamowione bylo
-
-
-    // przy wpisywaniu nowej dostawy po wybraniu/ wpisaniu id zeby samo sie uzupelnila reszta???
-
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    // tutaj zeby z automatu przekazalo do tabeli tego co jest zalogowany.
     @ManyToOne
     @JoinColumn(name = "accepting_employee_id")
     private Employee acceptingEmployee;
@@ -66,4 +55,7 @@ public class Delivery {
 
     @ManyToOne
     private ProductOrder order;
+
+    private boolean deleted;
+    private LocalDateTime timeDeleted;
 }

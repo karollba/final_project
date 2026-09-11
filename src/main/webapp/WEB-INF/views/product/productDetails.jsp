@@ -46,7 +46,7 @@
                            <td>${batch.product.defaultUnit}</td>
                           <td>${batch.expirationDate}</td>
                           <td>
-                            <a href="${pageContext.request.contextPath}/product/deletebatch?id=${batch.id}" class="btn btn-info btn-sm">Usuń</a>
+                            <a href="${pageContext.request.contextPath}/product/deletebatch?id=${batch.id}&productId=${product.id}" class="btn btn-info btn-sm">Usuń</a>
                           </td>
                     </tr>
                     </c:forEach>

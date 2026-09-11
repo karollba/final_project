@@ -32,10 +32,7 @@ public class EmployeeController {
         return "employee/employeeList";
     }
 
-    // walidacja pamietaj!
-    // hash hasla!
 
-    // dodawanie nowego pracownika
 
     @GetMapping("/add")
     public String addForm(Model model) {
@@ -50,10 +47,6 @@ public class EmployeeController {
     }
 
 
-    // update pracownika
-
-    // przy update nadpisujesz haslo (co prowadzi do np pustgego pola :/) ponadto brak hash hasla yet
-
     @GetMapping("/edit")
     public String editForm(@RequestParam UUID id, Model model) {
         model.addAttribute("employee", employeeService.get(id));
@@ -66,5 +59,9 @@ public class EmployeeController {
         return "redirect:/employee/list";
     }
 
-
+    @GetMapping("/delete")
+    public String delete(@RequestParam UUID id) {
+        employeeService.delete(id);
+        return "redirect:/employee/list";
+    }
 }

@@ -58,6 +58,8 @@
                     </td>
                     <td>
                         <a href="${pageContext.request.contextPath}/productorder/show?id=${order.id}" class="btn btn-sm btn-info"> Szczegóły </a>
+
+                        <a href="delete?id=${order.id}" class="btn btn-info btn-sm">Usuń</a>
                </td>
           </tr>
       </c:forEach>

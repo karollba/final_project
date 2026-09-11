@@ -45,6 +45,12 @@ public class DeliveryController {
         return "delivery/deliveryList";
     }
 
+    @GetMapping("/delete")
+    public String delete(@RequestParam UUID id) {
+        deliveryService.delete(id);
+        return "redirect:/delivery/list";
+    }
+
 
     @GetMapping("/search")
     public String search(@RequestParam String query, Model model) {

@@ -3,8 +3,8 @@ package pl.visa.finalproject.employee;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -39,8 +39,6 @@ public class EmployeeService {
         return employeeRepository.findById(id).orElse(null);
     }
 
-    // a jak z tym remove? bo bedzie ciezko c
-
 
     public void update(Employee updatedEmployee) {
         Employee existing = employeeRepository.findById(updatedEmployee.getId())
@@ -74,6 +72,16 @@ public class EmployeeService {
 
     public boolean exists(UUID id) {
         return employeeRepository.existsById(id);
+    }
+
+    public void delete(UUID id) {
+        Employee employee = employeeRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Pracownik nie znaleziony"));
+
+        employee.setDeleted(true);
+        employee.setTimeDeleted(LocalDateTime.now());
+
+        employeeRepository.save(employee);
     }
 
 }

@@ -15,13 +15,13 @@ import java.util.UUID;
 public interface DeliveryRepository extends JpaRepository<Delivery, UUID> {
 
 
-    @Query("select MAX(e.idToShow) from Delivery e")
+    @Query("select MAX(e.idToShow) from Delivery e ")
     Optional<Long> findMaxIdToShow();
 
     @Query("select max(cast(substring( d.deliveryId, locate('-', d.deliveryId) + 1, 10) as long)) from Delivery d")
     Optional<Long> findMaxDeliveryNumber();
 
-    @Query("select d from Delivery d where " +
+    @Query("select d from Delivery d where d.deleted = false and " +
             "cast(d.deliveryId as string ) like %:query% or " +
             "lower(d.supplier.name) like lower(concat('%', :query, '%')) or " +
             "cast(d.idToShow as string ) like %:query% or " +
@@ -29,4 +29,9 @@ public interface DeliveryRepository extends JpaRepository<Delivery, UUID> {
             "lower(cast(d.paid as string )) like lower(concat('%', :query, '%')) or " +
             "cast(d.dateOfAcceptTheDelivery as string ) like %:query%" )
     List<Delivery> search(@Param("query") String query);
+
+    @Override
+    @Query("select d from Delivery d where d.deleted = false ")
+    List<Delivery> findAll();
+
 }

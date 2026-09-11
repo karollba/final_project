@@ -74,9 +74,9 @@ public class ProductController {
 
 
     @GetMapping("/deletebatch")
-    public String deleteBatch(@RequestParam UUID id) {
+    public String deleteBatch(@RequestParam UUID id, @RequestParam UUID productId) {
         productBatchService.delete(id);
-        return "redirect:/product/details?id=" + id;
+        return "redirect:/product/details?id=" + productId;
         // tutaj musisz dodac plus id
     }
 

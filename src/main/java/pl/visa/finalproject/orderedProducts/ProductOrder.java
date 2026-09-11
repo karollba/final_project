@@ -9,6 +9,7 @@ import pl.visa.finalproject.delivery.Delivery;
 import pl.visa.finalproject.supplier.Supplier;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -36,4 +37,7 @@ public class ProductOrder {
     @ManyToOne
     @JoinColumn(name = "delivery_id")
     private Delivery delivery;
+
+    private boolean deleted;
+    private LocalDateTime timeDeleted;
 }

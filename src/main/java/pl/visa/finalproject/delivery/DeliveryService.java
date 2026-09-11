@@ -6,6 +6,7 @@ import pl.visa.finalproject.product.Product;
 import pl.visa.finalproject.product.ProductDTO;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
@@ -98,5 +99,16 @@ public class DeliveryService {
 
     public boolean exists(UUID id) {
         return deliveryRepository.existsById(id);
+    }
+
+
+    public void delete(UUID id) {
+        Delivery delivery = deliveryRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Dostawa nie znaleziona"));
+
+        delivery.setDeleted(true);
+        delivery.setTimeDeleted(LocalDateTime.now());
+
+        deliveryRepository.save(delivery);
     }
 }

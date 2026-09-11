@@ -68,4 +68,12 @@ public class SupplierController {
         }
         supplierService.update(supplier);
         return "redirect:/supplier/list";
-    }}
+    }
+
+    @GetMapping("/delete")
+    public String delete(@RequestParam UUID id) {
+        supplierService.delete(id);
+        return "redirect:/supplier/list";
+    }
+
+}

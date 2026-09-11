@@ -43,6 +43,5 @@ public class Employee {
     private boolean adminAccess;
 
     private boolean deleted;
-
     private LocalDateTime timeDeleted;
 }
