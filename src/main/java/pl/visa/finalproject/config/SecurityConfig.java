@@ -35,11 +35,8 @@ public class SecurityConfig {
 
     @Bean
     public AuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider(userDetailsService());
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider(employeeDetailsService);
         provider.setPasswordEncoder(passwordEncoder());
-
-        ProviderManager providerManager = new ProviderManager(provider);
-        providerManager.setEraseCredentialsAfterAuthentication(false);
 
         return provider;
     }
@@ -48,7 +45,14 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests(auth -> auth.requestMatchers("/login", "/theme/**", "/css/**", "/js/**", "/error").permitAll().requestMatchers("/employee/add", "/employee/delete").hasAnyAuthority("ROLE_ADMIN").anyRequest().authenticated())
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/login", "/theme/**", "/css/**", "/js/**", "/error")
+                        .permitAll()
+                        .requestMatchers("/employee/add", "/employee/delete")
+                        .hasAnyAuthority("ROLE_ADMIN")
+                        .anyRequest()
+                        .authenticated()
+                )
                 .formLogin(form -> form
                         .loginPage("/login")
                         .defaultSuccessUrl("/delivery/list", true)
@@ -62,16 +66,5 @@ public class SecurityConfig {
         return http.build();
     }
 
-
-    @Bean
-    public UserDetailsService userDetailsService() {
-        UserDetails userDetails = User.withDefaultPasswordEncoder()
-                .username("user")
-                .password("password")
-                .roles("USER")
-                .build();
-
-        return new InMemoryUserDetailsManager(userDetails);
-    }
 
 }

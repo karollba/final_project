@@ -15,6 +15,11 @@ public class EmployeeDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        return  employeeRepository.findByLogin(login).orElseThrow(() -> new UsernameNotFoundException("Nie znaleziono użytkownika o nazwie " + login));
+        System.out.println("szukam uzytkownika " + login+ "=======");
+        return  employeeRepository.findByLogin(login)
+                .orElseThrow(() -> {
+                    System.out.println("nie znaleziono: " + login + "=====");
+                    return new UsernameNotFoundException("Nie znaleziono użytkownika o nazwie " + login);
+                });
     }
 }

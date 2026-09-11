@@ -7,10 +7,10 @@
         <div class="card shadow">
             <div class="card-body">
                 <h3 class="text-center mb-4">Logowanie</h3>
-                <c:if test="${param.error != null">
+                <c:if test="${param.error != null}">
                     <div class="alert alert-danger"> Nieprawidłowy login lub hasło</div>
                 </c:if>
-                <c:if test="${param.logout != null">
+                <c:if test="${param.logout != null}">
                     <div class="alert alert-success"> Wylogowano pomyślnie</div>
                 </c:if>
 
