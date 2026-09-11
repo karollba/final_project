@@ -1,11 +1,14 @@
 package pl.visa.finalproject.delivery;
 
+import jakarta.persistence.EntityManager;
 import jakarta.validation.Valid;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import pl.visa.finalproject.employee.Employee;
 import pl.visa.finalproject.orderedProducts.OrderedProduct;
 import pl.visa.finalproject.orderedProducts.OrderedProductService;
 import pl.visa.finalproject.orderedProducts.ProductOrder;
@@ -71,7 +74,8 @@ public class DeliveryController {
     @PostMapping("/add")
     public String  add(@Valid @ModelAttribute Delivery delivery,
                        BindingResult bindingResult,
-                       @RequestParam UUID orderId) {
+                       @RequestParam UUID orderId,
+                       @AuthenticationPrincipal Employee loggedInEmployee) {
 
         if (bindingResult.hasErrors()) {
             bindingResult.getAllErrors().forEach(error -> System.out.println("Errror" + error.toString()));
@@ -80,6 +84,7 @@ public class DeliveryController {
         ProductOrder order = productOrderService.findById(orderId).orElseThrow();
         delivery.setSupplier(order.getSupplier());
         delivery.setDeliveryId(order.getOrderNumber());
+        delivery.setAcceptingEmployee(loggedInEmployee);
 
         deliveryService.save(delivery);
 
@@ -162,12 +167,14 @@ public class DeliveryController {
 
     @PostMapping("/recievedDelivery")
     public String recievedDelivery(@RequestParam UUID supplierId,
-                                   @RequestParam List<UUID> orderedProductsIds) {
+                                   @RequestParam List<UUID> orderedProductsIds,
+                                   @AuthenticationPrincipal Employee loggedInEmployee) {
         Supplier supplier = supplierService.findById(supplierId).orElseThrow();
 
         Delivery delivery = new Delivery();
         delivery.setSupplier(supplier);
         delivery.setDateOfAcceptTheDelivery(LocalDate.now());
+        delivery.setAcceptingEmployee(loggedInEmployee);
         deliveryService.add(delivery);
 
         for (UUID id : orderedProductsIds) {

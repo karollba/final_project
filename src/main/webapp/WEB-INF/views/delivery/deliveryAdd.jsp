@@ -64,11 +64,6 @@
                 <input name="paid" type="checkbox" id="paid" ${delivery.paid ? 'checked' : ''}>
             </div>
 
-            <div class="form-group">
-                <label for="acceptingEmployeeId">Pracownik przyjmujący </label>
-                <input value="${delivery.acceptingEmployee.idToShow}" name="acceptingEmployeeId" type="text" class="form-control" id="acceptingEmployeeId" placeholder="acceptingEmployeeId">
-            </div>
-
 
              <div class="form-group">
                 <label for="category"> Kategoria </label>

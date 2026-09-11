@@ -1,5 +1,6 @@
 package pl.visa.finalproject.config;
 
+import jakarta.servlet.DispatcherType;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -45,19 +46,37 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+            .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/login", "/theme/**", "/css/**", "/js/**", "/error")
-                        .permitAll()
-                        .requestMatchers("/employee/add", "/employee/delete")
-                        .hasAnyAuthority("ROLE_ADMIN")
-                        .anyRequest()
-                        .authenticated()
-                )
-                .formLogin(form -> form
-                        .loginPage("/login")
-                        .defaultSuccessUrl("/delivery/list", true)
-                        .permitAll()
-                )
+                    .dispatcherTypeMatchers(
+                            DispatcherType.FORWARD,
+                            DispatcherType.ERROR).permitAll()
+                    .requestMatchers(
+                            "/login",
+                            "/theme/**",
+                            "/css/**",
+                            "/js/**",
+                            "/error").permitAll()
+
+                // tylko admin
+                  .requestMatchers("/employee/**").hasAuthority("ROLE_ADMIN")
+                  .requestMatchers("/supplier/add", "/supplier/edit", "/supplier/delete").hasAnyAuthority("ROLE_ADMIN")
+
+                  // admin + employee
+                  .requestMatchers("/delivery/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_EMPLOYEE")
+                  .requestMatchers("/productorder/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_EMPLOYEE")
+                  .requestMatchers("/ordered/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_EMPLOYEE")
+
+                  .requestMatchers("/product/list", "/product/details", "/product/search" ).hasAnyAuthority("ROLE_ADMIN", "ROLE_EMPLOYEE")
+                  .requestMatchers("/product/edit", "/product/add", "/product/delete").hasAuthority("ROLE_ADMIN")
+
+                  .requestMatchers("/supplier/list", "/supplier/search").hasAnyAuthority("ROLE_ADMIN", "ROLE_EMPLOYEE")
+                  .anyRequest().authenticated())
+
+              .formLogin(form -> form
+                .loginPage("/login")
+                .defaultSuccessUrl("/delivery/list", true)
+                .permitAll())
                 .logout(logout -> logout.logoutUrl("/logout")
                         .logoutSuccessUrl("/login?logout")
                         .permitAll())

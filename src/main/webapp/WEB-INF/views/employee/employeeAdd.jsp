@@ -32,6 +32,12 @@
                 <input value="${employee.lastName}" name="lastName" type="text" class="form-control" id="lastName" placeholder="lastName">
             </div>
 
+
+            <div class="form-group">
+                <label for="login">Nazwa użytkownika</label>
+                <input value="${employee.login}" name="login" type="text" class="form-control" id="login" placeholder="login">
+            </div>
+
             <div class="form-group">
                 <label for="password">Hasło</label>
                 <input name="password" type="password" class="form-control" id="password" placeholder="password">
