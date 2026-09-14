@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ include file="../header.jsp" %>
 
 
@@ -19,28 +20,30 @@
 
   <h1>Dodaj pracownika</h1>
 
-       <form method="post" action="add">
-
-
+       <form method="post" action="${pageContext.request.contextPath}/employee/add">
             <div class="form-group">
                 <label for="firstName">Imię</label>
                 <input value="${employee.firstName}" name="firstName" type="text" class="form-control" id="firstName" placeholder="firstName">
+                <form:errors path="firstName" cssClass="text-danger"/>
             </div>
 
             <div class="form-group">
                 <label for="lastName">Nazwisko</label>
                 <input value="${employee.lastName}" name="lastName" type="text" class="form-control" id="lastName" placeholder="lastName">
-            </div>
+                <form:errors path="lastName" cssClass="text-danger"/>
+           </div>
 
 
             <div class="form-group">
                 <label for="login">Nazwa użytkownika</label>
                 <input value="${employee.login}" name="login" type="text" class="form-control" id="login" placeholder="login">
+               <form:errors path="login" cssClass="text-danger"/>
             </div>
 
             <div class="form-group">
                 <label for="password">Hasło</label>
                 <input name="password" type="password" class="form-control" id="password" placeholder="password">
+                <form:errors path="password" cssClass="text-danger"/>
             </div>
 
             <div class="form-group">

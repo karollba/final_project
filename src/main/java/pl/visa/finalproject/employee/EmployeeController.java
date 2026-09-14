@@ -1,9 +1,11 @@
 package pl.visa.finalproject.employee;
 
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.eclipse.tags.shaded.org.apache.xpath.operations.Mod;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -41,7 +43,10 @@ public class EmployeeController {
     }
 
     @PostMapping("/add")
-    public String add(Employee employee) {
+    public String add(@Valid @ModelAttribute Employee employee, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "employee/employeeAdd";
+        }
         employeeService.add(employee);
        return "redirect:/employee/list";
     }
@@ -54,7 +59,10 @@ public class EmployeeController {
     }
 
     @PostMapping("/edit")
-    public String edit(Employee employee) {
+    public String edit(@Valid @ModelAttribute Employee employee, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "employee/employeeEdit";
+        }
         employeeService.update(employee);
         return "redirect:/employee/list";
     }
