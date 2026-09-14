@@ -51,6 +51,6 @@ public class OrderedProduct {
     private ProductOrder productOrder;
 
     @NotBlank(message = "Podaj termin ważności!")
-    @Future
+    @Future(message = "Termin musi być w przyszłości!")
     private LocalDate expirationDate;
 }

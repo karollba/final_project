@@ -117,19 +117,7 @@ public class DeliveryController {
         return "redirect:/delivery/list";
     }
 
-    @InitBinder
-    public void initBinder(WebDataBinder binder) {
-        binder.registerCustomEditor(Supplier.class, new PropertyEditorSupport() {
-            @Override
-            public void setAsText(String text) {
-                if (text != null && !text.isEmpty()) {
-                    UUID uuid = UUID.fromString(text);
-                    Supplier supplier = supplierService.findById(uuid).orElse(null);
-                    setValue(supplier);
-                }
-            }
-        });
-    }
+
 
 
     // lista produktow
@@ -143,7 +131,7 @@ public class DeliveryController {
 
 
     @PostMapping("/addwithitems")
-    public String addOrderWithItems(@RequestParam UUID supplierId,
+    public String addOrderWithItems(@Valid @ModelAttribute @RequestParam UUID supplierId,
                                     @RequestParam List<UUID> productsIds,
                                     @RequestParam List<Double> orderQuantities, Model model) {
 
@@ -199,6 +187,22 @@ public class DeliveryController {
             orderedProductService.assignToDelivery(id, delivery);
         }
         return "redirect:/orderedproduct/check?deliveryId=" + delivery.getIdToShow();
+    }
+
+
+    // zamienia string na obiekt aby mozna bylo go uzyc dalej (dropdown z lista dostawcow)
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.registerCustomEditor(Supplier.class, new PropertyEditorSupport() {
+            @Override
+            public void setAsText(String text) {
+                if (text != null && !text.isEmpty()) {
+                    UUID uuid = UUID.fromString(text);
+                    Supplier supplier = supplierService.findById(uuid).orElse(null);
+                    setValue(supplier);
+                }
+            }
+        });
     }
 
 }

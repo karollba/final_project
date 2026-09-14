@@ -3,6 +3,7 @@ package pl.visa.finalproject.employee;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,8 +31,6 @@ import java.util.UUID;
 
 public class Employee implements UserDetails {
 
-//public class Employee {
-
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
@@ -43,16 +42,19 @@ public class Employee implements UserDetails {
     private Long idToShow;
 
     @NotBlank(message = "Pole imię nie może być puste")
-    @Min(value = 4, message = "Imię musi mieć minim 4 znaki")
+    @Size(min = 4, message = "Imię musi mieć minim 4 znaki")
     private String firstName;
 
     @NotBlank(message = "Pole nazwisko nie może być puste")
-    @Min(value = 4, message = "Nazwisko musi mieć min 4 znaki!")
+    @Size(min = 4, message = "Nazwisko musi mieć min 4 znaki!")
     private String lastName;
 
     private boolean adminAccess;
     private boolean deleted;
     private LocalDateTime timeDeleted;
+
+    @NotBlank(message = "Login jest wymagany")
+    @Size(min = 3, max = 20, message = "Login musi mieć od 3 do 20 znaków")
     private String login;
 
     @Override
@@ -83,5 +85,9 @@ public class Employee implements UserDetails {
         return !deleted;
     }
 
+    @Override
+    public boolean isAccountNonLocked(){
+        return !deleted;
+    }
 
 }

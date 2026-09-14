@@ -3,6 +3,7 @@ package pl.visa.finalproject.product;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,7 +34,7 @@ public class Product {
     private boolean availability;
 
     @Min(value = 0, message = "Ilość nie może być ujemna!")
-    @NotBlank
+    @NotBlank(message = "Podaj ilość!")
     private double quantity;
 
     private boolean deleted;
@@ -45,6 +46,7 @@ public class Product {
     private String barcode;
 
     @Enumerated(EnumType.STRING)
+    @NotNull(message = "Kategoria jest wymagana!")
     private ProductCategory category;
 
     @Enumerated(EnumType.STRING)

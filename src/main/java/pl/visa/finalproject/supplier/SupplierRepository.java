@@ -27,4 +27,7 @@ public interface SupplierRepository extends JpaRepository<Supplier, UUID> {
     @Query("select s from Supplier s where s.deleted = false ")
     List<Supplier> findAll();
 
+
+    Optional<Supplier> findByNIP(Long nip);
+
 }

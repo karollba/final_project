@@ -2,6 +2,9 @@ package pl.visa.finalproject.supplier;
 
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,9 +25,20 @@ public class Supplier {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @NotBlank(message = "Nazwa dostawcy jest wymagana!")
     private String name;
+
+    @NotNull(message = "NIP jest wymagany!")
+    @Digits(integer = 10, fraction = 0, message = "NIP musi mieć dokładnie 10 cyfr")
+    @Column(unique = true)
     private Long NIP;
+
+    @NotNull(message = "REGON jest wymagany!")
+    @Digits(integer = 9, fraction = 0, message = "REGON musi mieć 9 cyfr")
+    @Column(unique = true)
     private Long REGON;
+
+
     private String street;
     private String city;
     private String postalCode;
