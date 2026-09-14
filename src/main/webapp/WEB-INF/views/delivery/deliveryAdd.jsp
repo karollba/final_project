@@ -46,6 +46,12 @@
             </div>
 
             <div class="form-group">
+                <label for="invoiceId">Numer Faktury</label>
+                <form:input path="invoiceId" type="number" cssClass="form-control" id="invoiceId"/>
+                <form:errors path="invoiceId" cssClass="text-danger"/>
+            </div>
+
+            <div class="form-group">
                 <label for="paid">Zapłacono</label>
                 <form:checkbox path="paid" id="paid"/>
             </div>
