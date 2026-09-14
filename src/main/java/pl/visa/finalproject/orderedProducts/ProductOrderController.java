@@ -79,11 +79,10 @@ public class ProductOrderController {
     }
 
     @PostMapping("/add")
-    public String add(@RequestParam UUID supplierId,
-                      @RequestParam List<UUID> productsIds,
-                      @RequestParam List<Double> orderedQuantities,
+    public String add(@RequestParam(required = false) UUID supplierId,
+                      @RequestParam(required = false) List<UUID> productsIds,
+                      @RequestParam(required = false) List<Double> orderedQuantities,
                       Model model) {
-        System.out.println("wchodze do add ==================");
 
         if (supplierId == null) {
             model.addAttribute("error", "Wybierz dostawcę!");

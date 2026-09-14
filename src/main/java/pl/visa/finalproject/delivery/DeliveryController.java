@@ -75,10 +75,17 @@ public class DeliveryController {
     @PostMapping("/add")
     public String  add(@Valid @ModelAttribute Delivery delivery,
                        BindingResult bindingResult,
-                       @RequestParam UUID orderId,
+                       @RequestParam(required = false) UUID orderId,
                        @AuthenticationPrincipal Employee loggedInEmployee, Model model) {
 
 
+        if (orderId == null) {
+            model.addAttribute("error", "Wybierz zamówienie!");
+            model.addAttribute("suppliers", supplierService.findAll());
+            model.addAttribute("deliveryCategories", DeliveryCategory.values());
+            model.addAttribute("orders", productOrderService.findAll());
+            return "delivery/deliveryAdd";
+        }
         if (bindingResult.hasErrors()) {
             model.addAttribute("suppliers", supplierService.findAll());
             model.addAttribute("deliveryCategories", DeliveryCategory.values());
