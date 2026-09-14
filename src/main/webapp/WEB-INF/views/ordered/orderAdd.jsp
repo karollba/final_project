@@ -1,7 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ include file="../header.jsp" %>
 
    <!-- Begin Page Content -->
@@ -50,11 +49,9 @@
                             <td>
                                 <input type="number" step="0.1" name="orderedQuantities" class="form-control">
                             </td>
-                            <sec:authorize access="hasAuthority('ROLE_ADMIN')">
                                 <td>
                                     <button type="button" class="btn btn-danger btn-sm removeRow"> Usuń </button>
                                 </td>
-                            </sec:authorize>
 
                                 </tr>
                     </tbody>

@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ include file="../header.jsp" %>
 
    <!-- Begin Page Content -->
@@ -58,8 +59,11 @@
                       <td>${delivery.deliveryIntact}</td>
                       <td>${delivery.category}</td>
                       <td>
-                        <a href="edit?id=${delivery.id}" class="btn btn-info btn-sm">Edytuj</a>
-                        <a href="delete?id=${delivery.id}" class="btn btn-info btn-sm">Usuń</a>
+
+                        <sec:authorize access="hasAuthority('ROLE_ADMIN')">
+                            <a href="edit?id=${delivery.id}" class="btn btn-info btn-sm">Edytuj</a>
+                            <a href="delete?id=${delivery.id}" class="btn btn-info btn-sm">Usuń</a>
+                        </sec:authorize>
                         <a href="${pageContext.request.contextPath}/delivery/showorder?deliveryId=${delivery.id}" class="btn btn-info btn-sm">Szczegóły</a>
                       </td>
                   </tr>
