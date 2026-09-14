@@ -76,20 +76,24 @@
                     <span>Dostawy</span></a>
             </li>
 
-            <!-- Nav Item - Pracownicy -->
-            <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/employee/list">
-                    <i class="fas fa-fw fa-users"></i>
-                    <span>Pracownicy</span></a>
-            </li>
 
+         <!-- Nav Item - Pracownicy -->
+         <sec:authorize access="hasAuthority('ROLE_ADMIN')">
+         <li class="nav-item">
+             <a class="nav-link" href="${pageContext.request.contextPath}/employee/list">
+                 <i class="fas fa-fw fa-users"></i>
+                 <span>Pracownicy</span></a>
+         </li>
+          </sec:authorize>
 
-           <!-- Nav Item - Dostawcy -->
-            <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/supplier/list">
-                    <i class="fas fa-fw fa-handshake"></i>
-                    <span>Dostawcy</span></a>
-            </li>
+        <!-- Nav Item - Dostawcy -->
+        <sec:authorize access="hasAuthority('ROLE_ADMIN')">
+         <li class="nav-item">
+             <a class="nav-link" href="${pageContext.request.contextPath}/supplier/list">
+                 <i class="fas fa-fw fa-handshake"></i>
+                 <span>Dostawcy</span></a>
+         </li>
+         </sec:authorize>
 
 
 

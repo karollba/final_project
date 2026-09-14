@@ -30,18 +30,15 @@ public class Employee implements UserDetails {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @NotBlank(message = "Podaj hasło!")
     private String password;
 
     @Column(unique = true, nullable = false)
     private Long idToShow;
 
     @NotBlank(message = "Pole imię nie może być puste")
-    @Size(min = 4, message = "Imię musi mieć minim 4 znaki")
     private String firstName;
 
     @NotBlank(message = "Pole nazwisko nie może być puste")
-    @Size(min = 4, message = "Nazwisko musi mieć min 4 znaki!")
     private String lastName;
 
     private boolean adminAccess;

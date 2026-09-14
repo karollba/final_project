@@ -23,6 +23,11 @@
     </div>
 
 <div class="card-body">
+
+<c:if test="4{not empty error}">
+    <div class="alert alert-danger">${error}</div>
+</c:if>
+
 <form method="post" action="edit">
 
 <input type="hidden" name="id" value="${employee.id}"/>
@@ -36,6 +41,11 @@
             <div class="form-group">
                 <label for="lastName">Nazwisko</label>
                 <input value="${employee.lastName}" name="lastName" type="text" class="form-control" id="lastName" placeholder="Nazwisko">
+            </div>
+
+            <div class="form-group">
+                <label for="login">Login</label>
+                <input value="${employee.login}"  name="login" type="text" class="form-control" id="login" placeholder="Login">
             </div>
 
             <div class="form-group">

@@ -61,6 +61,7 @@ public class EmployeeController {
     @PostMapping("/edit")
     public String edit(@Valid @ModelAttribute Employee employee, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
+            bindingResult.getAllErrors().forEach(objectError -> System.out.println("Błąd: " + objectError.toString()));
             return "employee/employeeEdit";
         }
         employeeService.update(employee);
