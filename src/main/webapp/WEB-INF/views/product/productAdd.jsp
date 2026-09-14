@@ -41,13 +41,13 @@
 
             <div class="form-group">
                 <label for="barcode">Kod kreskowy</label>
-                <form:input path="barcode" cssClass="form-control" id="barcode" placeholder="barcode"/>
+                <form:input path="barcode" cssClass="form-control" id="barcode" placeholder="Kod kreskowy"/>
                 <form:errors path="barcode" cssClass="text-danger"/>
             </div>
 
             <div class="form-group">
                 <label for="name">Nazwa</label>
-                <form:input path="name" cssClass="form-control" id="name" placeholder="name"/>
+                <form:input path="name" cssClass="form-control" id="name" placeholder="Nazwa"/>
                 <form:errors path="name" cssClass="text-danger"/>
             </div>
 
@@ -75,7 +75,7 @@
 
             <div class="form-group">
                 <label for="quantity">Ilość</label>
-                <form:input path="quantity" type="number" min="0" cssClass="form-control" id="quantity" placeholder="quantity"/>
+                <form:input path="quantity" type="number" min="0" cssClass="form-control" id="quantity" placeholder="Ilość"/>
                 <form:errors path="quantity" cssClass="text-danger"/>
             </div>
 

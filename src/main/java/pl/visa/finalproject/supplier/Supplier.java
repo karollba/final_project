@@ -10,6 +10,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.pl.NIP;
+import org.hibernate.validator.constraints.pl.REGON;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -31,13 +33,13 @@ public class Supplier {
 
     @NotNull(message = "NIP jest wymagany!")
     @Column(unique = true)
-    @Digits(integer = 10, fraction = 0, message = "NIP musi mieć dokładnie 10 cyfr")
-    private Long NIP;
+    @NIP(message = "Niepoprawny numer NIP")
+    private String NIP;
 
     @NotNull(message = "REGON jest wymagany!")
     @Column(unique = true)
-    @Pattern(regexp = "\\d{9}|\\d{14}", message = "REGON musi mieć 9 cyfr")
-    private Long REGON;
+    @REGON(message = "Niepoprawny numer REGON")
+    private String REGON;
 
     @NotBlank(message = "Ulica jest wymagana!")
     private String street;

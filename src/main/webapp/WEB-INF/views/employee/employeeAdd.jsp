@@ -36,7 +36,7 @@
 
             <div class="form-group">
                 <label for="login">Nazwa użytkownika</label>
-                <input value="${employee.login}" name="login" type="text" class="form-control" id="login" placeholder="l=Login">
+                <input value="${employee.login}" name="login" type="text" class="form-control" id="login" placeholder="Login">
                <form:errors path="login" cssClass="text-danger"/>
             </div>
 

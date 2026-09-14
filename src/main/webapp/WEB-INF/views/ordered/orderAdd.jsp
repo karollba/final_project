@@ -1,5 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ include file="../header.jsp" %>
 
@@ -14,6 +13,13 @@
 
               <div class="card shadow mb-4">
                 <div class="card-body">
+
+                    <c:if test="${not empty error}">
+                        <div class="alert alert-danger">
+                            ${error}
+                        </div>
+                    </c:if>
+
                     <form method="post" action="${pageContext.request.contextPath}/productorder/add" id="orderForm">
 
                     <div class="form-group">

@@ -1,5 +1,6 @@
 package pl.visa.finalproject.orderedProducts;
 
+import org.eclipse.tags.shaded.org.apache.xpath.operations.Mod;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -80,7 +81,32 @@ public class ProductOrderController {
     @PostMapping("/add")
     public String add(@RequestParam UUID supplierId,
                       @RequestParam List<UUID> productsIds,
-                      @RequestParam List<Double> orderedQuantities) {
+                      @RequestParam List<Double> orderedQuantities,
+                      Model model) {
+        System.out.println("wchodze do add ==================");
+
+        if (supplierId == null) {
+            model.addAttribute("error", "Wybierz dostawcę!");
+            model.addAttribute("suppliers", supplierService.findAll());
+            model.addAttribute("products", productService.findAll());
+            return "ordered/orderAdd";
+        }
+
+        if (productsIds.size() != orderedQuantities.size()) {
+            model.addAttribute("error", "Błąd danych formularza!");
+            model.addAttribute("suppliers", supplierService.findAll());
+            model.addAttribute("products", productService.findAll());
+            return "ordered/orderAdd";
+        }
+
+        for (Double quantity : orderedQuantities) {
+            if (quantity == null || quantity <= 0) {
+                model.addAttribute("error", "Ilość musi być większa od 0!");
+                model.addAttribute("suppliers", supplierService.findAll());
+                model.addAttribute("products", productService.findAll());
+                return "ordered/orderAdd";
+            }
+        }
 
         Supplier supplier = supplierService.findById(supplierId).orElseThrow();
         ProductOrder order = productOrderService.createOrder(supplier);

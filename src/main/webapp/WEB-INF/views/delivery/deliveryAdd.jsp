@@ -1,12 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ include file="../header.jsp" %>
 
 
 <div class="container-fluid">
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">deliveryCRUD</h1>
-    <a href="<c:url value='/delivery/list'/>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+    <a href="${pageContext.request.contextPath}/delivery/list" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
       <i class="fas fa-plus fa-sm text-white-50"></i> Lista dostaw</a>
   </div>
 
@@ -26,74 +27,56 @@
       </c:if>
 
 
-       <form method="post" action="add">
-        <form:errors path="quantity" cssClass="text-danger"/>
+       <form:form method="post" action="${pageContext.request.contextPath}/delivery/add" modelAttribute="delivery">
 
-
-            <div clas="form-group">
+            <div class="form-group">
                <label for="orderNumber">Zamówienie</label>
-               <select name="orderId" class="form-control" id="orderNumber" onchange="fillSupplier(this)">
-                   <option value=""> wybierz</option>
+               <select name="orderId" class="form-control" id="orderNumber">
+                   <option value="">wybierz</option>
                    <c:forEach var="o" items="${orders}">
-                      <option value="${o.id}" data-supplier="${o.supplier.id}">${o.orderNumber}</option>
+                      <option value="${o.id}">${o.orderNumber}</option>
                    </c:forEach>
                </select>
            </div>
-
-
-
-
-           <div clas="form-group">
-               <label for="supplier">Dostawca</label>
-               <select name="supplier.id" class="form-control" id="supplier">
-                   <option value=""> wybierz</option>
-                   <c:forEach var="s" items="${suppliers}">
-                      <option value="${s.id}" >${s.name}</option>
-                   </c:forEach>
-               </select>
-           </div>
-
 
             <div class="form-group">
                 <label for="invoiceDue">Płatność do</label>
-                <input value="${delivery.invoiceDue}" name="invoiceDue" type="date" class="form-control" id="invoiceDue" placeholder="invoiceDue">
+                <form:input path="invoiceDue" type="date" cssClass="form-control" id="invoiceDue"/>
+                <form:errors path="invoiceDue" cssClass="text-danger"/>
             </div>
 
-             <div class="form-group">
+            <div class="form-group">
                 <label for="paid">Zapłacono</label>
-                <input name="paid" type="checkbox" id="paid" ${delivery.paid ? 'checked' : ''}>
+                <form:checkbox path="paid" id="paid"/>
             </div>
 
-
-             <div class="form-group">
-                <label for="category"> Kategoria </label>
-                    <select name="category" class="form-control" id="category">
-                    <option value=""> wybierz </option>
-                        <c:forEach var="cat" items="${deliveryCategories}">
-                          <option value="${cat}">${cat}</option>
+            <div class="form-group">
+                <label for="category">Kategoria</label>
+                <form:select path="category" cssClass="form-control" id="category">
+                    <form:option value="">wybierz</form:option>
+                    <c:forEach var="cat" items="${deliveryCategories}">
+                        <form:option value="${cat}">${cat}</form:option>
                     </c:forEach>
-                    </select>
-                </div>
-
-
-
+                </form:select>
+                <form:errors path="category" cssClass="text-danger"/>
+            </div>
 
             <div class="form-group">
                 <label for="deliveryIntact">Dostawa nienaruszona</label>
-                <input name="deliveryIntact" type="checkbox" id="deliveryIntact" ${delivery.deliveryIntact ? 'checked' : ''}>
+                <form:checkbox path="deliveryIntact" id="deliveryIntact"/>
             </div>
 
             <div class="form-group">
                 <label for="dateOfAcceptTheDelivery">Data przyjęcia dostawy</label>
-                <input value="${delivery.dateOfAcceptTheDelivery}" name="dateOfAcceptTheDelivery" type="date" class="form-control" id="dateOfAcceptTheDelivery" placeholder="dateOfAcceptTheDelivery">
+                <form:input path="dateOfAcceptTheDelivery" type="date" cssClass="form-control" id="dateOfAcceptTheDelivery"/>
+                <form:errors path="dateOfAcceptTheDelivery" cssClass="text-danger"/>
             </div>
-
 
             <button type="submit" class="btn btn-primary">Dodaj</button>
 
-             </form>
-           </div>
-               <a href="<c:url value='/delivery/list'/>" class="btn btn-primary"> Strona główna</a>
-         </div>
-       </div>
+       </form:form>
+    </div>
+    <a href="${pageContext.request.contextPath}/delivery/list" class="btn btn-primary">Strona główna</a>
+ </div>
+</div>
 <%@ include file="../footer.jsp" %>

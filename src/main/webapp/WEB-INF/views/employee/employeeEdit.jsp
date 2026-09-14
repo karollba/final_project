@@ -30,17 +30,17 @@
 
             <div class="form-group">
                 <label for="firstName">Imię</label>
-                <input value="${employee.firstName}" name="firstName" type="text" class="form-control" id="firstName" placeholder="firstName">
+                <input value="${employee.firstName}" name="firstName" type="text" class="form-control" id="firstName" placeholder="Imię">
             </div>
 
             <div class="form-group">
                 <label for="lastName">Nazwisko</label>
-                <input value="${employee.lastName}" name="lastName" type="text" class="form-control" id="lastName" placeholder="lastName">
+                <input value="${employee.lastName}" name="lastName" type="text" class="form-control" id="lastName" placeholder="Nazwisko">
             </div>
 
             <div class="form-group">
                 <label for="password">Hasło</label>
-                <input name="password" type="password" class="form-control" id="password" placeholder="password">
+                <input name="password" type="password" class="form-control" id="password" placeholder="Hasło">
             </div>
 
             <div class="form-group">

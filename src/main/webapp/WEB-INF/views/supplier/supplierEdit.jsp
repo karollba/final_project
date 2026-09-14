@@ -30,34 +30,34 @@
 
             <div class="form-group">
                 <label for="name">Nazwa dostawcy </label>
-                <input value="${supplier.name}" name="name" type="text" class="form-control" id="name" placeholder="name">
+                <input value="${supplier.name}" name="name" type="text" class="form-control" id="name" placeholder="Nazwa">
             </div>
 
             <div class="form-group">
                 <label for="REGON">REGON</label>
-                <input value="${supplier.REGON}" name="REGON" type="number" min="0" class="form-control" id="REGON" placeholder="REGON">
+                <input value="${supplier.REGON}" name="REGON" type="text" min="0" class="form-control" id="REGON" placeholder="REGON">
             </div>
 
 
             <div class="form-group">
                 <label for="NIP">NIP</label>
-                <input value="${supplier.NIP}" name="NIP" type="number" min="0" class="form-control" id="NIP" placeholder="NIP">
+                <input value="${supplier.NIP}" name="NIP" type="text" min="0" class="form-control" id="NIP" placeholder="NIP">
             </div>
 
 
             <div class="form-group">
                 <label for="postalCode">Kod pocztowy</label>
-                <input value="${supplier.postalCode}" name="postalCode" type="text" class="form-control" id="postalCode" placeholder="postalCode">
+                <input value="${supplier.postalCode}" name="postalCode" type="text" class="form-control" id="postalCode" placeholder="Kod pocztowy">
             </div>
 
             <div class="form-group">
                 <label for="street">Ulica</label>
-                <input value="${supplier.street}" name="street" type="text" class="form-control" id="street" placeholder="street">
+                <input value="${supplier.street}" name="street" type="text" class="form-control" id="street" placeholder="Ulica">
             </div>
 
              <div class="form-group">
                 <label for="city">Miejscowosc</label>
-                <input value="${supplier.city}" name="city" type="text" class="form-control" id="city" placeholder="city">
+                <input value="${supplier.city}" name="city" type="text" class="form-control" id="city" placeholder="Miejscowość">
             </div>
 
 

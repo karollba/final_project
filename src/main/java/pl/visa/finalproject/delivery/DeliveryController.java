@@ -78,6 +78,7 @@ public class DeliveryController {
                        @RequestParam UUID orderId,
                        @AuthenticationPrincipal Employee loggedInEmployee, Model model) {
 
+
         if (bindingResult.hasErrors()) {
             model.addAttribute("suppliers", supplierService.findAll());
             model.addAttribute("deliveryCategories", DeliveryCategory.values());
@@ -108,6 +109,7 @@ public class DeliveryController {
     public String editForm(@RequestParam UUID id, Model model) {
         Delivery delivery = deliveryService.findById(id).orElseThrow();
         model.addAttribute("delivery", delivery);
+        model.addAttribute("deliveryCategories", DeliveryCategory.values());
         return "delivery/deliveryEdit";
     }
 

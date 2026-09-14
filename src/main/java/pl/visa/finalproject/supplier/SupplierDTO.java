@@ -13,8 +13,8 @@ import java.util.UUID;
 public class SupplierDTO {
     private UUID id;
     private String name;
-    private Long NIP;
-    private Long REGON;
+    private String NIP;
+    private String REGON;
     private String street;
     private String city;
     private String postalCode;

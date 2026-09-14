@@ -31,37 +31,37 @@
 
             <div class="form-group">
                 <label for="name">Nazwa dostawcy</label>
-                <form:input path="name" cssClass="form-control" id="name" placeholder="name"/>
+                <form:input path="name" cssClass="form-control" id="name" placeholder="Nazwa"/>
                 <form:errors path="name" cssClass="text-danger"/>
             </div>
 
             <div class="form-group">
                 <label for="REGON">REGON</label>
-                <form:input path="REGON" type="number" min="0" cssClass="form-control" id="REGON" placeholder="REGON"/>
+                <form:input path="REGON" type="text"  cssClass="form-control" id="REGON" placeholder="REGON"/>
                 <form:errors path="REGON" cssClass="text-danger"/>
             </div>
 
             <div class="form-group">
                 <label for="NIP">NIP</label>
-                <form:input path="NIP" type="number" min="0" cssClass="form-control" id="NIP" placeholder="NIP"/>
+                <form:input path="NIP" type="text" cssClass="form-control" id="NIP" placeholder="NIP"/>
                 <form:errors path="NIP" cssClass="text-danger"/>
             </div>
 
             <div class="form-group">
                 <label for="postalCode">Kod pocztowy</label>
-                <form:input path="postalCode" cssClass="form-control" id="postalCode" placeholder="postalCode"/>
+                <form:input path="postalCode" cssClass="form-control" id="postalCode" placeholder="Kod pocztowy"/>
                 <form:errors path="postalCode" cssClass="text-danger"/>
             </div>
 
             <div class="form-group">
                 <label for="street">Ulica</label>
-                <form:input path="street" cssClass="form-control" id="street" placeholder="street"/>
+                <form:input path="street" cssClass="form-control" id="street" placeholder="Ulica"/>
                 <form:errors path="street" cssClass="text-danger"/>
             </div>
 
              <div class="form-group">
                 <label for="city">Miejscowość</label>
-                <form:input path="city" cssClass="form-control" id="city" placeholder="city"/>
+                <form:input path="city" cssClass="form-control" id="city" placeholder="Miejscowość"/>
                 <form:errors path="city" cssClass="text-danger"/>
             </div>
 
