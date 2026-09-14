@@ -67,16 +67,20 @@ public class DeliveryService {
     }
 
     public void save(Delivery delivery) {
+        try {
+            System.out.println("Wchodze do save, id to show = " + delivery.getIdToShow());
         if (delivery.getIdToShow() == null) {
-            Optional<Long> maxId = deliveryRepository.findMaxIdToShow();
-
-            if (maxId.isEmpty()) {
-                delivery.setIdToShow(1L);
-            } else {
-                delivery.setIdToShow(maxId.orElse(null) + 1);
-            }
+            Long maxId = deliveryRepository.findMaxIdToShow().orElse(null);
+            delivery.setIdToShow((maxId != null ? maxId : 0L) + 1);
         }
+            System.out.println("zaraz reository.save");
+
         deliveryRepository.save(delivery);
+            System.out.println("repositorysave zakonczone");
+        } catch (Exception e) {
+            System.out.println("Blad " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     public boolean exists(UUID id) {

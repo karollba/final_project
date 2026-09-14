@@ -49,8 +49,6 @@
                   <td>
                     <a href="edit?id=${employee.id}" class="btn btn-info btn-sm">Edit</a>
                     <a href="delete?id=${employee.id}" class="btn btn-info btn-sm">Usuń</a>
-                    <a href="show?id=${employee.id}" class="btn btn-info btn-sm">Pokaż</a>
-                    <a href="${pageContext.request.contextPath}/employee/show?id=${employee.id}" class="btn btn-sm btn-info"> Szczegóły </a>
                   </td>
             </tr>
             </c:forEach>

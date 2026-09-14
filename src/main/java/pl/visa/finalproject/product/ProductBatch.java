@@ -39,7 +39,6 @@ public class ProductBatch {
     private LocalDate expirationDate;
 
     @Min(value = 0, message = "Ilość nie może być ujemna!")
-    @NotBlank
     private double quantity;
     private LocalDateTime deliveryDate;
 

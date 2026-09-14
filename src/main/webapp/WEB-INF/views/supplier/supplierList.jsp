@@ -57,7 +57,6 @@
                           <td>
                             <a href="edit?id=${supplier.id}" class="btn btn-info btn-sm">Edit</a>
                             <a href="delete?id=${supplier.id}" class="btn btn-info btn-sm">Usuń</a>
-                            <a href="show?id=${supplier.id}" class="btn btn-info btn-sm">Pokaż</a>
                           </td>
                     </tr>
                     </c:forEach>
