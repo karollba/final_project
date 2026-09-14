@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ include file="../header.jsp" %>
 
 
@@ -17,7 +18,7 @@
 
  <div class="card-body">
 
-       <form method="post" action="${pageContext.request.contextPath}/product/addbatch" id="orderForm">
+       <form:form method="post" action="${pageContext.request.contextPath}/product/addbatch" modelAttribute="batch">
 
            <div clas="form-group">
                <label for="product">Produkt</label>
@@ -27,24 +28,23 @@
                       <option value="${p.id}" >${p.name}</option>
                    </c:forEach>
                </select>
+               <form:errors path="product" cssClass="text-danger"/>
            </div>
 
 
             <div class="form-group">
                 <label for="quantity"> Ilość </label>
-                <input type="number" step="0.1" name="quantity" class="form-control" id="quantity" placeholder="Ilość">
+                <form:input path="quantity" type="number" step="0.1" name="quantity" cssClass="form-control" id="quantity" placeholder="Ilość">
+                <form:errors path="quantity" cssClass="text-danger"/>
             </div>
 
             <div class="form-group">
                 <label for="expirationDate"> Termin ważności </label>
-                <input type="date" name="expirationDate" class="form-control" id="expirationDate">
+                <form:input  path="expirationDate" type="date" name="expirationDate" cssClass="form-control" id="expirationDate">
+                <form:errors path="expirationDate" cssClass="text-danger"/>
             </div>
-
-
             <button type="submit" class="btn btn-primary"> Dodaj partię</button>
-
-
-
+            </form:form>
                <a href="<c:url value='/delivery/list'/>" class="btn btn-primary"> Strona główna</a>
          </div>
        </div>

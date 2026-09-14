@@ -1,12 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ include file="../header.jsp" %>
 
 
 <div class="container-fluid">
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">ProductCRUD</h1>
-    <a href="<c:url value='/product/list'/>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+    <a href="${pageContext.request.contextPath}/product/list" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
       <i class="fas fa-plus fa-sm text-white-50"></i> Lista produktów</a>
   </div>
 
@@ -27,64 +28,62 @@
 
           <div class="card mb-4">
               <div class="card-body">
-                  <h5> zeskanuj kod kreskowy </h5>
-                  <form action="/product/scan" method="post" enctype="multipart/form-data">
+                  <h5>Zeskanuj kod kreskowy</h5>
+                  <form action="${pageContext.request.contextPath}/product/scan" method="post" enctype="multipart/form-data">
                   <input type="file" name="file" accept="image/*" class="form-control">
-                  <button type="submit" class="btn btn-primary mt-2"> Skanuj </button>
+                  <button type="submit" class="btn btn-primary mt-2">Skanuj</button>
                   </form>
               </div>
           </div>
 
 
-       <form method="post" action="add">
-        <form:errors path="quantity" cssClass="text-danger"/>
+       <form:form method="post" action="${pageContext.request.contextPath}/product/add" modelAttribute="product">
 
             <div class="form-group">
                 <label for="barcode">Kod kreskowy</label>
-                <input value="${product.barcode}" name="barcode" type="text" class="form-control" id="barcode" placeholder="barcode">
+                <form:input path="barcode" cssClass="form-control" id="barcode" placeholder="barcode"/>
+                <form:errors path="barcode" cssClass="text-danger"/>
             </div>
-
 
             <div class="form-group">
                 <label for="name">Nazwa</label>
-                <input value="${product.name}" name="name" type="text" class="form-control" id="name" placeholder="name">
+                <form:input path="name" cssClass="form-control" id="name" placeholder="name"/>
+                <form:errors path="name" cssClass="text-danger"/>
             </div>
 
             <div class="form-group">
-            <label for="category"> Kategoria </label>
-                <select name="category" class="form-control" id="category">
-                <option value=""> wybierz </option>
+                <label for="category">Kategoria</label>
+                <form:select path="category" cssClass="form-control" id="category">
+                    <form:option value="">wybierz</form:option>
                     <c:forEach var="cat" items="${productCategories}">
-                      <option value="${cat}">${cat}</option>
-                </c:forEach>
-                </select>
-            </div>
-
-             <div class="form-group">
-                <label for="defaultUnit"> Jednostka </label>
-                    <select name="defaultUnit" class="form-control" id="defaultUnit">
-                    <option value=""> wybierz </option>
-                        <c:forEach var="u" items="${units}">
-                        <option value="${u}">${u}</option>
-                </c:forEach>
-                </select>
+                        <form:option value="${cat}">${cat}</form:option>
+                    </c:forEach>
+                </form:select>
+                <form:errors path="category" cssClass="text-danger"/>
             </div>
 
             <div class="form-group">
-                <label for="expirationDate">Termin ważności</label>
-                <input value="${productBatch.expirationDate}" name="expirationDate" type="date" class="form-control" id="expirationDate" placeholder="expirationDate">
+                <label for="defaultUnit">Jednostka</label>
+                <form:select path="defaultUnit" cssClass="form-control" id="defaultUnit">
+                    <form:option value="">wybierz</form:option>
+                    <c:forEach var="u" items="${units}">
+                        <form:option value="${u}">${u}</form:option>
+                    </c:forEach>
+                </form:select>
+                <form:errors path="defaultUnit" cssClass="text-danger"/>
             </div>
 
             <div class="form-group">
                 <label for="quantity">Ilość</label>
-                <input value="${product.quantity}" name="quantity" type="number" min="0" class="form-control" id="quantity" placeholder="quantity">
+                <form:input path="quantity" type="number" min="0" cssClass="form-control" id="quantity" placeholder="quantity"/>
+                <form:errors path="quantity" cssClass="text-danger"/>
             </div>
 
             <button type="submit" class="btn btn-primary">Dodaj</button>
 
-             </form>
-           </div>
-               <a href="<c:url value='/product/list'/>" class="btn btn-primary"> Strona główna</a>
-         </div>
-       </div>
+       </form:form>
+    </div>
+    <a href="${pageContext.request.contextPath}/product/list" class="btn btn-primary">Strona główna</a>
+ </div>
+</div>
 <%@ include file="../footer.jsp" %>

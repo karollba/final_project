@@ -20,29 +20,29 @@
 
   <h1>Dodaj pracownika</h1>
 
-       <form method="post" action="${pageContext.request.contextPath}/employee/add">
+       <form:form method="post" action="${pageContext.request.contextPath}/employee/add" modelAttribute="employee">
             <div class="form-group">
                 <label for="firstName">Imię</label>
-                <input value="${employee.firstName}" name="firstName" type="text" class="form-control" id="firstName" placeholder="firstName">
+                <input value="${employee.firstName}" name="firstName" type="text" class="form-control" id="firstName" placeholder="Imię">
                 <form:errors path="firstName" cssClass="text-danger"/>
             </div>
 
             <div class="form-group">
                 <label for="lastName">Nazwisko</label>
-                <input value="${employee.lastName}" name="lastName" type="text" class="form-control" id="lastName" placeholder="lastName">
+                <input value="${employee.lastName}" name="lastName" type="text" class="form-control" id="lastName" placeholder="Nazwisko">
                 <form:errors path="lastName" cssClass="text-danger"/>
            </div>
 
 
             <div class="form-group">
                 <label for="login">Nazwa użytkownika</label>
-                <input value="${employee.login}" name="login" type="text" class="form-control" id="login" placeholder="login">
+                <input value="${employee.login}" name="login" type="text" class="form-control" id="login" placeholder="l=Login">
                <form:errors path="login" cssClass="text-danger"/>
             </div>
 
             <div class="form-group">
                 <label for="password">Hasło</label>
-                <input name="password" type="password" class="form-control" id="password" placeholder="password">
+                <input name="password" type="password" class="form-control" id="password" placeholder="Hasło">
                 <form:errors path="password" cssClass="text-danger"/>
             </div>
 
@@ -52,7 +52,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary">Dodaj</button>
-             </form>
+             </form:form>
            </div>
                <a href="<c:url value='/employee/list'/>" class="btn btn-primary"> Strona główna</a>
          </div>

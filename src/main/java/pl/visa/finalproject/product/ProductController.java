@@ -97,8 +97,10 @@ public class ProductController {
     // zrob tu flasha aby wyswietlal co jest nie tak
     @PostMapping("/add")
     public String add(@Valid @ModelAttribute Product product,
-                      BindingResult bindingResult) {
+                      BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("productCategories", ProductCategory.values());
+            model.addAttribute("units", Unit.values());
             return "product/productAdd";
         }
         productService.add(product);
@@ -169,8 +171,9 @@ public class ProductController {
 
     @PostMapping("/addbatch")
     public String addBatch(@Valid @ModelAttribute ProductBatch product,
-                      BindingResult bindingResult) {
+                           BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("products", productService.findAll());
             return "product/batchAdd";
         }
         productBatchService.add(product);
