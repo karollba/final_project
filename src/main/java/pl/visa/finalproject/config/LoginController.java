@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class LoginController {
     @GetMapping("/login")
     public String login() {
-        System.out.println("Wchodze do kontorllera /login");
         return "login";
     }
 }

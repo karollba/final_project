@@ -2,6 +2,7 @@ package pl.visa.finalproject.delivery;
 
 import jakarta.persistence.EntityManager;
 import jakarta.validation.Valid;
+import org.eclipse.tags.shaded.org.apache.xpath.operations.Mod;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -75,10 +76,12 @@ public class DeliveryController {
     public String  add(@Valid @ModelAttribute Delivery delivery,
                        BindingResult bindingResult,
                        @RequestParam UUID orderId,
-                       @AuthenticationPrincipal Employee loggedInEmployee) {
+                       @AuthenticationPrincipal Employee loggedInEmployee, Model model) {
 
         if (bindingResult.hasErrors()) {
-            bindingResult.getAllErrors().forEach(error -> System.out.println("Errror" + error.toString()));
+            model.addAttribute("suppliers", supplierService.findAll());
+            model.addAttribute("deliveryCategories", DeliveryCategory.values());
+            model.addAttribute("orders", productOrderService.findAll());
             return "delivery/deliveryAdd";
         }
         ProductOrder order = productOrderService.findById(orderId).orElseThrow();
@@ -109,8 +112,9 @@ public class DeliveryController {
     }
 
     @PostMapping("/edit")
-    public String edit(@Valid @ModelAttribute Delivery delivery, BindingResult bindingResult) {
+    public String edit(@Valid @ModelAttribute Delivery delivery, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
+            model.addAttribute("delivery", delivery);
             return "delivery/deliveryEdit";
         }
         deliveryService.update(delivery);
@@ -131,12 +135,14 @@ public class DeliveryController {
 
 
     @PostMapping("/addwithitems")
-    public String addOrderWithItems(@Valid @ModelAttribute @RequestParam UUID supplierId,
+    public String addOrderWithItems(@RequestParam UUID supplierId,
                                     @RequestParam List<UUID> productsIds,
                                     @RequestParam List<Double> orderQuantities, Model model) {
 
         if (productsIds.size() != orderQuantities.size()) {
-            model.addAttribute("errod", "Błąd danych formualrza");
+            model.addAttribute("error", "Błąd danych formualrza");
+            model.addAttribute("suppliers", supplierService.findAll());
+            model.addAttribute("products", productService.findAll());
             return "ordered/orderAdd";
         }
         for (Double quantity : orderQuantities) {

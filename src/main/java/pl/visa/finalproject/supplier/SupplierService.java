@@ -17,9 +17,11 @@ public class SupplierService {
     }
 
      public void add(Supplier supplier) {
-         if (supplierRepository.findByNIP(supplier.getNIP().isPresent())) {
+         if (supplierRepository.findByNIP(supplier.getNIP()).isPresent()) {
              throw new RuntimeException("Dostawca z tym NIP-em już istnieje!");
-             }
+             } else if (supplierRepository.findByREGON(supplier.getREGON()).isPresent()) {
+             throw new RuntimeException("Dostawca z tym numerem REGON już istnieje");
+         }
 
          Long maxId = supplierRepository.findMaxIdToShow().orElse(0L);
          supplier.setIdToShow(maxId + 1);

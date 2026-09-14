@@ -30,4 +30,5 @@ public interface SupplierRepository extends JpaRepository<Supplier, UUID> {
 
     Optional<Supplier> findByNIP(Long nip);
 
+    Optional<Supplier> findByREGON(Long regon);
 }

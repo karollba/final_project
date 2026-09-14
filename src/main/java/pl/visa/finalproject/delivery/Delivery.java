@@ -39,7 +39,6 @@ public class Delivery {
     @NotNull(message = "Numer faktury jest wymagany")
     private Long invoiceId;
 
-    @NotNull(message = "Numer dostawy jest wymagany!")
     private String deliveryId;
 
     @Future(message = "Data płatności musi być w przyszłości!")
@@ -62,7 +61,6 @@ public class Delivery {
 
     @ManyToOne
     @JoinColumn(name = "supplier_id", nullable = false)
-    @NotNull(message = "Dostawca jest wymagany!")
     private Supplier supplier;
 
     @OneToMany(mappedBy = "delivery", cascade = CascadeType.ALL)

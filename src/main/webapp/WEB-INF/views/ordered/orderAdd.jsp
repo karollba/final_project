@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ include file="../header.jsp" %>
 
    <!-- Begin Page Content -->
@@ -8,9 +10,7 @@
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
           <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-          <a href="<c:url value='/productorder/add'/>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                  class="fas fa-plus fa-sm text-white-50"></i>Nowe zamówienie</a>
-                  <a href="${pageContext.request.contextPath}/delivery/list" class="btn btn-primary btn-sm"> Lista dostaw</a>
+            <a href="${pageContext.request.contextPath}/delivery/list" class="btn btn-primary btn-sm"> Lista dostaw</a>
         </div>
 
               <div class="card shadow mb-4">
@@ -49,10 +49,13 @@
                             </td>
                             <td>
                                 <input type="number" step="0.1" name="orderedQuantities" class="form-control">
+                            </td>
+                            <sec:authorize access="hasAuthority('ROLE_ADMIN')">
+                                <td>
+                                    <button type="button" class="btn btn-danger btn-sm removeRow"> Usuń </button>
                                 </td>
-                                    <td>
-                                        <button type="button" class="btn btn-danger btn-sm removeRow"> Usuń </button>
-                                    </td>
+                            </sec:authorize>
+
                                 </tr>
                     </tbody>
                     </table>

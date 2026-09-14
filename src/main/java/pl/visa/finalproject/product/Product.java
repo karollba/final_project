@@ -1,6 +1,7 @@
 package pl.visa.finalproject.product;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -34,7 +35,7 @@ public class Product {
     private boolean availability;
 
     @Min(value = 0, message = "Ilość nie może być ujemna!")
-    @NotBlank(message = "Podaj ilość!")
+    @DecimalMin(value = "0.0", message = "Ilość nie może być ujemna!")
     private double quantity;
 
     private boolean deleted;

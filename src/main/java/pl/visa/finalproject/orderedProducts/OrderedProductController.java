@@ -23,7 +23,7 @@ import java.util.UUID;
 
 @Controller
 @RequestMapping("/order")
-public class OrderedProductController {
+public class    OrderedProductController {
 
     private final OrderedProductService orderedProductService;
     private final DeliveryService deliveryService;
@@ -76,29 +76,5 @@ public class OrderedProductController {
         model.addAttribute("items", items);
         return "order/check";
     }
-
-//    // do zastanowienia jeszcze to roziwazanie (te dodawanie id)
-//    @PostMapping("/updatequantity")
-//    public String updateQuantity(@RequestParam UUID id,
-//                                 @RequestParam UUID orderId,
-//                                 @RequestParam double recievedQuantity,
-//                                 @RequestParam LocalDate expirationDate,
-//                                 RedirectAttributes redirectAttributes) {
-//
-//        Optional<OrderedProduct> item = Optional.of(orderedProductService.findById(id).orElseThrow());
-//
-//        ProductBatch batch = new ProductBatch();
-//        batch.setProduct(item.get().getProduct());
-//        batch.setQuantity(recievedQuantity);
-//        batch.setExpirationDate(expirationDate);
-//        batch.setDeliveryDate(LocalDateTime.now());
-//        productBatchService.add(batch);
-//
-//
-//
-//        orderedProductService.updateRecievedQuantity(id, recievedQuantity);
-//        return "redirect:/productorder/show?id=" + orderId;
-//    }
-
 
 }

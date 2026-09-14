@@ -1,8 +1,7 @@
-package pl.visa.finalproject.notification;
+package pl.visa.finalproject.config;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpServletRequest;
-import org.eclipse.tags.shaded.org.apache.xpath.operations.Mod;
 import org.springframework.boot.webmvc.error.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
