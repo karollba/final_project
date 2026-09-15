@@ -16,8 +16,6 @@ public class ProductDTO {
     private UUID id;
     private String name;
     private boolean availability;
-    private double quantity;
-//    private LocalDate expirationDate;
     private boolean deleted;
     private LocalDateTime timeDeleted;
     private Unit defaultUnit;
@@ -31,7 +29,6 @@ public class ProductDTO {
         this.idToShow = product.getIdToShow();
         this.name = product.getName();
         this.availability = product.isAvailability();
-        this.quantity = product.getQuantity();
         this.deleted = product.isDeleted();
         this.timeDeleted = product.getTimeDeleted();
         this.barcode = product.getBarcode();

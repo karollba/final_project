@@ -73,12 +73,6 @@
                 <form:errors path="defaultUnit" cssClass="text-danger"/>
             </div>
 
-            <div class="form-group">
-                <label for="quantity">Ilość</label>
-                <form:input path="quantity" type="number" min="0" cssClass="form-control" id="quantity" placeholder="Ilość"/>
-                <form:errors path="quantity" cssClass="text-danger"/>
-            </div>
-
             <button type="submit" class="btn btn-primary">Dodaj</button>
 
        </form:form>

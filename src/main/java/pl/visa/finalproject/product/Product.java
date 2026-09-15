@@ -34,10 +34,6 @@ public class Product {
 
     private boolean availability;
 
-    @Min(value = 0, message = "Ilość nie może być ujemna!")
-    @DecimalMin(value = "0.0", message = "Ilość nie może być ujemna!")
-    private double quantity;
-
     private boolean deleted;
 
     private LocalDateTime timeDeleted;

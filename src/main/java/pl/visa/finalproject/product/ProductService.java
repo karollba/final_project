@@ -25,7 +25,6 @@ public class ProductService {
 
         if (existing.isPresent()) {
             Product existingProduct = existing.get();
-            existingProduct.setQuantity(existingProduct.getQuantity() + product.getQuantity());
             existingProduct.setAvailability(true);
             productRepository.save(existingProduct);
         } else {
@@ -93,9 +92,6 @@ public class ProductService {
             existing.setName(updatedProduct.getName());
         }
 
-        if (updatedProduct.getQuantity() > 0) {
-            existing.setQuantity(updatedProduct.getQuantity());
-        }
         productRepository.save(existing);
 
     }
