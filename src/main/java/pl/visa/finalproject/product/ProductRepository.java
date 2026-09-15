@@ -32,8 +32,4 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
     List<Product> search(@Param("query") String query);
 
 
-    // produkty z bliskim terminem przydatności do spożycia
-//    @Query("select pb from ProductBatch pb where pb.expirationDate between :today and :weeklater")
-//    List<ProductBatch> findExpiringBatches(@Param("today") LocalDate today, @Param("weeklater") LocalDate weeklater);
-
 }

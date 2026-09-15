@@ -40,24 +40,6 @@ public class OrderedProductService {
         return orderedProductRepository.findByDelivery(delivery);
     }
 
-    public void updateRecievedQuantity(UUID id, double recievedQuantity) {
-        OrderedProduct item = orderedProductRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Nie znaleziono dostawy o id: "));
-
-        item.setRecievedQuantity(recievedQuantity);
-        item.setChecked(true);
-        item.setMatches(item.getOrderedQuantity() == recievedQuantity);
-        orderedProductRepository.save(item);
-    }
-
-    public void addRecievedQuantity(UUID id, double quantity) {
-        OrderedProduct item = orderedProductRepository.findById(id).orElseThrow();
-
-        item.setRecievedQuantity(item.getRecievedQuantity() + quantity);
-        item.setMatches(item.getOrderedQuantity() == item.getRecievedQuantity());
-        orderedProductRepository.save(item);
-    }
-
     public void assignToDelivery(UUID itemId, Delivery delivery) {
         OrderedProduct item = orderedProductRepository.findById(itemId).orElseThrow();
         item.setDelivery(delivery);

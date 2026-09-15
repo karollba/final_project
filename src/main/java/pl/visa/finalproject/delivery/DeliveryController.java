@@ -89,27 +89,19 @@ public class DeliveryController {
         }
         if (bindingResult.hasErrors()) {
             bindingResult.getAllErrors().forEach(objectError -> System.out.println("Błąd: " + objectError.toString()));
-            System.out.println("bining results ma bledy!!!!=======");
             model.addAttribute("suppliers", supplierService.findAll());
             model.addAttribute("deliveryCategories", DeliveryCategory.values());
             model.addAttribute("orders", productOrderService.findAll());
             return "delivery/deliveryAdd";
         }
-        System.out.println("walidacja ok ========");
         ProductOrder order = productOrderService.findById(orderId).orElseThrow();
-        System.out.println("product order!!=========" + order.getOrderNumber());
         delivery.setSupplier(order.getSupplier());
         delivery.setDeliveryId(order.getOrderNumber());
         delivery.setAcceptingEmployee(loggedInEmployee);
 
-        System.out.println("zaraz zapisuje delivery =====");
         deliveryService.save(delivery);
-        System.out.println("zapisano delivery =====");
-
         order.setDelivery(delivery);
         productOrderService.save(order);
-
-        System.out.println("koniec metody!======");
 
         return "redirect:/delivery/list";
     }

@@ -27,15 +27,13 @@ public class    OrderedProductController {
 
     private final OrderedProductService orderedProductService;
     private final DeliveryService deliveryService;
-    private final ProductBatchService productBatchService;
     private final SupplierService supplierService;
     private final ProductService productService;
     private final ProductOrderService productOrderService;
 
-    public OrderedProductController(OrderedProductService orderedProductService, DeliveryService deliveryService, ProductBatchService productBatchService, SupplierService supplierService, ProductService productService, ProductOrderService productOrderService) {
+    public OrderedProductController(OrderedProductService orderedProductService, DeliveryService deliveryService, SupplierService supplierService, ProductService productService, ProductOrderService productOrderService) {
         this.orderedProductService = orderedProductService;
         this.deliveryService = deliveryService;
-        this.productBatchService = productBatchService;
         this.supplierService = supplierService;
         this.productService = productService;
         this.productOrderService = productOrderService;

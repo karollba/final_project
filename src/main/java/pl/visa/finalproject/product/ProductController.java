@@ -77,14 +77,9 @@ public class ProductController {
     public String deleteBatch(@RequestParam UUID id, @RequestParam UUID productId) {
         productBatchService.delete(id);
         return "redirect:/product/details?id=" + productId;
-        // tutaj musisz dodac plus id
-    }
+   }
 
 
-    // poszukujac filtruj napierw przez kategorie potem szukaj uuid bo tak to zajedziesz baze danych
-
-
-    // najpierw sprawdz czy produkt juz nie istnieje jesli istnieje to dodaj do istniejacego rekordu juz a jak nie istnieje to utworz nowy rekord
     @GetMapping("/add")
     public String addForm(Model model) {
         model.addAttribute("product", new Product());
@@ -93,8 +88,6 @@ public class ProductController {
         return "product/productAdd";
     }
 
-    // zmein aby po zeskanowaniu/ wpisaniu barcode uzupelnilo automatcznie wszystkie pola. po co masz pisac recznie jak moze sie samo wy7pelnic
-    // zrob tu flasha aby wyswietlal co jest nie tak
     @PostMapping("/add")
     public String add(@Valid @ModelAttribute Product product,
                       BindingResult bindingResult, Model model) {
