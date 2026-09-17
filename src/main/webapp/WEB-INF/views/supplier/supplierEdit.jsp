@@ -6,13 +6,13 @@
 
 <html>
   <head>
-    <title>Edytuj pracownika</title>
+
   </head>
   <body>
 
 
   <div class="d-sm-flex align-items-center justify-content-between mb-4">
-      <h1 class="h3 mb-0 text-gray-800">EmployeeCRUD</h1>
+      <h1 class="h3 mb-0 text-gray-800">SupplierCRUD</h1>
       <a href="<c:url value='/supplier/list'/>" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
         <i class="fas fa-plus fa-sm text-white-50"></i> Lista dostawców</a>
     </div>
@@ -23,6 +23,11 @@
     </div>
 
 <div class="card-body">
+
+   <c:if test="${not empty error}">
+        <div class="alert alert-danger"> ${error} </div>
+   </c:if>
+
 <form method="post" action="edit">
 
         <input type="hidden" name="id" value="${supplier.id}"/>

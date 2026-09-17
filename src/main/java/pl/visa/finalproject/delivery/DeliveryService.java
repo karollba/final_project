@@ -44,6 +44,9 @@ public class DeliveryService {
         if (updateDelivery.getInvoiceDue() != null) {
             existing.setInvoiceDue(updateDelivery.getInvoiceDue());
         }
+        if (updateDelivery.getCategory() != null) {
+            existing.setCategory(updateDelivery.getCategory());
+        }
 
         existing.setPaid(updateDelivery.isPaid());
         deliveryRepository.save(existing);

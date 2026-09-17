@@ -31,14 +31,18 @@ public class Supplier {
     @NotBlank(message = "Nazwa dostawcy jest wymagana!")
     private String name;
 
+
+    //    @NIP(message = "Niepoprawny numer NIP")
     @NotNull(message = "NIP jest wymagany!")
     @Column(unique = true)
-    @NIP(message = "Niepoprawny numer NIP")
+    @Pattern(regexp = "\\d{10}", message = "Niepoprawny nr NIP!")
     private String NIP;
 
+
+//    @REGON(message = "Niepoprawny numer REGON")
     @NotNull(message = "REGON jest wymagany!")
     @Column(unique = true)
-    @REGON(message = "Niepoprawny numer REGON")
+    @Pattern(regexp = "\\d{9}|\\d{14}", message = "Niepoprawny numer REGON!")
     private String REGON;
 
     @NotBlank(message = "Ulica jest wymagana!")

@@ -20,6 +20,9 @@
 <form:form method="post" action="${pageContext.request.contextPath}/delivery/edit" modelAttribute="delivery">
 
         <form:hidden path="id"/>
+        <input type="hidden" name="supplier" value="${delivery.supplier.id}"/>
+        <input type="hidden" name="dateOfAcceptTheDelivery" value="${delivery.dateOfAcceptTheDelivery}"/>
+        <input type="hidden" name="invoiceId" value="${delivery.invoiceId}"/>
 
         <div class="form-group">
             <label>Nr dostawy:</label>
@@ -28,7 +31,7 @@
 
         <div class="form-group">
             <label for="invoiceDue">Płatność do</label>
-            <form:input path="invoiceDue" type="date" cssClass="form-control" id="invoiceDue"/>
+            <form:input path="invoiceDue" type="date" cssClass="form-control" id="invoiceDue" value="${delivery.invoiceDue}"/>
             <form:errors path="invoiceDue" cssClass="text-danger"/>
         </div>
 

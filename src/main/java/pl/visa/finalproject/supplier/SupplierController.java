@@ -49,7 +49,7 @@ public class SupplierController {
             return "supplier/supplierAdd";
         }
 
-        supplierService.save(supplier);
+        supplierService.add(supplier);
         return "redirect:/supplier/list";
     }
 
@@ -65,6 +65,7 @@ public class SupplierController {
     public String edit(@Valid @ModelAttribute Supplier supplier, BindingResult bindingResult)
     {
         if (bindingResult.hasErrors()) {
+            bindingResult.getAllErrors().forEach(e -> System.out.println("Bląd " + e.toString()));
             return "supplier/supplierEdit";
         }
         supplierService.update(supplier);
