@@ -193,3 +193,6 @@ src/main/webapp/WEB-INF/views/
 - Rejestracja nowych pracowników możliwa jest wyłącznie przez administratora, nie ma samodzielnej rejestracji
 
 ---
+
+## UWAGI DOTYCZĄCE BEZPIECZEŃSTWA
+- Ochrona CSRF jest obecnie wyłączona w konfiguracji Spring Security ('SecurityConfig.java') w celu uproszczenia pracy z formularzami podczas developmentu.
