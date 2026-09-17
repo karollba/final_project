@@ -84,6 +84,8 @@ public class ProductOrderController {
                       @RequestParam(required = false) List<Double> orderedQuantities,
                       Model model) {
 
+
+
         if (supplierId == null) {
             model.addAttribute("error", "Wybierz dostawcę!");
             model.addAttribute("suppliers", supplierService.findAll());
@@ -130,9 +132,30 @@ public class ProductOrderController {
                                  @RequestParam UUID orderId,
                                  @RequestParam double recievedQuantity,
                                  @RequestParam LocalDate expirationDate,
-                                 RedirectAttributes redirectAttributes) {
+                                 Model model) {
+
+        if (recievedQuantity < 0) {
+            ProductOrder order = productOrderService.findById(orderId).orElseThrow();
+            List<OrderedProduct> items = orderedProductService.findByProductOrder(order);
+
+            model.addAttribute("order", order);
+            model.addAttribute("items", items);
+            model.addAttribute("error", "Ilość nie może być ujemna!");
+            return "ordered/orderShow";
+        }
+
+        if (!expirationDate.isAfter(LocalDate.now())) {
+            ProductOrder order = productOrderService.findById(orderId).orElseThrow();
+            List<OrderedProduct> items = orderedProductService.findByProductOrder(order);
+
+            model.addAttribute("order", order);
+            model.addAttribute("items", items);
+            model.addAttribute("error", "Termin ważności musi być w przyszłości!");
+            return "ordered/orderShow";
+        }
 
         OrderedProduct item = orderedProductService.findById(id).orElseThrow();
+
 
         // zapisz partie z terminem
         ProductBatch batch = new ProductBatch();

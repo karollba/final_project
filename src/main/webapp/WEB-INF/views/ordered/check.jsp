@@ -45,7 +45,7 @@
 
                             </c:when>
                         <c:otherwise>
-                            <form action="${pageContext.request.contextPath}/order/updatequantity" method="post" class="form-inline">
+                            <form action="${pageContext.request.contextPath}/productorder/updatequantity" method="post" class="form-inline">
                                 <input type="hidden" name="id" value="${item.id}">
                                 <input type="hidden" name="deliveryId" value="${deliveryId}">
                                 <input type="number" step="0.1" name="recievedQuantity" class="form-control" style="width:100px" required>

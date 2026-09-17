@@ -20,6 +20,14 @@
             <h6 class="m-0 font-weight-bold text-primary"> Pozycje </h6>
         </div>
     <div class="card-body">
+
+
+      <c:if test="${not empty error}">
+          <div class="alert alert-danger">
+              ${error}
+          </div>
+      </c:if>
+
         <table class="table">
             <thead>
             <tr>

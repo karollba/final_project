@@ -10,6 +10,8 @@ import java.util.NoSuchElementException;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
+    // Error handle with custom page
+
     @ExceptionHandler(RuntimeException.class)
     public String handleRunTimeException(RuntimeException e, Model model) {
         model.addAttribute("errorMessage", e.getMessage());

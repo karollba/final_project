@@ -39,6 +39,10 @@ public class ProductOrderService {
         return productOrderRepository.search(query);
     }
 
+    public List<ProductOrder> findUnassignedOrders() {
+        return productOrderRepository.findUnassignedOrders();
+    }
+
     public List<ProductOrder> findAll() {
         return productOrderRepository.findAll();
     }

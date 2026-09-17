@@ -42,7 +42,6 @@ public class SecurityConfig {
         return provider;
     }
 
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -58,29 +57,29 @@ public class SecurityConfig {
                             "/js/**",
                             "/error").permitAll()
 
-                // tylko admin
-                  .requestMatchers("/employee/**").hasAuthority("ROLE_ADMIN")
-                  .requestMatchers("/supplier/add", "/supplier/edit", "/supplier/delete").hasAnyAuthority("ROLE_ADMIN")
+                       // tylko admin
+                      .requestMatchers("/employee/**").hasAuthority("ROLE_ADMIN")
+                      .requestMatchers("/supplier/add", "/supplier/edit", "/supplier/delete").hasAnyAuthority("ROLE_ADMIN")
 
-                  // admin + employee
-                  .requestMatchers("/delivery/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_EMPLOYEE")
-                  .requestMatchers("/productorder/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_EMPLOYEE")
-                  .requestMatchers("/ordered/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_EMPLOYEE")
+                      // admin + employee
+                      .requestMatchers("/delivery/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_EMPLOYEE")
+                      .requestMatchers("/productorder/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_EMPLOYEE")
+                      .requestMatchers("/ordered/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_EMPLOYEE")
 
-                  .requestMatchers("/product/list", "/product/details", "/product/search" ).hasAnyAuthority("ROLE_ADMIN", "ROLE_EMPLOYEE")
-                  .requestMatchers("/product/edit", "/product/add", "/product/delete").hasAuthority("ROLE_ADMIN")
+                      .requestMatchers("/product/list", "/product/details", "/product/search" ).hasAnyAuthority("ROLE_ADMIN", "ROLE_EMPLOYEE")
+                      .requestMatchers("/product/edit", "/product/add", "/product/delete").hasAuthority("ROLE_ADMIN")
 
-                  .requestMatchers("/supplier/list", "/supplier/search").hasAnyAuthority("ROLE_ADMIN", "ROLE_EMPLOYEE")
-                  .anyRequest().authenticated())
+                      .requestMatchers("/supplier/list", "/supplier/search").hasAnyAuthority("ROLE_ADMIN", "ROLE_EMPLOYEE")
+                      .anyRequest().authenticated())
 
-              .formLogin(form -> form
-                .loginPage("/login")
-                .defaultSuccessUrl("/delivery/list", true)
-                .permitAll())
-                .logout(logout -> logout.logoutUrl("/logout")
-                        .logoutSuccessUrl("/login?logout")
+                    .formLogin(form -> form
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/delivery/list", true)
                         .permitAll())
-                .authenticationProvider(authenticationProvider());
+                        .logout(logout -> logout.logoutUrl("/logout")
+                                .logoutSuccessUrl("/login?logout")
+                                .permitAll())
+                        .authenticationProvider(authenticationProvider());
 
         return http.build();
     }

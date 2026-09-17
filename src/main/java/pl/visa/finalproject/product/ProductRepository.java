@@ -32,4 +32,7 @@ public interface ProductRepository extends JpaRepository<Product, UUID> {
     List<Product> search(@Param("query") String query);
 
 
+    @Override
+    @Query("select p from Product p where p.deleted = false order by p.name asc")
+    List<Product> findAll();
 }

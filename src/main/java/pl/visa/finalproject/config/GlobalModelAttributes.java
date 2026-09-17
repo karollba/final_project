@@ -7,6 +7,8 @@ import pl.visa.finalproject.employee.Employee;
 
 @ControllerAdvice
 public class GlobalModelAttributes {
+
+    // Employee who's currently logged in
     @ModelAttribute("loggedInEmployee")
     public Employee addLoggedInEmployee(@AuthenticationPrincipal Employee employee) {
         return  employee;

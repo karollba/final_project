@@ -29,5 +29,8 @@ public interface ProductOrderRepository extends JpaRepository<ProductOrder, UUID
     @Query("select p from ProductOrder p where p.deleted = false ")
     List<ProductOrder> findAll();
 
+    @Query("select p from  ProductOrder p where p.deleted = false and p.delivery is null")
+    List<ProductOrder> findUnassignedOrders();
+
 
 }
